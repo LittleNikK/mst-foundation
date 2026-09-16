@@ -1,26 +1,209 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #E9ECF0;
+  --foreground: #121417;
+
+  --color-gold: #B88728;
+  --color-gold-bright: #F5BA13;
+  --color-gold-light: #FEF3C7;
+  --color-ink: #121417;
+  --color-card-bg: #FAFBFD;
+  --color-muted: #595E6B;
+
+  --brand-white: #ffffff;
+  --brand-yellow: #F5BA13;
+  --brand-yellow-light: #FDE68A;
+  --brand-blue: #1E3A8A;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-gold: var(--color-gold);
+  --color-gold-bright: var(--color-gold-bright);
+  --color-gold-light: var(--color-gold-light);
+  --color-ink: var(--color-ink);
+  --color-card-bg: var(--color-card-bg);
+  --color-muted: var(--color-muted);
+
+  --font-serif: var(--font-serif), Newsreader, Georgia, Cambria, serif;
+  --font-sans: var(--font-sans), Plus Jakarta Sans, Inter, system-ui, -apple-system, sans-serif;
+  --font-body: var(--font-sans), Plus Jakarta Sans, Inter, system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-display), Anton, Impact, sans-serif;
+  --font-montserrat: var(--font-montserrat), 'Montserrat', sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+* {
+  box-sizing: border-box;
+}
+
+html {
+  zoom: 1.1;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  scroll-behavior: smooth;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: rgba(245, 186, 19, 0.3);
+  color: #121417;
+}
+
+/* Blueprint Architecture Grid pattern */
+.bg-blueprint-grid {
+  background-image: 
+    linear-gradient(to right, rgba(148, 163, 184, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.12) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #E9ECF0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Continuous Marquee Animations */
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee-left {
+  animation: marquee-left 60s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-right {
+  animation: marquee-right 68s linear infinite;
+  will-change: transform;
+}
+
+/* 4-Span Traveling Gradient Border Button Effect */
+.animated-button-gold {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-button-gold > span:nth-child(-n+4) {
+  position: absolute;
+  pointer-events: none;
+}
+
+.animated-button-gold > span:nth-child(1) {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to left, rgba(245, 186, 19, 0), #F5BA13);
+  animation: 2s animateTop linear infinite;
+  filter: drop-shadow(0 0 3px #F5BA13);
+}
+
+@keyframes animateTop {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animated-button-gold > span:nth-child(2) {
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 2px;
+  background: linear-gradient(to top, rgba(245, 186, 19, 0), #F5BA13);
+  animation: 2s animateRight linear -1s infinite;
+  filter: drop-shadow(0 0 3px #F5BA13);
+}
+
+@keyframes animateRight {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.animated-button-gold > span:nth-child(3) {
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, rgba(245, 186, 19, 0), #F5BA13);
+  animation: 2s animateBottom linear infinite;
+  filter: drop-shadow(0 0 3px #F5BA13);
+}
+
+@keyframes animateBottom {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animated-button-gold > span:nth-child(4) {
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 2px;
+  background: linear-gradient(to bottom, rgba(245, 186, 19, 0), #F5BA13);
+  animation: 2s animateLeft linear -1s infinite;
+  filter: drop-shadow(0 0 3px #F5BA13);
+}
+
+@keyframes animateLeft {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
 }
