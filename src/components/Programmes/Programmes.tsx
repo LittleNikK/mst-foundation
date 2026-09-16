@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
@@ -52,13 +52,13 @@ const programmes = [
 /* ------------------------------------------------------------------ */
 /*  Motion variants — same easing/feel as the Hero scroll reveal       */
 /* ------------------------------------------------------------------ */
-const imageReveal = {
+const imageReveal: Variants = {
   hidden: { opacity: 0, scale: 1.08, y: 16 },
   show: {
     opacity: 1,
     scale: 1,
     y: 0,
-    transition: { duration: 0.9, ease: [0.44, 0, 0.56, 1] },
+    transition: { duration: 0.9, ease: [0.44, 0, 0.56, 1] as const },
   },
 };
 
@@ -214,7 +214,8 @@ export function Programmes() {
                     whileInView="show"
                     viewport={{ once: true, margin: "-60px" }}
                     transition={{
-                      ...imageReveal.show.transition,
+                      duration: 0.9,
+                      ease: [0.44, 0, 0.56, 1] as const,
                       delay: 0.15 + i * 0.08,
                     }}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"

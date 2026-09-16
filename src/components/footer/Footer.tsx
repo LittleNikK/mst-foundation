@@ -108,9 +108,11 @@ export function Footer() {
                   <span style={{ color: "#C8A265" }}>Foundation</span>
                 </h3>
                 <p
-                  style={{ fontFamily: "var(--font-serif), Newsreader, Georgia, serif" }}
+                  style={{
+                    fontFamily: "var(--font-serif), Newsreader, Georgia, serif",
+                    color: "rgba(203,213,225,0.70)",
+                  }}
                   className="mt-3 text-[13.5px] sm:text-[14px] leading-relaxed font-normal max-w-xs"
-                  style={{ color: "rgba(203,213,225,0.70)" }}
                 >
                   A non-profit foundation, maintained by its community.
                 </p>
