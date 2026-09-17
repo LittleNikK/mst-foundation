@@ -356,9 +356,12 @@ export default function PublicObligations() {
   return (
     <section
       id="obligations"
-      className="relative"
+      className="relative scroll-mt-24"
       style={{ background: "linear-gradient(145deg, #D6E4F0 0%, #E4EEF6 30%, #F0EBE0 65%, #E8EFF6 100%)" }}
     >
+      {/* Anchors for Governance & Transparency */}
+      <div id="governance" className="absolute -top-24 pointer-events-none" />
+      <div id="transparency" className="absolute -top-24 pointer-events-none" />
       {/* Ambient glows */}
       <div
         aria-hidden="true"

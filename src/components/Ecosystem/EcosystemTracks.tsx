@@ -55,6 +55,8 @@ const tracks = [
 export function EcosystemTracks() {
   return (
     <section id="ecosystem" className="relative w-full py-10 sm:py-14 lg:py-16 overflow-hidden scroll-mt-24" style={{ background: "linear-gradient(145deg, #D6E4F0 0%, #E4EEF6 30%, #F0EBE0 65%, #E8EFF6 100%)" }}>
+      {/* Anchor for Validators */}
+      <div id="validators" className="absolute -top-24 pointer-events-none" />
       {/* Ambient glows behind the cards */}
       <div
         aria-hidden="true"

@@ -77,19 +77,7 @@ export function Hero() {
           <div className="lg:col-span-7 xl:col-span-8 flex flex-col justify-center max-w-4xl">
 
             {/* Crisp Eyebrow Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="inline-flex items-center gap-2 mb-4 sm:mb-5 self-start"
-            >
-
-              <span className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-semibold text-[#8C6A28] select-none">
-                NON-PROFIT FOUNDATION · PARENT OF MST BLOCKCHAIN
-              </span>
-            </motion.div>
-
-            {/* Bold Montserrat Headline strictly formatted into 3 lines */}
+            {/* Bold Montserrat Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -100,17 +88,18 @@ export function Hero() {
               }}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] xl:text-[54px] 2xl:text-[60px] font-bold leading-[1.12] tracking-[-0.03em] text-[#0D1117]"
             >
-              <span className="inline-block whitespace-nowrap">
-                Building a{" "}
-                <RotatingWord
-                  words={["accountable", "commonly held", "transparent"]}
-                  interval={4000}
-                />
+              <span className="block text-[#0D1117]">
+                Smart Angelos
               </span>
-              <br />
-              <span className="inline-block whitespace-nowrap">future for public</span>
-              <br />
-              <span className="inline-block whitespace-nowrap">infrastructure.</span>
+              <span className="block mt-1 sm:mt-2 text-[#0D1117]">
+                <span className="inline whitespace-nowrap">The non-profit{" "}
+                <RotatingWord
+                  words={["home", "steward", "foundation"]}
+                  interval={3500}
+                /></span>
+                <br />
+                for public infrastructure.
+              </span>
             </motion.h1>
 
             {/* Subtitle Description */}
@@ -119,14 +108,12 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               style={{
-                fontFamily: "var(--font-serif), Newsreader, Georgia, serif",
+                fontFamily:
+                  "var(--font-sans), 'Plus Jakarta Sans', Inter, system-ui, -apple-system, sans-serif",
               }}
-              className="mt-5 sm:mt-6 max-w-2xl text-[14.5px] sm:text-[15.5px] lg:text-[16px] leading-[1.65] text-[#373E4A] font-normal"
+              className="mt-5 sm:mt-6 max-w-2xl text-[15px] sm:text-[16px] lg:text-[17px] leading-[1.62] text-[#2C333E] font-normal tracking-[-0.01em]"
             >
-              Smart Angelos Foundation is the non-profit parent of a family of
-              independent organizations, among them MST Blockchain. We hold the
-              shared assets, fund the work through grants, and answer to the
-              community that maintains it.
+              The non-profit parent foundation of the MST ecosystem. We hold the shared treasury and infrastructure in trust, fund builders through grants, and govern by open, elected membership.
             </motion.p>
 
             {/* Action Row: Rectangular Buttons + Assurance Badges */}
@@ -139,7 +126,7 @@ export function Hero() {
               {/* Primary Button — 4-Span Continuous Traveling Border Effect */}
               <Link
                 href="/whitepaper"
-                className="animated-button-gold relative inline-flex items-center justify-center rounded-[6px] border border-[#B88728]/35 bg-white/90 px-5 sm:px-6 py-2 sm:py-2.5 text-[13px] sm:text-[13.5px] font-medium text-[#8E6317] shadow-sm overflow-hidden"
+                className="animated-button-gold relative inline-flex items-center justify-center h-[38px] sm:h-[42px] rounded-[6px] border border-[#B88728]/35 bg-white/90 px-5 sm:px-6 text-[13px] sm:text-[13.5px] font-medium text-[#8E6317] shadow-sm overflow-hidden"
               >
                 <span></span>
                 <span></span>
@@ -148,27 +135,28 @@ export function Hero() {
                 <span className="relative z-10">Read the whitepaper</span>
               </Link>
 
-              {/* Secondary Button — Soft Tinted Glass Box */}
+              {/* Secondary Button — Button No 3 Diagonal Expand Hover Effect */}
               <Link
                 href="/briefing"
-                className="inline-flex items-center justify-center rounded-[6px] border border-black/5 bg-[#E4ECF4]/80 px-5 sm:px-6 py-2 sm:py-2.5 text-[13px] sm:text-[13.5px] font-medium text-[#1A1F26] shadow-sm transition-all duration-200 hover:bg-[#D9E3ED] hover:shadow hover:-translate-y-0.5 active:translate-y-0"
+                className="btn-hover-diagonal relative inline-flex items-center justify-center h-[38px] sm:h-[42px] rounded-[6px] border border-[#0D1117] px-5 sm:px-6 text-[13px] sm:text-[13.5px] font-medium shadow-sm transition-all duration-200 active:scale-[0.98]"
               >
-                <span>Book a briefing</span>
+                <span className="relative z-10">Book a briefing</span>
               </Link>
 
               {/* Inline Assurance List */}
               <span
                 style={{
-                  fontFamily: "var(--font-serif), Newsreader, Georgia, serif",
+                  fontFamily:
+                    "var(--font-sans), 'Plus Jakarta Sans', Inter, system-ui, -apple-system, sans-serif",
                 }}
-                className="text-[12px] sm:text-[13px] text-[#616875] font-normal sm:ml-1 tracking-wide"
+                className="text-[12px] sm:text-[12.5px] text-[#596273] font-medium sm:ml-1 tracking-normal"
               >
-                Open membership · Published accounts · No shareholders
+                Elected Council · Open Votes · No Shareholders · Open Grants · Milestone-Based · Publicly Disclosed
               </span>
             </motion.div>
           </div>
 
-          {/* Right Column: Hero Graphic (Isolated Yellow Feather Wing with radiant depth) */}
+          {/* Right Column: Full Hero Logo Graphic */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, x: 20 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
@@ -176,27 +164,25 @@ export function Hero() {
             className="lg:col-span-5 xl:col-span-4 relative flex items-center justify-center lg:justify-end select-none pointer-events-none"
           >
             {/* Ambient soft glow ring behind the graphic */}
-            <div className="absolute w-72 sm:w-96 h-72 sm:h-96 rounded-full bg-gradient-to-tr from-amber-200/40 via-yellow-100/30 to-sky-100/30 blur-3xl" />
+            <div className="absolute w-72 sm:w-96 lg:w-[440px] h-72 sm:h-96 lg:h-[440px] rounded-full bg-gradient-to-tr from-amber-200/35 via-yellow-100/25 to-sky-100/25 blur-3xl" />
 
-            {/* Dedicated crop container isolating solely the yellow feather wing with floating micro-motion */}
+            {/* Full-size floating logo with no box background */}
             <motion.div
-              animate={{ y: [-4, 5, -4] }}
+              animate={{ y: [-5, 6, -5] }}
               transition={{
                 duration: 6,
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="relative w-[280px] sm:w-[360px] lg:w-[420px] aspect-[4/3.2] overflow-hidden flex items-center justify-center drop-shadow-[0_20px_40px_rgba(202,138,4,0.15)]"
+              className="relative w-[300px] sm:w-[380px] lg:w-[420px] xl:w-[460px] aspect-square flex items-center justify-center drop-shadow-[0_16px_32px_rgba(202,138,4,0.18)]"
             >
-              <div className="relative w-[340%] h-[340%] -left-[30%] -top-[106%] flex-none">
-                <Image
-                  src="/logo.png"
-                  alt="Smart Angelos Feather"
-                  fill
-                  priority
-                  className="object-contain"
-                />
-              </div>
+              <Image
+                src="/logo.png"
+                alt="Smart Angelos Foundation"
+                fill
+                priority
+                className="object-contain mix-blend-multiply"
+              />
             </motion.div>
           </motion.div>
 

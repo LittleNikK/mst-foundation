@@ -8,10 +8,14 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
+  { href: "/about", label: "About" },
+  { href: "#governance", label: "Governance" },
+  { href: "#funding", label: "Funding" },
+  { href: "#validators", label: "Validators" },
+  { href: "#research", label: "Research" },
+  { href: "#transparency", label: "Transparency" },
   { href: "#ecosystem", label: "Ecosystem" },
-  { href: "#what-we-do", label: "What we do" },
-  { href: "#in-public", label: "In public" },
-  { href: "#news", label: "News" },
+  { href: "#contact", label: "Contact" },
 ];
 
 export function Navbar() {
@@ -57,6 +61,8 @@ export function Navbar() {
         // If on another route, Next.js Link will handle navigation to `/#section`
       }
       setMobileMenuOpen(false);
+    } else {
+      setMobileMenuOpen(false);
     }
   };
 
@@ -72,65 +78,64 @@ export function Navbar() {
       {/* Clean White Floating Capsule Navbar */}
       <div
         className={cn(
-          "flex h-14 sm:h-16 w-full max-w-7xl items-center justify-between rounded-2xl bg-white/95 backdrop-blur-md px-5 sm:px-8 shadow-[0_10px_30px_rgba(0,0,0,0.08)] border border-black/5 transition-all duration-300",
+          "flex h-14 sm:h-16 w-full max-w-7xl items-center justify-between rounded-2xl bg-white/95 backdrop-blur-md px-4 sm:px-6 xl:px-8 shadow-[0_10px_30px_rgba(0,0,0,0.08)] border border-black/5 transition-all duration-300",
           isVisible ? "pointer-events-auto" : "pointer-events-none"
         )}
       >
         {/* Left: Brand */}
-        <Link href="/" className="flex items-center gap-3 sm:gap-3.5 group shrink-0">
-          <div className="relative flex h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 items-center justify-center overflow-hidden rounded-full shrink-0">
+        <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+          <div className="relative flex h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 items-center justify-center overflow-hidden rounded-full shrink-0">
             <Image
               src="/logo.png"
               alt="Smart Angelos Foundation Logo"
-              width={48}
-              height={48}
+              width={44}
+              height={44}
               className="h-full w-full object-contain transition-transform duration-200 group-hover:scale-105"
               priority
             />
           </div>
-          <span className="text-base sm:text-lg md:text-[19px] font-bold tracking-tight text-slate-900">
+          <span className="text-sm sm:text-base md:text-[17px] font-bold tracking-tight text-slate-900 whitespace-nowrap">
             Smart Angelos
           </span>
         </Link>
 
-        {/* Desktop Nav Items + Action Buttons */}
-        <div className="hidden lg:flex items-center gap-8 xl:gap-10">
-          {/* Navigation Links */}
-          <nav className="flex items-center gap-7 xl:gap-9">
-            {navLinks.map((link) => {
-              const fullHref = pathname === "/" ? link.href : `/${link.href}`;
+        {/* Desktop Nav Items + Action Button */}
+        <div className="hidden lg:flex items-center gap-4 xl:gap-6 2xl:gap-8">
+          {/* Navigation Links with middle dot separators */}
+          <nav className="flex items-center gap-1.5 xl:gap-2.5 2xl:gap-3.5">
+            {navLinks.map((link, idx) => {
+              const fullHref = link.href.startsWith("#")
+                ? pathname === "/"
+                  ? link.href
+                  : `/${link.href}`
+                : link.href;
               return (
-                <Link
-                  key={link.label}
-                  href={fullHref}
-                  onClick={(e) => handleLinkClick(e, link.href)}
-                  className="font-serif text-[15px] sm:text-[15.5px] text-[#2F343F] transition-colors duration-150 hover:text-black"
-                >
-                  {link.label}
-                </Link>
+                <div key={link.label} className="flex items-center gap-1.5 xl:gap-2.5 2xl:gap-3.5">
+                  <Link
+                    href={fullHref}
+                    onClick={(e) => handleLinkClick(e, link.href)}
+                    className="font-serif text-[13px] xl:text-[13.5px] 2xl:text-[14px] text-[#2F343F] whitespace-nowrap transition-colors duration-150 hover:text-black"
+                  >
+                    {link.label}
+                  </Link>
+                  {idx < navLinks.length - 1 && (
+                    <span className="text-slate-300/90 text-[11px] select-none" aria-hidden="true">
+                      ·
+                    </span>
+                  )}
+                </div>
               );
             })}
           </nav>
 
-          {/* Action Buttons */}
-          <div className="flex items-center gap-3 xl:gap-3.5">
-            {/* Talk to us button */}
-            <Link
-              href={pathname === "/" ? "#talk-to-us" : "/#talk-to-us"}
-              onClick={(e) => handleLinkClick(e, "#talk-to-us")}
-              className="inline-flex items-center justify-center rounded-[6px] border border-[#CCD2DC] bg-transparent px-4.5 py-1.5 sm:px-5 sm:py-2 font-serif text-[14.5px] sm:text-[15px] text-[#262B34] transition-all duration-200 hover:border-slate-400 hover:bg-black/[0.02] active:scale-[0.98]"
-            >
-              Talk to us
-            </Link>
-
-            {/* Read the whitepaper button */}
-            <Link
-              href="/whitepaper"
-              className="inline-flex items-center justify-center rounded-[6px] border border-[#B68B42] bg-transparent px-4.5 py-1.5 sm:px-5 sm:py-2 font-serif text-[14.5px] sm:text-[15px] text-[#9E7329] transition-all duration-200 hover:border-[#8E631B] hover:bg-[#B68B42]/10 active:scale-[0.98]"
-            >
-              Read the whitepaper
-            </Link>
-          </div>
+          {/* Apply for a Grant Button */}
+          <Link
+            href={pathname === "/" ? "#funding" : "/#funding"}
+            onClick={(e) => handleLinkClick(e, "#funding")}
+            className="inline-flex items-center justify-center rounded-[6px] border border-[#B68B42] bg-[#B68B42]/10 px-3.5 py-1.5 sm:px-4 sm:py-2 font-serif text-[13px] sm:text-[13.5px] font-medium text-[#9E7329] whitespace-nowrap transition-all duration-200 hover:bg-[#B68B42] hover:text-white active:scale-[0.98] shrink-0"
+          >
+            Apply for a Grant
+          </Link>
         </div>
 
         {/* Mobile Menu Toggle Button */}
@@ -147,15 +152,19 @@ export function Navbar() {
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
         <div className="lg:hidden mt-2 w-full max-w-7xl rounded-2xl bg-white/95 backdrop-blur-md p-5 shadow-[0_15px_35px_rgba(0,0,0,0.12)] border border-black/5 flex flex-col gap-4 pointer-events-auto transition-all animate-in fade-in slide-in-from-top-2 duration-200">
-          <nav className="flex flex-col gap-3">
+          <nav className="flex flex-col gap-2.5">
             {navLinks.map((link) => {
-              const fullHref = pathname === "/" ? link.href : `/${link.href}`;
+              const fullHref = link.href.startsWith("#")
+                ? pathname === "/"
+                  ? link.href
+                  : `/${link.href}`
+                : link.href;
               return (
                 <Link
                   key={link.label}
                   href={fullHref}
                   onClick={(e) => handleLinkClick(e, link.href)}
-                  className="font-serif text-[16px] text-[#2F343F] py-1.5 hover:text-black transition-colors"
+                  className="font-serif text-[15.5px] text-[#2F343F] py-1 hover:text-black transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -165,23 +174,13 @@ export function Navbar() {
 
           <div className="h-px w-full bg-slate-200/80 my-1" />
 
-          <div className="flex flex-col sm:flex-row gap-2.5">
-            <Link
-              href={pathname === "/" ? "#talk-to-us" : "/#talk-to-us"}
-              onClick={(e) => handleLinkClick(e, "#talk-to-us")}
-              className="inline-flex items-center justify-center rounded-[6px] border border-[#CCD2DC] bg-transparent px-4 py-2 font-serif text-[15px] text-[#262B34] transition-all hover:bg-slate-50"
-            >
-              Talk to us
-            </Link>
-
-            <Link
-              href="/whitepaper"
-              onClick={() => setMobileMenuOpen(false)}
-              className="inline-flex items-center justify-center rounded-[6px] border border-[#B68B42] bg-transparent px-4 py-2 font-serif text-[15px] text-[#9E7329] transition-all hover:bg-[#B68B42]/10"
-            >
-              Read the whitepaper
-            </Link>
-          </div>
+          <Link
+            href={pathname === "/" ? "#funding" : "/#funding"}
+            onClick={(e) => handleLinkClick(e, "#funding")}
+            className="inline-flex items-center justify-center rounded-[6px] border border-[#B68B42] bg-[#B68B42]/10 px-4 py-2 font-serif text-[14.5px] font-medium text-[#9E7329] transition-all hover:bg-[#B68B42] hover:text-white"
+          >
+            Apply for a Grant
+          </Link>
         </div>
       )}
     </header>

@@ -207,3 +207,38 @@ a {
     transform: translateY(100%);
   }
 }
+
+/* Button No 3 Diagonal Expand Hover Effect (Hero "Book a briefing" button) */
+.btn-hover-diagonal {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: rgba(255, 255, 255, 0.75);
+  color: #0D1117;
+  text-decoration: none;
+  transition: color 0.4s ease, border-color 0.4s ease, box-shadow 0.3s ease;
+}
+
+.btn-hover-diagonal::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140%;
+  height: 0%;
+  background-color: #0D1117;
+  transform: translate(-50%, -50%) rotate(45deg);
+  transform-origin: 50% 50%;
+  z-index: 0;
+  transition: height 0.6s ease;
+}
+
+.btn-hover-diagonal:hover::before {
+  height: 440%;
+}
+
+.btn-hover-diagonal:hover {
+  color: #ffffff;
+  border-color: #0D1117;
+  box-shadow: 0 4px 14px rgba(13, 17, 23, 0.18);
+}

@@ -71,6 +71,9 @@ export function Programmes() {
       id="what-we-do"
       className="relative w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-8 sm:py-12 scroll-mt-24"
     >
+      {/* Anchors for Funding & Research */}
+      <div id="funding" className="absolute -top-24 pointer-events-none" />
+      <div id="research" className="absolute -top-24 pointer-events-none" />
       {/* Outer glass container */}
       <div
         className="relative z-10 w-full max-w-7xl mx-auto rounded-[28px] sm:rounded-[36px] lg:rounded-[42px] overflow-hidden"
