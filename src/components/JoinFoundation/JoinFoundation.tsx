@@ -24,7 +24,7 @@ export function JoinFoundation() {
   return (
     <section
       id="talk-to-us"
-      className="relative w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 scroll-mt-16"
+      className="relative w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 scroll-mt-16 bg-[#F1F3F6]"
     >
       {/* Anchor for Contact */}
       <div id="contact" className="absolute -top-24 pointer-events-none" />

@@ -63,17 +63,7 @@ const stats = [
 /* ------------------------------------------------------------------ */
 export function EcosystemOrgs() {
   return (
-    <section className="relative w-full py-12 sm:py-16 lg:py-20 overflow-hidden">
-      {/* Ambient background glows */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-[-8%] top-[5%] w-[600px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(253,230,138,0.22)_0%,transparent_65%)] blur-3xl select-none"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-[-10%] bottom-[10%] w-[500px] h-[400px] bg-[radial-gradient(circle_at_center,rgba(199,218,240,0.28)_0%,transparent_65%)] blur-3xl select-none"
-      />
-
+    <section className="relative w-full py-12 sm:py-16 lg:py-20 overflow-hidden bg-[#FAFAFC]">
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         {/* ── Section Header ── */}

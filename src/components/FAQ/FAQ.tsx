@@ -144,7 +144,7 @@ export function FAQ() {
   return (
     <section
       id="faq"
-      className="relative w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-8 sm:py-14 scroll-mt-24"
+      className="relative w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-8 sm:py-14 scroll-mt-24 bg-[#FAFAFC]"
     >
       {/* Outer Container with seamless rounded border */}
       <div className="relative z-10 w-full max-w-7xl mx-auto rounded-[28px] sm:rounded-[36px] lg:rounded-[40px] overflow-hidden border border-[#E4DCD3] shadow-[0_20px_50px_rgba(18,20,23,0.06)]">

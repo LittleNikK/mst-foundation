@@ -54,18 +54,9 @@ const tracks = [
 
 export function EcosystemTracks() {
   return (
-    <section id="ecosystem" className="relative w-full py-10 sm:py-14 lg:py-16 overflow-hidden scroll-mt-24" style={{ background: "linear-gradient(145deg, #D6E4F0 0%, #E4EEF6 30%, #F0EBE0 65%, #E8EFF6 100%)" }}>
+    <section id="ecosystem" className="relative w-full py-10 sm:py-14 lg:py-16 overflow-hidden scroll-mt-24 bg-[#FAFAFC]">
       {/* Anchor for Validators */}
       <div id="validators" className="absolute -top-24 pointer-events-none" />
-      {/* Ambient glows behind the cards */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 w-[900px] h-[400px] bg-[radial-gradient(ellipse_at_top,rgba(186,210,232,0.35)_0%,transparent_70%)] select-none"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-[-5%] bottom-[10%] w-[500px] h-[400px] bg-[radial-gradient(circle,rgba(251,191,36,0.18)_0%,transparent_65%)] blur-3xl select-none"
-      />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 

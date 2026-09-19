@@ -44,7 +44,7 @@ const navigationColumns = [
 /* ------------------------------------------------------------------ */
 export function Footer() {
   return (
-    <footer className="relative w-full overflow-hidden px-4 sm:px-6 lg:px-8 pb-6 sm:pb-8 pt-2 sm:pt-4">
+    <footer className="relative w-full overflow-hidden px-4 sm:px-6 lg:px-8 pb-6 sm:pb-8 pt-2 sm:pt-4 bg-[#F1F3F6]">
       {/* Outer Card Container */}
       <div className="relative z-10 w-full max-w-7xl mx-auto rounded-[24px] sm:rounded-[32px] lg:rounded-[36px] overflow-hidden border border-white/60 shadow-[0_16px_48px_rgba(15,23,42,0.07)] bg-[#ECEFF2]">
         
