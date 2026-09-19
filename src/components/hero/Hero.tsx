@@ -88,14 +88,14 @@ export function Hero() {
           <div className="lg:col-span-7 xl:col-span-8 flex flex-col justify-center max-w-4xl">
 
             {/* Crisp Eyebrow Badge */}
-            {/* Bold Headline in Outfit */}
+            {/* Bold Headline in Jost */}
             <motion.h1
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 fontFamily:
-                  "var(--font-outfit), 'Outfit', sans-serif",
+                  "var(--font-jost), 'Jost', sans-serif",
               }}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] xl:text-[54px] 2xl:text-[60px] font-bold leading-[1.12] tracking-[-0.02em] text-[#0D1117]"
             >

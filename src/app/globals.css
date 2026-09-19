@@ -35,10 +35,11 @@
   --font-body: var(--font-sans), Plus Jakarta Sans, Inter, system-ui, -apple-system, sans-serif;
   --font-display: var(--font-display), Anton, Impact, sans-serif;
   --font-montserrat: var(--font-montserrat), 'Montserrat', sans-serif;
+  --font-jost: var(--font-jost), 'Jost', sans-serif;
 }
 
 h1 {
-  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-family: var(--font-jost), 'Jost', var(--font-outfit), sans-serif;
 }
 
 * {
