@@ -82,8 +82,8 @@ export function Loader({ onDone }: LoaderProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               style={{
-                fontFamily: "var(--font-display), 'Anton', sans-serif",
-                fontWeight: 400,
+                fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
+                fontWeight: 800,
                 textTransform: "uppercase",
               }}
               className="text-5xl sm:text-7xl md:text-8xl lg:text-[94px] xl:text-[108px] font-normal uppercase tracking-[-0.015em] leading-[0.96] sm:leading-[0.93] text-slate-950 drop-shadow-[0_2px_14px_rgba(255,255,255,0.7)] max-w-6xl"

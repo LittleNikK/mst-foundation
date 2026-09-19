@@ -75,18 +75,19 @@ function ListItem({
         {/* Left col: number + badge */}
         <div className="flex items-center gap-3 sm:w-52 shrink-0">
           <span
-            className="tabular-nums font-bold text-[11px] select-none leading-none"
+            className="tabular-nums font-bold text-[11.5px] select-none leading-none"
             style={{
-              fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
+              fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
               color: item.accent,
-              opacity: 0.5,
+              opacity: 0.65,
             }}
           >
             {item.id}
           </span>
           <span
-            className="inline-block rounded-[3px] px-2.5 py-1 text-[10.5px] font-semibold tracking-wide select-none whitespace-nowrap"
+            className="inline-block rounded-[4px] px-2.5 py-1 text-[11px] font-semibold tracking-wide select-none whitespace-nowrap"
             style={{
+              fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
               backgroundColor: `${item.accent}12`,
               border: `1px solid ${item.accent}28`,
               color: item.accent,
@@ -96,23 +97,22 @@ function ListItem({
           </span>
         </div>
 
-        {/* Centre: title */}
+        {/* Centre: title — matching the bold/semibold headline font from reference image */}
         <h3
           style={{
-            fontFamily:
-              "var(--font-serif), Newsreader, 'Times New Roman', Georgia, serif",
+            fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
           }}
-          className="flex-1 text-[17px] sm:text-[19px] lg:text-[20px] font-normal leading-[1.3] text-[#121417] group-hover:text-[#0D1117] transition-colors duration-200"
+          className="flex-1 text-[17px] sm:text-[18.5px] lg:text-[19.5px] font-medium leading-[1.3] tracking-[-0.01em] text-[#121417] group-hover:text-black transition-colors duration-200"
         >
           {item.title}
         </h3>
 
-        {/* Right: footer — fades up slightly on hover */}
+        {/* Right: footer — matching the clean regular body font from reference image */}
         <p
           style={{
-            fontFamily: "var(--font-serif), Newsreader, Georgia, serif",
+            fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
           }}
-          className="sm:w-52 shrink-0 text-[12px] sm:text-[12.5px] text-[#8A919C] sm:text-right leading-relaxed group-hover:text-[#6B7280] transition-colors duration-200"
+          className="sm:w-56 shrink-0 text-[13px] sm:text-[13.5px] text-[#5A6372] sm:text-right leading-relaxed font-normal group-hover:text-[#282D37] transition-colors duration-200"
         >
           {item.footer}
         </p>
@@ -154,7 +154,7 @@ export function NewsEvents() {
   return (
     <section
       id="news"
-      className="relative w-full py-12 sm:py-16 lg:py-20 overflow-hidden scroll-mt-24"
+      className="relative w-full bg-white pt-12 sm:pt-16 lg:pt-20 pb-16 sm:pb-20 lg:pb-24 overflow-hidden scroll-mt-24 border-y border-black/[0.05]"
     >
       {/* Ambient glows */}
       <div
@@ -183,7 +183,7 @@ export function NewsEvents() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[11px] sm:text-[12px] uppercase tracking-[0.24em] font-semibold text-[#9E7D3B] select-none"
+            className="text-[11px] sm:text-[12px] uppercase tracking-[0.24em] font-semibold text-[#9E7D3B] select-none font-[var(--font-outfit)]"
           >
             NEWS &amp; EVENTS
           </motion.p>
@@ -194,9 +194,9 @@ export function NewsEvents() {
             transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
             style={{
               fontFamily:
-                "var(--font-serif), Newsreader, 'Times New Roman', Georgia, serif",
+                "var(--font-outfit), 'Outfit', sans-serif",
             }}
-            className="mt-3 sm:mt-4 text-4xl sm:text-5xl lg:text-[54px] xl:text-[58px] font-normal leading-[1.08] tracking-[-0.02em] text-[#121417]"
+            className="mt-3 sm:mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-[52px] xl:text-[56px] font-semibold leading-[1.1] tracking-[-0.02em] text-[#121417]"
           >
             What we are publishing
             <br />

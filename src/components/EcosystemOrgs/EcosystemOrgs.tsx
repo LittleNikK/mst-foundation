@@ -84,7 +84,7 @@ export function EcosystemOrgs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-semibold text-[#9E7D3B] select-none mb-3"
+              className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-semibold text-[#9E7D3B] select-none mb-3 font-[var(--font-outfit)]"
             >
               THE ECOSYSTEM
             </motion.p>
@@ -93,8 +93,8 @@ export function EcosystemOrgs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-              style={{ fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif" }}
-              className="text-3xl sm:text-4xl md:text-[40px] lg:text-[44px] xl:text-[48px] font-bold leading-[1.1] tracking-[-0.03em] text-[#0D1117]"
+              style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}
+              className="text-3xl sm:text-4xl md:text-[40px] lg:text-[44px] xl:text-[48px] font-semibold leading-[1.1] tracking-[-0.02em] text-[#0D1117]"
             >
               One non-profit parent,
               <br />
@@ -108,7 +108,7 @@ export function EcosystemOrgs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              style={{ fontFamily: "var(--font-serif), Newsreader, Georgia, serif" }}
+              style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}
               className="text-[14.5px] sm:text-[15.5px] lg:text-[16px] leading-[1.7] text-[#373E4A] font-normal"
             >
               Each organization runs its own roadmap and its own contributors. The
@@ -159,7 +159,7 @@ export function EcosystemOrgs() {
                     }}
                   />
 
-                  <div className="relative z-10 p-7 sm:p-8 lg:p-9">
+                  <div className="relative z-10 p-7 sm:p-8 lg:p-9 font-[var(--font-outfit)]">
                     {/* Status badge */}
                     <div className="inline-flex items-center mb-6">
                       <span
@@ -172,15 +172,15 @@ export function EcosystemOrgs() {
 
                     {/* Title */}
                     <h3
-                      style={{ fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif" }}
-                      className="text-[20px] sm:text-[22px] font-bold leading-[1.2] tracking-tight text-[#0D1117]"
+                      style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}
+                      className="text-[20px] sm:text-[22px] font-semibold leading-[1.2] tracking-tight text-[#0D1117]"
                     >
                       {org.title}
                     </h3>
 
                     {/* Description */}
                     <p
-                      style={{ fontFamily: "var(--font-serif), Newsreader, Georgia, serif" }}
+                      style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}
                       className="mt-3 text-[14px] sm:text-[14.5px] leading-[1.7] text-[#404651] font-normal"
                     >
                       {org.description}
@@ -189,7 +189,7 @@ export function EcosystemOrgs() {
 
                   {/* CTA footer */}
                   {org.cta && org.href ? (
-                    <div className="relative z-10 px-7 sm:px-8 pb-7 sm:pb-8 pt-0">
+                    <div className="relative z-10 px-7 sm:px-8 pb-7 sm:pb-8 pt-0 font-[var(--font-outfit)]">
                       <div
                         className="pt-4 border-t"
                         style={{ borderColor: `${org.badgeDot}22` }}
@@ -236,20 +236,20 @@ export function EcosystemOrgs() {
               style={{ background: "radial-gradient(circle, rgba(59,125,216,0.15) 0%, transparent 70%)" }}
             />
 
-            <div className="relative z-10">
+            <div className="relative z-10 font-[var(--font-outfit)]">
               <p className="text-[10.5px] sm:text-[11.5px] uppercase tracking-[0.22em] font-semibold text-[#C8A265] mb-6 sm:mb-8 select-none">
                 FROM THE COUNCIL — QUOTE TO CONFIRM
               </p>
               <blockquote
-                style={{ fontFamily: "var(--font-serif), Newsreader, 'Times New Roman', Georgia, serif" }}
-                className="text-2xl sm:text-[28px] lg:text-[30px] font-normal italic leading-[1.35] text-white tracking-[-0.01em]"
+                style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}
+                className="text-2xl sm:text-[27px] lg:text-[29px] font-normal italic leading-[1.38] text-white tracking-[-0.01em]"
               >
                 "A foundation is a promise written down: that what we build
                 together stays available to everyone who needs it."
               </blockquote>
             </div>
 
-            <p className="relative z-10 mt-8 sm:mt-10 text-[12px] sm:text-[13px] text-slate-400/70 font-normal">
+            <p className="relative z-10 mt-8 sm:mt-10 text-[12px] sm:text-[13px] text-slate-400/70 font-normal font-[var(--font-outfit)]">
               Chair, Smart Angelos Foundation — name to confirm
             </p>
           </motion.div>
@@ -270,24 +270,24 @@ export function EcosystemOrgs() {
               }}
             >
               <h3
-                style={{ fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif" }}
-                className="text-[19px] sm:text-[21px] font-bold tracking-tight text-[#0D1117] mb-2"
+                style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}
+                className="text-[19px] sm:text-[21px] font-semibold tracking-tight text-[#0D1117] mb-2"
               >
                 Built for the long term
               </h3>
               <p
-                style={{ fontFamily: "var(--font-serif), Newsreader, Georgia, serif" }}
+                style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}
                 className="text-[13px] sm:text-[13.5px] leading-relaxed text-[#4A505C] font-normal mb-6"
               >
                 Every figure below is published with the annual report and
                 independently reviewed. The dashes are placeholders until the
                 first reporting year closes.
               </p>
-              <div className="grid grid-cols-4 gap-4 pt-5 border-t border-black/[0.06]">
+              <div className="grid grid-cols-4 gap-4 pt-5 border-t border-black/[0.06] font-[var(--font-outfit)]">
                 {stats.map((s) => (
                   <div key={s.label}>
                     <p
-                      style={{ fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}
                       className="text-[22px] sm:text-[26px] font-bold text-[#0D1117] tabular-nums tracking-tight"
                     >
                       {s.value}
@@ -306,7 +306,7 @@ export function EcosystemOrgs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className="rounded-2xl sm:rounded-[22px] p-6 sm:p-7 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+              className="rounded-2xl sm:rounded-[22px] p-6 sm:p-7 flex flex-col sm:flex-row sm:items-center justify-between gap-4 font-[var(--font-outfit)]"
               style={{
                 background: "linear-gradient(135deg, rgba(255,255,255,0.99) 0%, rgba(245,247,251,0.95) 100%)",
                 border: "1px solid rgba(148,163,184,0.18)",
@@ -314,8 +314,8 @@ export function EcosystemOrgs() {
               }}
             >
               <p
-                style={{ fontFamily: "var(--font-serif), Newsreader, 'Times New Roman', Georgia, serif" }}
-                className="text-[17px] sm:text-[18px] font-normal text-[#0D1117] leading-snug"
+                style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}
+                className="text-[16px] sm:text-[17.5px] font-medium text-[#0D1117] leading-snug"
               >
                 Want the detail before the report
                 <br className="hidden sm:inline" />
@@ -324,7 +324,7 @@ export function EcosystemOrgs() {
 
               <Link
                 href="/secretariat"
-                className="animated-button-gold relative inline-flex items-center justify-center rounded-[6px] border border-[#B88728]/35 bg-white/90 px-5 py-2.5 text-[13px] font-medium text-[#8E6317] shadow-sm overflow-hidden flex-none self-start sm:self-auto"
+                className="animated-button-gold relative inline-flex items-center justify-center rounded-[6px] border border-[#B88728]/35 bg-white/90 px-5 py-2.5 text-[13px] font-medium text-[#8E6317] shadow-sm overflow-hidden flex-none self-start sm:self-auto font-[var(--font-outfit)]"
               >
                 <span></span>
                 <span></span>

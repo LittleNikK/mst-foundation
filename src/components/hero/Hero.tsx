@@ -52,7 +52,18 @@ function RotatingWord({
 
 export function Hero() {
   return (
-    <section className="relative w-full min-h-[calc(100vh-4.5rem)] flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-6 sm:pb-8" style={{ background: "linear-gradient(145deg, #D6E4F0 0%, #E4EEF6 30%, #F0EBE0 65%, #E8EFF6 100%)" }}>
+    <section className="relative w-full min-h-[calc(100vh-4.5rem)] flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-6 sm:pb-8">
+      {/* Background Image behind the hero section container card */}
+      <div className="absolute inset-0 z-0 pointer-events-none select-none">
+        <Image
+          src="/asstes/bg-2.jpg"
+          alt="Hero Background"
+          fill
+          priority
+          className="object-cover object-center"
+        />
+      </div>
+
       {/* Outer Floating Glassmorphic Container Card with fresh luminous gradient */}
       <div className="relative z-10 w-full max-w-7xl mx-auto rounded-[32px] sm:rounded-[40px] lg:rounded-[44px] border border-white/50 bg-gradient-to-br from-white/55 via-white/40 to-white/30 p-7 sm:p-12 lg:p-14 xl:p-16 shadow-[0_8px_32px_rgba(15,23,42,0.12),0_2px_8px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.9)] backdrop-blur-2xl overflow-hidden">
 
@@ -77,26 +88,26 @@ export function Hero() {
           <div className="lg:col-span-7 xl:col-span-8 flex flex-col justify-center max-w-4xl">
 
             {/* Crisp Eyebrow Badge */}
-            {/* Bold Montserrat Headline */}
+            {/* Bold Headline in Outfit */}
             <motion.h1
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 fontFamily:
-                  "var(--font-montserrat), 'Montserrat', sans-serif",
+                  "var(--font-outfit), 'Outfit', sans-serif",
               }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] xl:text-[54px] 2xl:text-[60px] font-bold leading-[1.12] tracking-[-0.03em] text-[#0D1117]"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] xl:text-[54px] 2xl:text-[60px] font-bold leading-[1.12] tracking-[-0.02em] text-[#0D1117]"
             >
               <span className="block text-[#0D1117]">
                 Smart Angelos
               </span>
               <span className="block mt-1 sm:mt-2 text-[#0D1117]">
                 <span className="inline whitespace-nowrap">The non-profit{" "}
-                <RotatingWord
-                  words={["home", "steward", "foundation"]}
-                  interval={3500}
-                /></span>
+                  <RotatingWord
+                    words={["home", "steward", "foundation"]}
+                    interval={3500}
+                  /></span>
                 <br />
                 for public infrastructure.
               </span>

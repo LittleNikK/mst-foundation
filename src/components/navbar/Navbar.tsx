@@ -114,7 +114,7 @@ export function Navbar() {
                   <Link
                     href={fullHref}
                     onClick={(e) => handleLinkClick(e, link.href)}
-                    className="font-serif text-[13px] xl:text-[13.5px] 2xl:text-[14px] text-[#2F343F] whitespace-nowrap transition-colors duration-150 hover:text-black"
+                    className="font-[var(--font-inter)] text-[13.5px] xl:text-[14px] 2xl:text-[14.5px] font-medium tracking-tight text-[#2B303B] whitespace-nowrap transition-colors duration-150 hover:text-black"
                   >
                     {link.label}
                   </Link>
@@ -132,7 +132,7 @@ export function Navbar() {
           <Link
             href={pathname === "/" ? "#funding" : "/#funding"}
             onClick={(e) => handleLinkClick(e, "#funding")}
-            className="inline-flex items-center justify-center rounded-[6px] border border-[#B68B42] bg-[#B68B42]/10 px-3.5 py-1.5 sm:px-4 sm:py-2 font-serif text-[13px] sm:text-[13.5px] font-medium text-[#9E7329] whitespace-nowrap transition-all duration-200 hover:bg-[#B68B42] hover:text-white active:scale-[0.98] shrink-0"
+            className="inline-flex items-center justify-center rounded-[6px] border border-[#B68B42] bg-[#B68B42]/10 px-3.5 py-1.5 sm:px-4 sm:py-2 font-[var(--font-inter)] text-[13px] sm:text-[13.5px] font-medium text-[#9E7329] whitespace-nowrap transition-all duration-200 hover:bg-[#B68B42] hover:text-white active:scale-[0.98] shrink-0"
           >
             Apply for a Grant
           </Link>
@@ -164,7 +164,7 @@ export function Navbar() {
                   key={link.label}
                   href={fullHref}
                   onClick={(e) => handleLinkClick(e, link.href)}
-                  className="font-serif text-[15.5px] text-[#2F343F] py-1 hover:text-black transition-colors"
+                  className="font-[var(--font-inter)] text-[15px] font-medium tracking-tight text-[#2B303B] py-1 hover:text-black transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -177,7 +177,7 @@ export function Navbar() {
           <Link
             href={pathname === "/" ? "#funding" : "/#funding"}
             onClick={(e) => handleLinkClick(e, "#funding")}
-            className="inline-flex items-center justify-center rounded-[6px] border border-[#B68B42] bg-[#B68B42]/10 px-4 py-2 font-serif text-[14.5px] font-medium text-[#9E7329] transition-all hover:bg-[#B68B42] hover:text-white"
+            className="inline-flex items-center justify-center rounded-[6px] border border-[#B68B42] bg-[#B68B42]/10 px-4 py-2 font-[var(--font-inter)] text-[14px] font-medium text-[#9E7329] transition-all hover:bg-[#B68B42] hover:text-white"
           >
             Apply for a Grant
           </Link>

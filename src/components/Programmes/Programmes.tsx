@@ -1,283 +1,479 @@
 "use client";
 
 import Link from "next/link";
-import { motion, type Variants } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, useScroll, useTransform, useSpring, easeOut, useMotionValueEvent, MotionValue } from "framer-motion";
+
+const VH_PER_CARD = 165;
 
 /* ------------------------------------------------------------------ */
-/*  Data                                                               */
+/*  Timeline Helpers (exact PublicObligations 1:1 forward/reverse)     */
 /* ------------------------------------------------------------------ */
-const programmes = [
-  {
-    id: "01",
-    tag: "PROGRAMME 01",
-    title: "Open grants",
-    description:
-      "Rolling awards to individuals and teams maintaining shared infrastructure.",
-    accent: "#3B7DD8",
-    image:
-      "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80",
+const TIMELINE = {
+  leadIn: 0.30, // Generous landing dwell (~180vh) so Card 0 stays calm and static in both directions
+  step(total: number) {
+    return (1.0 - this.leadIn) / (total - 1);
   },
-  {
-    id: "02",
-    tag: "PROGRAMME 02",
-    title: "Research fellowships",
-    description:
-      "Funded working papers on governance, assurance and public-good funding models.",
-    accent: "#B38D4A",
-    image:
-      "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&q=80",
-  },
-  {
-    id: "03",
-    tag: "PROGRAMME 03",
-    title: "Education",
-    description:
-      "Free curricula and workshops for schools, co-operatives and public bodies.",
-    accent: "#5C8A6E",
-    image:
-      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80",
-  },
-  {
-    id: "04",
-    tag: "PROGRAMME 04",
-    title: "Community fund",
-    description:
-      "Small, fast awards decided by members for local and volunteer-led work.",
-    accent: "#7B5EA7",
-    image:
-      "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=800&q=80",
-  },
-];
-
-/* ------------------------------------------------------------------ */
-/*  Motion variants — same easing/feel as the Hero scroll reveal       */
-/* ------------------------------------------------------------------ */
-const imageReveal: Variants = {
-  hidden: { opacity: 0, scale: 1.08, y: 16 },
-  show: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: { duration: 0.9, ease: [0.44, 0, 0.56, 1] as const },
+  card(index: number, total: number) {
+    if (index === 0) {
+      return { entryStart: 0, entryEnd: 0.001 };
+    }
+    const s = this.step(total);
+    // Strict PublicObligations formula:
+    // Glides over 75% of the step, rests over 25%.
+    // Final card reaches completion at EXACTLY 1.00!
+    const entryStart = this.leadIn + (index - 0.75) * s;
+    const entryEnd = this.leadIn + index * s;
+    return { entryStart, entryEnd };
   },
 };
 
 /* ------------------------------------------------------------------ */
-/*  Section                                                            */
+/*  Data — The Frontiers / Programmes exactly matching the design     */
+/* ------------------------------------------------------------------ */
+const frontiers = [
+  {
+    id: "01",
+    tag: "Programme 1",
+    title: "Open grants",
+    description:
+      "Rolling awards to individuals and teams maintaining shared infrastructure.",
+    image:
+      "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1200&q=80",
+  },
+  {
+    id: "02",
+    tag: "Programme 2",
+    title: "Research fellowships",
+    description:
+      "Funded working papers on governance, assurance and public-good funding models.",
+    image:
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80",
+  },
+  {
+    id: "03",
+    tag: "Programme 3",
+    title: "Education",
+    description:
+      "Free curricula and workshops for schools, co-operatives and public bodies.",
+    image:
+      "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=1200&q=80",
+  },
+  {
+    id: "04",
+    tag: "Programme 4",
+    title: "Community fund",
+    description:
+      "Small, fast awards decided by members for local and volunteer-led work.",
+    image:
+      "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1200&q=80",
+  },
+];
+
+/* ------------------------------------------------------------------ */
+/*  Decorative Segmented Wheel — left edge geometry matching design   */
+/* ------------------------------------------------------------------ */
+function DecorativeWheel() {
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute -left-48 sm:-left-40 top-1/2 -translate-y-1/2 w-[560px] h-[560px] select-none"
+    >
+      <svg viewBox="0 0 560 560" className="w-full h-full">
+        {/* Outer segmented rings */}
+        <path
+          d="M 280 40 A 240 240 0 0 1 520 280"
+          fill="none"
+          stroke="rgba(0,0,0,0.038)"
+          strokeWidth="48"
+        />
+        <path
+          d="M 520 280 A 240 240 0 0 1 360 500"
+          fill="none"
+          stroke="rgba(0,0,0,0.028)"
+          strokeWidth="48"
+        />
+        <path
+          d="M 220 510 A 240 240 0 0 1 40 280"
+          fill="none"
+          stroke="rgba(0,0,0,0.038)"
+          strokeWidth="48"
+        />
+
+        {/* Middle segmented rings */}
+        <path
+          d="M 280 115 A 165 165 0 0 1 445 280"
+          fill="none"
+          stroke="rgba(0,0,0,0.045)"
+          strokeWidth="40"
+        />
+        <path
+          d="M 115 280 A 165 165 0 0 0 280 445"
+          fill="none"
+          stroke="rgba(0,0,0,0.035)"
+          strokeWidth="40"
+        />
+
+        {/* Inner ring */}
+        <path
+          d="M 280 180 A 100 100 0 0 1 380 280"
+          fill="none"
+          stroke="rgba(0,0,0,0.05)"
+          strokeWidth="32"
+        />
+        <path
+          d="M 180 280 A 100 100 0 0 0 280 380"
+          fill="none"
+          stroke="rgba(0,0,0,0.04)"
+          strokeWidth="32"
+        />
+      </svg>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Stacking Image (exact PublicObligations glide-up transition)       */
+/* ------------------------------------------------------------------ */
+function StackImage({
+  item,
+  index,
+  total,
+  progress,
+}: {
+  item: typeof frontiers[0];
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  const isFirst = index === 0;
+  const { entryStart, entryEnd } = TIMELINE.card(index, total);
+
+  // y translation: item 0 anchored; incoming images glide up from 100% to 0% with easeOut
+  const y = useTransform(
+    progress,
+    [entryStart, entryEnd],
+    [isFirst ? "0%" : "100%", "0%"],
+    { clamp: true, ease: easeOut }
+  );
+
+  // Subtle scale expansion (0.96 -> 1.0)
+  const scale = useTransform(
+    progress,
+    [entryStart, entryEnd],
+    [isFirst ? 1 : 0.96, 1],
+    { clamp: true, ease: easeOut }
+  );
+
+  // Opacity: fades in gracefully across ascent
+  const opacity = useTransform(
+    progress,
+    [entryStart, isFirst ? 0.001 : entryStart + (entryEnd - entryStart) * 0.45],
+    [isFirst ? 1 : 0, 1],
+    { clamp: true, ease: easeOut }
+  );
+
+  return (
+    <motion.div
+      style={{
+        y,
+        scale,
+        opacity,
+        zIndex: (index + 1) * 10,
+        boxShadow:
+          index === 0
+            ? "0 20px 50px rgba(0,0,0,0.08)"
+            : "0 -14px 36px -4px rgba(0,0,0,0.30), 0 20px 50px rgba(0,0,0,0.15)",
+      }}
+      className="absolute inset-0 rounded-[20px] overflow-hidden will-change-transform bg-[#121417]"
+    >
+      <img
+        src={item.image}
+        alt={item.title}
+        className="w-full h-full object-cover select-none"
+      />
+    </motion.div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Synchronous Copy Stack matching the design layout                  */
+/* ------------------------------------------------------------------ */
+function StackCopy({
+  item,
+  index,
+  total,
+  progress,
+}: {
+  item: typeof frontiers[0];
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+}) {
+  const isFirst = index === 0;
+  const isLast = index === total - 1;
+  const { entryStart, entryEnd } = TIMELINE.card(index, total);
+  const nextCard = !isLast ? TIMELINE.card(index + 1, total) : null;
+  const nextEntryStart = nextCard ? nextCard.entryStart : 1.0;
+  const nextEntryFade = nextCard ? nextCard.entryStart + 0.10 : 1.0;
+
+  const opacity = useTransform(
+    progress,
+    isFirst
+      ? [0, nextEntryStart, nextEntryFade]
+      : isLast
+        ? [entryStart, entryEnd, 1.0]
+        : [entryStart, entryEnd, nextEntryStart, nextEntryFade],
+    isFirst
+      ? [1, 1, 0]
+      : isLast
+        ? [0, 1, 1]
+        : [0, 1, 1, 0],
+    { clamp: true, ease: easeOut }
+  );
+
+  const y = useTransform(
+    progress,
+    isFirst
+      ? [0, nextEntryStart, nextEntryFade]
+      : isLast
+        ? [entryStart, entryEnd, 1.0]
+        : [entryStart, entryEnd, nextEntryStart, nextEntryFade],
+    isFirst
+      ? ["0px", "0px", "-14px"]
+      : isLast
+        ? ["14px", "0px", "0px"]
+        : ["14px", "0px", "0px", "-14px"],
+    { clamp: true, ease: easeOut }
+  );
+
+  return (
+    <motion.div
+      style={{
+        opacity,
+        y,
+      }}
+      className="absolute inset-0 flex flex-col justify-center will-change-transform"
+    >
+      <h3
+        style={{
+          fontFamily:
+            "var(--font-montserrat), 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif",
+        }}
+        className="text-[26px] sm:text-[30px] lg:text-[34px] font-semibold text-[#111827] tracking-tight leading-[1.18] mb-5 sm:mb-6 max-w-[420px]"
+      >
+        {item.title}
+      </h3>
+
+      <p className="text-[14.5px] sm:text-[15.5px] leading-[1.68] text-[#374151] mb-6 sm:mb-8 max-w-[420px]">
+        {item.description}
+      </p>
+
+      <Link
+        href="/grants/apply"
+        className="inline-block text-[14px] font-normal text-[#111827] border-b border-[#111827] pb-0.5 self-start hover:opacity-70 transition-opacity select-none"
+      >
+        Discover
+      </Link>
+    </motion.div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Section Component                                                  */
 /* ------------------------------------------------------------------ */
 export function Programmes() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  // Snappy, low-inertia spring physics that stops immediately when scroll input pauses:
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 30,
+    mass: 0.20,
+    restDelta: 0.0005,
+  });
+
+  // Track active index smoothly based on midpoint of each transition:
+  useMotionValueEvent(smoothProgress, "change", (v) => {
+    const total = frontiers.length;
+    let idx = 0;
+    const c1 = TIMELINE.card(1, total);
+    const m1 = (c1.entryStart + c1.entryEnd) / 2;
+    if (v < m1) {
+      idx = 0;
+    } else {
+      idx = total - 1;
+      for (let i = 1; i < total - 1; i++) {
+        const cCurr = TIMELINE.card(i, total);
+        const cNext = TIMELINE.card(i + 1, total);
+        const midCurr = (cCurr.entryStart + cCurr.entryEnd) / 2;
+        const midNext = (cNext.entryStart + cNext.entryEnd) / 2;
+        if (v >= midCurr && v < midNext) {
+          idx = i;
+          break;
+        }
+      }
+    }
+    setActive((prev) => (prev === idx ? prev : idx));
+  });
+
+  // Click a nav item or dot to jump directly to its calm resting zone
+  const goTo = (i: number) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const trackTop = window.scrollY + rect.top;
+    const trackHeight = el.offsetHeight - window.innerHeight;
+
+    const total = frontiers.length;
+    let progressTarget = 0;
+    if (i === 0) {
+      progressTarget = TIMELINE.leadIn * 0.5;
+    } else if (i === total - 1) {
+      progressTarget = 0.999;
+    } else {
+      const c = TIMELINE.card(i, total);
+      const nextC = TIMELINE.card(i + 1, total);
+      progressTarget = (c.entryEnd + nextC.entryStart) / 2;
+    }
+
+    const target = trackTop + progressTarget * trackHeight;
+    window.scrollTo({ top: target, behavior: "smooth" });
+  };
+
+  const scrollHeightVh = (frontiers.length - 1) * VH_PER_CARD + 100;
+
   return (
     <section
       id="what-we-do"
-      className="relative w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-8 sm:py-12 scroll-mt-24"
+      className="relative w-full scroll-mt-24 bg-[#FAFAFC]"
     >
       {/* Anchors for Funding & Research */}
       <div id="funding" className="absolute -top-24 pointer-events-none" />
       <div id="research" className="absolute -top-24 pointer-events-none" />
-      {/* Outer glass container */}
+
+      {/*
+        Scroll track matching PublicObligations: keeps the layout locked static
+        in one viewport while cards glide in smoothly, releasing cleanly only
+        after the final card is seated.
+      */}
       <div
-        className="relative z-10 w-full max-w-7xl mx-auto rounded-[28px] sm:rounded-[36px] lg:rounded-[42px] overflow-hidden"
-        style={{
-          background:
-            "linear-gradient(135deg, rgba(213,225,237,0.88) 0%, rgba(234,239,245,0.90) 40%, rgba(250,246,237,0.85) 100%)",
-          border: "1px solid rgba(255,255,255,0.82)",
-          boxShadow:
-            "0 24px 72px rgba(18,20,23,0.07), inset 0 1px 0 rgba(255,255,255,0.92)",
-          backdropFilter: "blur(24px)",
-          WebkitBackdropFilter: "blur(24px)",
-        }}
+        ref={containerRef}
+        className="relative w-full"
+        style={{ height: `${scrollHeightVh}vh` }}
       >
-        {/* Ambient glows */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute right-0 top-0 bottom-0 w-3/5 select-none"
-          style={{
-            background:
-              "radial-gradient(ellipse at 80% 40%, rgba(253,230,138,0.38) 0%, rgba(254,243,199,0.16) 40%, transparent 70%)",
-          }}
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute left-0 top-0 bottom-0 w-2/5 select-none"
-          style={{
-            background:
-              "radial-gradient(circle at 10% 30%, rgba(186,207,228,0.35) 0%, transparent 65%)",
-          }}
-        />
+        <div className="sticky top-0 h-screen w-full flex flex-col justify-center items-center px-6 sm:px-10 lg:px-16 overflow-hidden">
 
-        <div className="relative z-10 p-8 sm:p-12 lg:p-14 xl:p-16">
 
-          {/* ── Header ── */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-14">
 
-            <div>
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="text-[11px] sm:text-[12px] uppercase tracking-[0.24em] font-semibold text-[#9E7D3B] select-none mb-3"
-              >
-                PROGRAMMES
-              </motion.p>
+          {/* Main 3-column stage */}
+          <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[240px_auto_1fr] gap-8 lg:gap-14 xl:gap-20 items-center">
 
-              <motion.h2
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-                style={{
-                  fontFamily:
-                    "var(--font-serif), Newsreader, 'Times New Roman', Georgia, serif",
-                }}
-                className="text-3xl sm:text-4xl lg:text-[46px] font-normal leading-[1.12] tracking-[-0.02em] text-[#121417]"
-              >
-                Where the money goes
-              </motion.h2>
+            {/* ── Left Column: Nav list with decorative wheel ── */}
+            <div className="relative hidden lg:flex flex-col justify-center">
+              <DecorativeWheel />
+              <div className="relative z-10 flex flex-col gap-5 pl-4 select-none">
+                {frontiers.map((item, i) => {
+                  const isActive = i === active;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => goTo(i)}
+                      className="text-left cursor-pointer transition-colors duration-200"
+                    >
+                      <span
+                        className={`text-[15px] sm:text-[16px] transition-colors duration-200 ${isActive
+                          ? "text-[#111827] font-medium"
+                          : "text-[#9CA3AF] hover:text-[#4B5563]"
+                          }`}
+                      >
+                        {isActive ? `•  ${item.tag}` : item.tag}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
-            {/* Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.55, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="flex items-center gap-3 flex-wrap"
-            >
-              <Link
-                href="/grants/apply"
-                className="inline-flex items-center justify-center rounded-[3px] border border-[#B38D4A] bg-transparent px-5 py-2.5 sm:px-6 sm:py-2.5 text-[13px] sm:text-[13.5px] font-medium text-[#94712F] transition-all duration-200 hover:bg-[#B38D4A]/10 hover:border-[#94712F] active:scale-[0.98] select-none shadow-sm"
-              >
-                Apply for a grant
-              </Link>
-              <Link
-                href="/library"
-                className="inline-flex items-center justify-center rounded-[3px] border border-white/80 bg-white/70 px-5 py-2.5 sm:px-6 sm:py-2.5 text-[13px] sm:text-[13.5px] font-medium text-[#1E2430] transition-all duration-200 hover:bg-white hover:border-slate-300 active:scale-[0.98] select-none shadow-sm backdrop-blur-sm"
-              >
-                Browse the library
-              </Link>
-            </motion.div>
-          </div>
+            {/* Mobile nav for smaller screens */}
+            <div className="flex lg:hidden gap-5 overflow-x-auto pb-1 -mx-2 px-2 w-full justify-center">
+              {frontiers.map((item, i) => {
+                const isActive = i === active;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => goTo(i)}
+                    className={`shrink-0 text-[13.5px] whitespace-nowrap pb-1 transition-colors duration-200 cursor-pointer ${isActive
+                      ? "text-[#111827] font-medium border-b border-[#111827]"
+                      : "text-[#9CA3AF]"
+                      }`}
+                  >
+                    {isActive ? `• ${item.tag}` : item.tag}
+                  </button>
+                );
+              })}
+            </div>
 
-          {/* Thin gold rule */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="mb-8 h-px w-full origin-left"
-            style={{
-              background:
-                "linear-gradient(90deg, rgba(179,141,74,0.35) 0%, rgba(0,0,0,0.06) 55%, transparent 100%)",
-            }}
-          />
+            {/* ── Center Column: "The Frontiers" title + image card + vertical dots ── */}
+            <div className="relative flex flex-col items-center">
+              {/* Top centered label */}
+              <p className="text-[14px] sm:text-[15px] text-[#111827] font-normal tracking-tight text-center mb-5 sm:mb-6 select-none">
+                Programmes
+              </p>
 
-          {/* ── Cards ── */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-stretch">
-            {programmes.map((prog, i) => (
-              <motion.div
-                key={prog.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{
-                  duration: 0.6,
-                  delay: 0.1 + i * 0.08,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="group relative flex flex-col rounded-2xl sm:rounded-[22px] overflow-hidden transition-all duration-300 hover:-translate-y-1"
-                style={{
-                  background: "rgba(255,255,255,0.58)",
-                  border: "1px solid rgba(255,255,255,0.82)",
-                  backdropFilter: "blur(20px)",
-                  WebkitBackdropFilter: "blur(20px)",
-                  boxShadow: "0 6px 24px rgba(18,20,23,0.04)",
-                }}
-              >
-                {/* Accent top bar — grows on hover */}
-                <div
-                  className="h-[2.5px] w-full transition-all duration-500"
-                  style={{
-                    background: `linear-gradient(90deg, ${prog.accent} 0%, ${prog.accent}60 100%)`,
-                    opacity: 0.25,
-                  }}
-                />
-                <div
-                  className="absolute top-0 left-0 h-[2.5px] w-0 group-hover:w-full transition-all duration-500 z-10"
-                  style={{ background: `linear-gradient(90deg, ${prog.accent}, ${prog.accent}90)` }}
-                />
-
-                {/* Image — reveals with a scroll-triggered scale/fade, same easing as the hero */}
-                <div className="relative h-36 sm:h-40 w-full overflow-hidden">
-                  <motion.img
-                    src={prog.image}
-                    alt={prog.title}
-                    variants={imageReveal}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, margin: "-60px" }}
-                    transition={{
-                      duration: 0.9,
-                      ease: [0.44, 0, 0.56, 1] as const,
-                      delay: 0.15 + i * 0.08,
-                    }}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div
-                    className="pointer-events-none absolute inset-0"
-                    style={{
-                      background:
-                        "linear-gradient(180deg, rgba(255,255,255,0) 40%, rgba(255,255,255,0.58) 100%)",
-                    }}
-                  />
+              <div className="relative flex items-center">
+                {/* Central Portrait Card */}
+                <div className="relative aspect-[3.2/4] w-[310px] sm:w-[360px] md:w-[390px] lg:w-[420px] rounded-[20px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.10)] bg-[#121417]">
+                  {frontiers.map((item, i) => (
+                    <StackImage
+                      key={item.id}
+                      item={item}
+                      index={i}
+                      total={frontiers.length}
+                      progress={smoothProgress}
+                    />
+                  ))}
                 </div>
 
-                {/* Watermark number */}
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute right-4 bottom-3 select-none leading-none font-bold tabular-nums"
-                  style={{
-                    fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
-                    fontSize: "72px",
-                    color: prog.accent,
-                    opacity: 0.055,
-                    lineHeight: 1,
-                  }}
-                >
-                  {prog.id}
-                </span>
-
-                <div className="relative flex flex-col flex-1 p-6 sm:p-7">
-                  <p
-                    className="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] font-semibold select-none mb-3"
-                    style={{ color: prog.accent }}
-                  >
-                    {prog.tag}
-                  </p>
-
-                  <h3
-                    style={{
-                      fontFamily:
-                        "var(--font-serif), Newsreader, 'Times New Roman', Georgia, serif",
-                    }}
-                    className="text-xl sm:text-[22px] lg:text-[23px] font-normal leading-[1.2] text-[#121417] mb-3"
-                  >
-                    {prog.title}
-                  </h3>
-
-                  <p
-                    style={{
-                      fontFamily: "var(--font-serif), Newsreader, Georgia, serif",
-                    }}
-                    className="text-[12.5px] sm:text-[13.5px] leading-[1.65] text-[#4A505C] font-normal"
-                  >
-                    {prog.description}
-                  </p>
+                {/* Vertical pagination dots + active capsule pill */}
+                <div className="flex flex-col items-center gap-2.5 ml-4 sm:ml-5 select-none">
+                  {frontiers.map((item, i) => {
+                    const isActive = i === active;
+                    return (
+                      <span
+                        key={item.id}
+                        onClick={() => goTo(i)}
+                        className={`cursor-pointer transition-all duration-300 rounded-full ${isActive
+                          ? "w-1 h-5 bg-[#111827]"
+                          : "w-1 h-1 bg-[#D1D5DB] hover:bg-[#9CA3AF]"
+                          }`}
+                      />
+                    );
+                  })}
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+            </div>
 
+            {/* ── Right Column: Stacked Copy ── */}
+            <div className="relative w-full max-w-[440px] h-[240px] sm:h-[260px]">
+              {frontiers.map((item, i) => (
+                <StackCopy
+                  key={item.id}
+                  item={item}
+                  index={i}
+                  total={frontiers.length}
+                  progress={smoothProgress}
+                />
+              ))}
+            </div>
+
+          </div>
         </div>
       </div>
     </section>

@@ -16,7 +16,7 @@ export default function AboutPage() {
         About the Foundation
       </div>
 
-      <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-950 mb-6">
+      <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-950 mb-6 font-[var(--font-outfit)]">
         Stewarding Long-Term Neutrality &amp; Open Innovation
       </h1>
 
