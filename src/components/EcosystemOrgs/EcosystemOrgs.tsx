@@ -83,8 +83,11 @@ export function EcosystemOrgs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-              style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}
-              className="text-3xl sm:text-4xl md:text-[40px] lg:text-[44px] xl:text-[48px] font-semibold leading-[1.1] tracking-[-0.02em] text-[#0D1117]"
+              style={{
+                fontFamily:
+                  "var(--font-playfair), 'Playfair Display', Georgia, serif",
+              }}
+              className="text-3xl sm:text-4xl md:text-[40px] lg:text-[44px] xl:text-[48px] font-normal leading-[1.12] tracking-[-0.015em] text-[#0D1117]"
             >
               One non-profit parent,
               <br />

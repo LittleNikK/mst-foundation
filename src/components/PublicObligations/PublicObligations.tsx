@@ -1,10 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, easeOut, MotionValue } from "framer-motion";
-
-const VH_PER_CARD = 165; // 165vh per card ensures an unhurried, silky-smooth scroll glide
+import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 /* ──────────────────────────────────────────────
    Shared types
@@ -12,41 +11,41 @@ const VH_PER_CARD = 165; // 165vh per card ensures an unhurried, silky-smooth sc
 interface CardDef {
   number: string;
   accentColor: string;
+  pastel: string; // solid pastel card background, video-style
   title: string;
   description: string;
-  dark: boolean;
 }
 
 const CARDS: CardDef[] = [
-  { number: "01", accentColor: "#3B7DD8", title: "Treasury", description: "Reserves, runway and every outgoing line, reconciled monthly.", dark: false },
-  { number: "02", accentColor: "#6B7280", title: "Council votes", description: "Every resolution, how each seat voted, and the minute that recorded it.", dark: false },
-  { number: "03", accentColor: "#B88728", title: "Grant pipeline", description: "Applications move through four stages, and the queue is visible to applicants.", dark: false },
-  { number: "04", accentColor: "#3B7DD8", title: "Documents", description: "The charter, bylaws, minutes and accounts, versioned and permanently archived.", dark: false },
-  { number: "05", accentColor: "#6B7280", title: "The council", description: "Four seats, elected annually. Names go up as the first assembly confirms them.", dark: false },
-  { number: "06", accentColor: "#6BA3E8", title: "Assembly record", description: "Motions, turnout and outcomes from every members’ assembly, kept as a permanent register.", dark: true },
+  { number: "01", accentColor: "#3B7DD8", pastel: "#CFE3FA", title: "Treasury", description: "Reserves, runway and every outgoing line, reconciled monthly." },
+  { number: "02", accentColor: "#6B7280", pastel: "#E3E6EC", title: "Council votes", description: "Every resolution, how each seat voted, and the minute that recorded it." },
+  { number: "03", accentColor: "#B88728", pastel: "#F5E7C4", title: "Grant pipeline", description: "Applications move through four stages, and the queue is visible to applicants." },
+  { number: "04", accentColor: "#3B7DD8", pastel: "#CDEBD9", title: "Documents", description: "The charter, bylaws, minutes and accounts, versioned and permanently archived." },
+  { number: "05", accentColor: "#6B7280", pastel: "#F4E4E6", title: "The council", description: "Four seats, elected annually. Names go up as the first assembly confirms them." },
+  { number: "06", accentColor: "#2C5AA0", pastel: "#D8E0F2", title: "Assembly record", description: "Motions, turnout and outcomes from every members\u2019 assembly, kept as a permanent register." },
 ];
 
 /* ──────────────────────────────────────────────
-   Card content per obligation
+   Card body content per obligation — kept from the
+   original component, restyled for solid pastel
+   backgrounds instead of a white/glass card.
 ────────────────────────────────────────────── */
 function CardContent({ card }: { card: CardDef }) {
+  const tileBg = "rgba(255,255,255,0.55)";
+  const tileBorder = "rgba(15,23,42,0.08)";
+
   if (card.number === "01") {
     return (
-      <div className="grid grid-cols-2 gap-3 sm:gap-3.5">
+      <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
         {[
-          { label: "Reserves", status: "Published", detail: "Reconciled monthly" },
-          { label: "Grants committed", status: "Audited", detail: "Full public ledger" },
-          { label: "Operating cost", status: "Published", detail: "Line-by-line accounts" },
-          { label: "Runway", status: "Current", detail: "Maintained in treasury" },
+          { label: "Reserves", status: "Published" },
+          { label: "Grants committed", status: "Audited" },
+          { label: "Operating cost", status: "Published" },
+          { label: "Runway", status: "Current" },
         ].map((item) => (
-          <div key={item.label} className="p-3 sm:p-3.5 rounded-xl bg-slate-50/90 border border-slate-200/90 font-[var(--font-outfit)]">
-            <div className="flex items-center justify-between mb-1">
-              <span className="text-[13px] font-semibold text-[#0F172A]">{item.label}</span>
-              <span className="text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-blue-50 text-[#3B7DD8]">
-                {item.status}
-              </span>
-            </div>
-            <p className="text-[11.5px] text-slate-500 font-normal">{item.detail}</p>
+          <div key={item.label} className="p-2.5 sm:p-3 rounded-xl" style={{ background: tileBg, border: `1px solid ${tileBorder}` }}>
+            <p className="text-[12.5px] font-semibold text-[#0F172A]">{item.label}</p>
+            <p className="text-[10.5px] text-[#334155]/70 mt-0.5">{item.status}</p>
           </div>
         ))}
       </div>
@@ -54,21 +53,19 @@ function CardContent({ card }: { card: CardDef }) {
   }
   if (card.number === "02") {
     return (
-      <div className="space-y-3 font-[var(--font-outfit)]">
+      <div className="space-y-2.5">
         {[
-          { label: "Charter amendment", result: "Carried", pct: 88, color: "#3B7DD8" },
-          { label: "Grant round 01 budget", result: "Carried", pct: 94, color: "#3B7DD8" },
-          { label: "Third organization intake", result: "Deferred", pct: 45, color: "#94A3B8" },
+          { label: "Charter amendment", result: "Carried", pct: 88 },
+          { label: "Grant round 01 budget", result: "Carried", pct: 94 },
+          { label: "Third organization intake", result: "Deferred", pct: 45 },
         ].map((row) => (
-          <div key={row.label} className="p-3 rounded-xl bg-slate-50/90 border border-slate-200/90">
-            <div className="flex justify-between items-center text-[13px] font-medium mb-2 text-[#0D1117]">
+          <div key={row.label} className="p-2.5 rounded-xl" style={{ background: tileBg, border: `1px solid ${tileBorder}` }}>
+            <div className="flex justify-between items-center text-[12px] font-medium mb-1.5 text-[#0F172A]">
               <span>{row.label}</span>
-              <span className="text-[#3B7DD8] font-semibold text-xs bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">
-                {row.result} &bull; {row.pct}%
-              </span>
+              <span className="text-[10.5px] font-semibold">{row.result}</span>
             </div>
-            <div className="h-2 w-full rounded-full bg-slate-200/80 overflow-hidden">
-              <div className="h-full rounded-full transition-all" style={{ width: `${row.pct}%`, backgroundColor: row.color }} />
+            <div className="h-1.5 w-full rounded-full bg-black/10 overflow-hidden">
+              <div className="h-full rounded-full bg-[#0F172A]/70" style={{ width: `${row.pct}%` }} />
             </div>
           </div>
         ))}
@@ -77,34 +74,20 @@ function CardContent({ card }: { card: CardDef }) {
   }
   if (card.number === "03") {
     return (
-      <div className="grid grid-cols-4 gap-2 sm:gap-2.5 font-[var(--font-outfit)]">
+      <div className="grid grid-cols-4 gap-2">
         {[
-          { n: "01", label: "Enquiry", status: "Submitted", active: false },
-          { n: "02", label: "Proposal", status: "Published", active: false },
-          { n: "03", label: "Review", status: "In queue", active: false },
-          { n: "04", label: "Award", status: "Public minute", active: true },
+          { n: "01", label: "Enquiry", active: false },
+          { n: "02", label: "Proposal", active: false },
+          { n: "03", label: "Review", active: false },
+          { n: "04", label: "Award", active: true },
         ].map((stage) => (
           <div
             key={stage.n}
-            className={`flex flex-col items-center text-center p-2.5 sm:p-3 rounded-xl border transition-all ${
-              stage.active
-                ? "bg-[#FAF5E8] border-[#B88728]/40 shadow-sm ring-1 ring-[#B88728]/20"
-                : "bg-slate-50/90 border-slate-200/90"
-            }`}
+            className="flex flex-col items-center text-center p-2 sm:p-2.5 rounded-xl"
+            style={{ background: stage.active ? "rgba(255,255,255,0.85)" : tileBg, border: `1px solid ${tileBorder}` }}
           >
-            <span
-              className={`text-[10px] font-bold px-1.5 py-0.5 rounded mb-1.5 ${
-                stage.active ? "bg-[#B88728] text-white" : "bg-slate-200 text-slate-700"
-              }`}
-            >
-              {stage.n}
-            </span>
-            <span className="text-[12px] font-semibold text-[#0D1117] leading-tight mb-1">
-              {stage.label}
-            </span>
-            <span className={`text-[10px] sm:text-[10.5px] leading-tight font-normal ${stage.active ? "text-[#9E7D3B]" : "text-slate-500"}`}>
-              {stage.status}
-            </span>
+            <span className="text-[10px] font-bold text-[#0F172A]/60 mb-1">{stage.n}</span>
+            <span className="text-[11px] font-semibold text-[#0F172A] leading-tight">{stage.label}</span>
           </div>
         ))}
       </div>
@@ -112,27 +95,21 @@ function CardContent({ card }: { card: CardDef }) {
   }
   if (card.number === "04") {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-[var(--font-outfit)]">
+      <div className="grid grid-cols-2 gap-2">
         {[
-          { label: "Charter & bylaws", desc: "Permanent archive", href: "/documents/charter" },
-          { label: "Council minutes", desc: "Versioned registry", href: "/documents/minutes" },
-          { label: "Annual accounts", desc: "Reconciled ledger", href: "/documents/accounts" },
-          { label: "Conflict policy", desc: "Standing register", href: "/documents/conflict-policy" },
+          { label: "Charter & bylaws", href: "/documents/charter" },
+          { label: "Council minutes", href: "/documents/minutes" },
+          { label: "Annual accounts", href: "/documents/accounts" },
+          { label: "Conflict policy", href: "/documents/conflict-policy" },
         ].map((doc) => (
           <Link
             key={doc.label}
             href={doc.href}
-            className="group/doc flex items-center justify-between p-3 rounded-xl bg-slate-50/90 border border-slate-200/90 hover:border-blue-300 hover:bg-blue-50/40 transition-all"
+            className="flex items-center justify-between p-2.5 rounded-xl transition-colors hover:bg-white/70"
+            style={{ background: tileBg, border: `1px solid ${tileBorder}` }}
           >
-            <div>
-              <p className="text-[13px] font-medium text-[#0D1117] group-hover/doc:text-[#3B7DD8] transition-colors">
-                {doc.label}
-              </p>
-              <p className="text-[11px] text-slate-500 mt-0.5 font-normal">{doc.desc}</p>
-            </div>
-            <span className="text-[#3B7DD8] text-sm font-bold opacity-70 group-hover/doc:opacity-100 group-hover/doc:translate-x-0.5 transition-all">
-              &rarr;
-            </span>
+            <span className="text-[12px] font-medium text-[#0F172A]">{doc.label}</span>
+            <span className="text-[#0F172A]/50 text-sm">&rarr;</span>
           </Link>
         ))}
       </div>
@@ -140,49 +117,39 @@ function CardContent({ card }: { card: CardDef }) {
   }
   if (card.number === "05") {
     return (
-      <div className="grid grid-cols-2 gap-2.5 sm:gap-3 font-[var(--font-outfit)]">
+      <div className="grid grid-cols-2 gap-2.5">
         {[
-          { tag: "Ch", name: "Chair", sub: "Elected annually", active: true },
-          { tag: "Tr", name: "Treasurer", sub: "Elected annually", active: false },
-          { tag: "Se", name: "Secretary", sub: "Elected annually", active: false },
-          { tag: "Cd", name: "Community delegate", sub: "Assembly confirmed", active: false },
+          { tag: "Ch", name: "Chair", active: true },
+          { tag: "Tr", name: "Treasurer", active: false },
+          { tag: "Se", name: "Secretary", active: false },
+          { tag: "Cd", name: "Delegate", active: false },
         ].map((seat) => (
           <div
             key={seat.tag}
-            className={`flex items-start gap-2.5 p-2.5 sm:p-3 rounded-xl border ${
-              seat.active
-                ? "bg-[#FAF5E8] border-[#B88728]/35 shadow-sm ring-1 ring-[#B88728]/15"
-                : "bg-slate-50/90 border-slate-200/90"
-            }`}
+            className="flex items-center gap-2 p-2.5 rounded-xl"
+            style={{ background: seat.active ? "rgba(255,255,255,0.85)" : tileBg, border: `1px solid ${tileBorder}` }}
           >
-            <span
-              className={`flex h-8 w-8 flex-none items-center justify-center rounded-lg text-[11px] font-bold ${
-                seat.active ? "bg-[#B88728] text-white" : "bg-slate-200 text-slate-700"
-              }`}
-            >
+            <span className="flex h-6 w-6 flex-none items-center justify-center rounded-md text-[10px] font-bold bg-[#0F172A]/10 text-[#0F172A]">
               {seat.tag}
             </span>
-            <div>
-              <p className="text-[12.5px] font-semibold text-[#0D1117] leading-tight">{seat.name}</p>
-              <p className="text-[11px] text-slate-500 leading-tight mt-1 font-normal">{seat.sub}</p>
-            </div>
+            <p className="text-[11.5px] font-semibold text-[#0F172A] leading-tight">{seat.name}</p>
           </div>
         ))}
       </div>
     );
   }
-  // Card 06 — dark
+  // 06
   return (
-    <div className="rounded-xl border border-sky-500/25 bg-slate-900/90 p-4 sm:p-5 space-y-2.5 text-[13px] font-[var(--font-outfit)]">
+    <div className="rounded-xl p-3 sm:p-3.5 space-y-2" style={{ background: tileBg, border: `1px solid ${tileBorder}` }}>
       {[
         ["Assembly", "First sitting, date to confirm"],
         ["Motions", "Published prior to sitting"],
         ["Turnout", "Register opens with membership"],
-        ["Outcome", "Signed & published within 7 days"],
+        ["Outcome", "Published within 7 days"],
       ].map(([key, val]) => (
-        <div key={key} className="flex items-baseline justify-between border-b border-white/[0.08] pb-2 last:border-0 last:pb-0">
-          <span className="text-[#6BA3E8] font-semibold text-[13px]">{key}</span>
-          <span className="text-slate-200 text-[12.5px] font-normal">{val}</span>
+        <div key={key} className="flex items-baseline justify-between border-b border-[#0F172A]/[0.08] pb-1.5 last:border-0 last:pb-0">
+          <span className="text-[12px] font-semibold text-[#0F172A]">{key}</span>
+          <span className="text-[11px] text-[#334155]">{val}</span>
         </div>
       ))}
     </div>
@@ -190,142 +157,118 @@ function CardContent({ card }: { card: CardDef }) {
 }
 
 /* ──────────────────────────────────────────────
-   StackCard Component
-   Each card starts hidden below the screen. As the user
-   scrolls down, each card rises slowly and smoothly from below,
-   settles squarely in the center, and stays completely static
-   while subsequent cards stack on top of it.
+   Responsive card metrics — width/gap tracked via
+   window width so the stacking math below stays exact
+   at every breakpoint instead of guessing from CSS.
+────────────────────────────────────────────── */
+function useCardMetrics(deckRef: React.RefObject<HTMLDivElement | null>) {
+  const [metrics, setMetrics] = useState({ width: 470, gap: 20, height: 350, stackStep: 28 });
+
+  useEffect(() => {
+    const compute = () => {
+      const el = deckRef.current;
+      const w = el ? el.clientWidth : (typeof window !== "undefined" ? Math.min(window.innerWidth - 64, 1152) : 1152);
+
+      if (w < 600) {
+        // Mobile: 1 card + ~15% peek
+        const cardW = Math.max(280, Math.round(w * 0.85));
+        setMetrics({ width: cardW, gap: 14, height: 390, stackStep: 16 });
+      } else if (w < 960) {
+        // Tablet: 1.5 cards
+        const gap = 18;
+        const cardW = Math.round((w - gap) / 1.55);
+        setMetrics({ width: cardW, gap, height: 365, stackStep: 22 });
+      } else {
+        // Desktop: exactly 2 full cards + ~32-35% peek of 3rd card
+        const gap = 20;
+        const cardW = Math.round((w - 2 * gap) / 2.35);
+        setMetrics({ width: cardW, gap, height: 350, stackStep: 28 });
+      }
+    };
+
+    compute();
+    window.addEventListener("resize", compute);
+
+    let ro: ResizeObserver | null = null;
+    if (deckRef.current && typeof ResizeObserver !== "undefined") {
+      ro = new ResizeObserver(compute);
+      ro.observe(deckRef.current);
+    }
+
+    return () => {
+      window.removeEventListener("resize", compute);
+      if (ro) ro.disconnect();
+    };
+  }, [deckRef]);
+
+  return metrics;
+}
+
+/* ──────────────────────────────────────────────
+   A single card, absolutely positioned.
+   Cards before & up to active stack neatly on the
+   left (matching the reference screenshot); cards
+   after active flow with normal gap spacing.
 ────────────────────────────────────────────── */
 function StackCard({
   card,
   index,
-  total,
-  scrollYProgress,
+  active,
+  metrics,
+  onSelect,
 }: {
   card: CardDef;
   index: number;
-  total: number;
-  scrollYProgress: MotionValue<number>;
+  active: number;
+  metrics: { width: number; gap: number; height: number; stackStep: number };
+  onSelect: () => void;
 }) {
-  // 5 exact card transitions between 6 cards (total - 1):
-  // Perfect 1:1 forward and reverse symmetry with zero dead zone at the end.
-  const totalSteps = total - 1;
-  const step = 1 / totalSteps;
-  const isFirst = index === 0;
+  const { width, gap, stackStep } = metrics;
+  const isPast = index < active;
 
-  // Strict uniform timing across all cards in both directions:
-  // Card 1 is seated at 0vh from the start.
-  // Each card spends 0.7 * step traveling up and 0.3 * step resting.
-  // In reverse, Card 6 descends immediately over 0.7 * step to uncover Card 5!
-  const entryStart = isFirst ? 0 : (index - 0.7) * step;
-  const entryEnd = isFirst ? 0.001 : index * step;
-
-  // y translation: Card 1 is anchored at 0vh; all incoming cards glide smoothly from 38vh to 0vh with gentle deceleration
-  const y = useTransform(
-    scrollYProgress,
-    [entryStart, entryEnd],
-    [isFirst ? "0vh" : "38vh", "0vh"],
-    { clamp: true, ease: easeOut }
-  );
-
-  // Smooth subtle scale expansion as it settles into place (0.97 -> 1.0)
-  const scale = useTransform(
-    scrollYProgress,
-    [entryStart, entryEnd],
-    [isFirst ? 1 : 0.97, 1],
-    { clamp: true, ease: easeOut }
-  );
-
-  // Opacity: fades in gracefully across ascent
-  const opacity = useTransform(
-    scrollYProgress,
-    [entryStart, isFirst ? 0.001 : entryStart + (entryEnd - entryStart) * 0.45],
-    [isFirst ? 1 : 0, 1],
-    { clamp: true, ease: easeOut }
-  );
+  // Exact stacking formula from the reference screenshots:
+  // - All cards up to the active card stack on the left with stackStep (28px each)
+  // - Subsequent cards flow to the right with standard gap spacing
+  const x =
+    index <= active
+      ? index * stackStep
+      : active * stackStep + (index - active) * (width + gap);
 
   return (
     <motion.div
+      onClick={isPast ? onSelect : undefined}
+      animate={{ x }}
+      transition={{ type: "spring", stiffness: 240, damping: 28, mass: 0.7 }}
       style={{
-        y,
-        scale,
-        opacity,
-        zIndex: (index + 1) * 10,
-        background: card.dark
-          ? "linear-gradient(145deg, #0B1120 0%, #131E32 100%)"
-          : "#FFFFFF",
-        border: card.dark
-          ? "1px solid rgba(107,163,232,0.25)"
-          : "1px solid rgba(15,23,42,0.09)",
-        boxShadow: card.dark
-          ? "0 25px 60px -15px rgba(0,0,0,0.70), 0 0 0 1px rgba(255,255,255,0.08)"
-          : "0 20px 50px -12px rgba(15,23,42,0.14), 0 4px 16px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.04)",
+        width,
+        height: metrics.height,
+        zIndex: index + 1,
+        background: card.pastel,
       }}
-      className="absolute inset-0 w-full h-full rounded-[24px] sm:rounded-[28px] overflow-hidden flex flex-col justify-between will-change-transform"
+      className={`absolute top-0 left-0 rounded-[20px] sm:rounded-[24px] overflow-hidden shadow-[-6px_0_18px_rgba(0,0,0,0.12),0_18px_40px_rgba(0,0,0,0.22)] select-none ${
+        isPast ? "cursor-pointer hover:brightness-[1.02]" : ""
+      }`}
     >
-      {/* Card header strip */}
-      <div
-        className="flex items-center gap-3 px-6 sm:px-8 lg:px-10 py-3 border-b"
-        style={{
-          borderColor: card.dark ? "rgba(107,163,232,0.12)" : "rgba(0,0,0,0.06)",
-          backgroundColor: card.dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.02)",
-        }}
-      >
+      <div className="flex flex-col h-full p-5 sm:p-6">
         <span
-          className="text-[11px] uppercase tracking-[0.22em] font-bold tabular-nums select-none font-[var(--font-outfit)]"
+          className="text-[11px] font-bold tracking-[0.16em] uppercase mb-1 font-[var(--font-outfit)]"
           style={{ color: card.accentColor }}
         >
-          {card.number}
+          Obligation {card.number}
         </span>
-        <div
-          className="h-3 w-px"
-          style={{ backgroundColor: card.dark ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.12)" }}
-        />
-        <span
-          className="text-[10px] uppercase tracking-[0.18em] font-semibold select-none font-[var(--font-outfit)]"
-          style={{ color: card.dark ? "rgba(210,218,232,0.60)" : "#64748B" }}
+        <h3
+          style={{ fontFamily: "var(--font-display), Anton, sans-serif" }}
+          className="text-[21px] sm:text-[23px] lg:text-[24px] font-normal uppercase tracking-[0.02em] text-[#0F172A] leading-[1.12] mb-1 max-w-[90%]"
         >
-          Standing Obligation
-        </span>
-      </div>
-
-      {/* Card body */}
-      <div className="grid grid-cols-1 md:grid-cols-[230px_1fr] gap-6 md:gap-8 lg:gap-10 px-6 sm:px-8 lg:px-10 py-5 sm:py-7 flex-1 items-center">
-        <div className="pt-0 font-[var(--font-outfit)]">
-          <span
-            style={{
-              fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
-              color: card.accentColor,
-              opacity: card.dark ? 0.35 : 0.25,
-            }}
-            className="block text-[32px] sm:text-[42px] font-bold leading-none tabular-nums select-none mb-1.5"
-          >
-            {card.number}
-          </span>
-          <h3
-            style={{
-              fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
-              color: card.dark ? "#FFFFFF" : "#0F172A",
-            }}
-            className="text-[19px] sm:text-[21px] font-semibold tracking-[-0.015em] leading-tight mb-2"
-          >
-            {card.title}
-          </h3>
-          <div
-            className="h-0.5 w-8 mb-2.5 rounded-full"
-            style={{ backgroundColor: card.accentColor, opacity: 0.8 }}
-          />
-          <p
-            style={{
-              fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
-              color: card.dark ? "#CBD5E1" : "#334155",
-            }}
-            className="text-[13.5px] sm:text-[14px] leading-[1.6] font-normal"
-          >
-            {card.description}
-          </p>
-        </div>
-        <div className="flex flex-col justify-center">
+          {card.title}
+        </h3>
+        <p
+          style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}
+          className="text-[12px] sm:text-[12.5px] leading-[1.45] text-[#334155] mb-3 max-w-[95%] font-normal"
+        >
+          {card.description}
+        </p>
+        <div className="mt-auto">
           <CardContent card={card} />
         </div>
       </div>
@@ -337,96 +280,120 @@ function StackCard({
    Page section
 ────────────────────────────────────────────── */
 export default function PublicObligations() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
+  const [active, setActive] = useState(0);
+  const deckRef = useRef<HTMLDivElement>(null);
+  const metrics = useCardMetrics(deckRef);
+  const isAnimatingRef = useRef(false);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Silky-smooth spring physics: eliminates discrete mouse-wheel notches and glides with continuous liquid momentum
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 70,
-    damping: 24,
-    mass: 0.45,
-    restDelta: 0.0005,
-  });
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
 
-  const scrollHeightVh = (CARDS.length - 1) * VH_PER_CARD + 100;
+  const goPrev = (e?: React.MouseEvent) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    if (isAnimatingRef.current) return;
+    isAnimatingRef.current = true;
+    timerRef.current = setTimeout(() => {
+      isAnimatingRef.current = false;
+    }, 420);
+    setActive((a) => Math.max(0, a - 1));
+  };
+
+  const goNext = (e?: React.MouseEvent) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    if (isAnimatingRef.current) return;
+    isAnimatingRef.current = true;
+    timerRef.current = setTimeout(() => {
+      isAnimatingRef.current = false;
+    }, 420);
+    setActive((a) => Math.min(CARDS.length - 1, a + 1));
+  };
+
+  const handleSelect = (i: number) => {
+    if (isAnimatingRef.current) return;
+    isAnimatingRef.current = true;
+    timerRef.current = setTimeout(() => {
+      isAnimatingRef.current = false;
+    }, 420);
+    setActive(i);
+  };
 
   return (
     <section
       id="obligations"
-      className="relative scroll-mt-24"
-      style={{ background: "linear-gradient(145deg, #D6E4F0 0%, #E4EEF6 30%, #F0EBE0 65%, #E8EFF6 100%)" }}
+      className="relative scroll-mt-24 w-full overflow-hidden"
+      style={{ background: "#1B1C21" }}
     >
       {/* Anchors for Governance & Transparency */}
       <div id="governance" className="absolute -top-24 pointer-events-none" />
       <div id="transparency" className="absolute -top-24 pointer-events-none" />
-      {/* Ambient glows */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-[-5%] top-[-5%] w-[600px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(251,191,36,0.22)_0%,transparent_70%)] blur-3xl select-none"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-[-5%] bottom-[5%] w-[500px] h-[400px] bg-[radial-gradient(circle,rgba(186,210,232,0.32)_0%,transparent_65%)] blur-3xl select-none"
-      />
 
-      {/* Scroll-driven stacking cards container */}
-      <div
-        ref={containerRef}
-        className="relative w-full"
-        style={{ height: `${scrollHeightVh}vh` }}
-      >
-        <div className="sticky top-0 h-screen w-full flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 overflow-hidden">
-          <div className="w-full max-w-5xl flex flex-col justify-center -translate-y-6 sm:-translate-y-8 lg:-translate-y-12">
-            {/* Section header: stays visible in viewport during the entire cards showcase */}
-            <div className="w-full mb-4 sm:mb-6">
-              <motion.p
-                initial={{ opacity: 0, y: 8 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-semibold text-[#9E7D3B] select-none mb-1.5 sm:mb-2 font-[var(--font-outfit)]"
-              >
-                EVERYTHING IN PUBLIC
-              </motion.p>
-              <motion.h2
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-                style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}
-                className="text-2xl sm:text-3xl lg:text-[36px] font-semibold leading-[1.15] tracking-[-0.02em] text-[#0D1117]"
-              >
-                How a foundation earns
-                <br className="hidden sm:inline" /> the name
-              </motion.h2>
-              <motion.p
-                initial={{ opacity: 0, y: 8 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}
-                className="mt-1.5 sm:mt-2 text-[13px] sm:text-[14.5px] leading-[1.55] text-[#373E4A] max-w-2xl font-normal"
-              >
-                Six standing obligations. Each one has a page, a document trail and a person accountable for it.
-              </motion.p>
-            </div>
+      <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 lg:px-16 py-16 sm:py-20 lg:py-24">
+        {/* Header */}
+        <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-semibold text-[#B88728] select-none mb-3 font-[var(--font-outfit)]">
+          EVERYTHING IN PUBLIC
+        </p>
+        <h2
+          style={{
+            fontFamily:
+              "var(--font-playfair), 'Playfair Display', Georgia, serif",
+          }}
+          className="text-3xl sm:text-4xl lg:text-[44px] xl:text-[48px] font-normal leading-[1.12] tracking-[-0.015em] text-[#EAF1F2] mb-8 sm:mb-10"
+        >
+          How a foundation earns the name
+        </h2>
 
-            {/* Stacking cards */}
-            <div className="relative w-full h-[460px] sm:h-[420px] md:h-[390px] lg:h-[380px] flex items-center justify-center">
-              {CARDS.map((card, i) => (
-                <StackCard
-                  key={card.number}
-                  card={card}
-                  index={i}
-                  total={CARDS.length}
-                  scrollYProgress={smoothProgress}
-                />
-              ))}
-            </div>
-          </div>
+        {/* Stacking deck */}
+        <div
+          ref={deckRef}
+          className="relative overflow-hidden w-full"
+          style={{ height: metrics.height }}
+        >
+          {CARDS.map((card, i) => (
+            <StackCard
+              key={card.number}
+              card={card}
+              index={i}
+              active={active}
+              metrics={metrics}
+              onSelect={() => handleSelect(i)}
+            />
+          ))}
+        </div>
+
+        {/* Arrow controls */}
+        <div className="flex items-center gap-3 mt-8 sm:mt-10">
+          <button
+            type="button"
+            onClick={goPrev}
+            disabled={active === 0}
+            aria-label="Previous obligation"
+            className="flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full transition-all duration-200 cursor-pointer disabled:cursor-not-allowed select-none"
+            style={{
+              background: active === 0 ? "#2B2E37" : "#D3E9EB",
+              color: active === 0 ? "#6B7280" : "#1B1C21",
+            }}
+          >
+            <ArrowLeft size={18} strokeWidth={2.2} className="pointer-events-none" />
+          </button>
+          <button
+            type="button"
+            onClick={goNext}
+            disabled={active === CARDS.length - 1}
+            aria-label="Next obligation"
+            className="flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full transition-all duration-200 cursor-pointer disabled:cursor-not-allowed select-none"
+            style={{
+              background: active === CARDS.length - 1 ? "#2B2E37" : "#D3E9EB",
+              color: active === CARDS.length - 1 ? "#6B7280" : "#1B1C21",
+            }}
+          >
+            <ArrowRight size={18} strokeWidth={2.2} className="pointer-events-none" />
+          </button>
         </div>
       </div>
     </section>

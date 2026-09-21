@@ -96,8 +96,11 @@ export function FoundationJobs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-              style={{ fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif" }}
-              className="text-3xl sm:text-4xl lg:text-[42px] xl:text-[46px] font-bold leading-[1.12] tracking-[-0.03em] text-[#0D1117]"
+              style={{
+                fontFamily:
+                  "var(--font-playfair), 'Playfair Display', Georgia, serif",
+              }}
+              className="text-3xl sm:text-4xl lg:text-[42px] xl:text-[46px] font-normal leading-[1.12] tracking-[-0.015em] text-[#0D1117]"
             >
               Three jobs, held in
               <br />

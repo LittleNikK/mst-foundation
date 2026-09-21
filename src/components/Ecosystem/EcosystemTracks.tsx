@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowRight, Coins, ShieldCheck, Users } from "lucide-react";
 import { PartnerMarquee } from "./PartnerMarquee";
 
 /* ------------------------------------------------------------------ */
-/*  Three Tracks Data                                                   */
+/*  Three Tracks Data — Fresh & High-Visibility Design                */
 /* ------------------------------------------------------------------ */
 const tracks = [
   {
@@ -15,12 +16,14 @@ const tracks = [
       "Funding, documentation and maintainer support for the work the ecosystem depends on.",
     cta: "Apply for a grant",
     href: "/grants",
-    accentColor: "#3B7DD8",
-    accentBg: "rgba(59, 125, 216, 0.06)",
-    accentBorder: "rgba(59, 125, 216, 0.18)",
-    tagColor: "#2C64B5",
-    cardBg: "linear-gradient(155deg, rgba(255,255,255,0.55) 0%, rgba(235,242,253,0.45) 100%)",
+    accentColor: "#2563EB",
+    badgeBg: "#EFF6FF",
+    badgeBorder: "#DBEAFE",
+    badgeText: "#1D4ED8",
+    topAccent: "#3B82F6",
+    glowColor: "rgba(37, 99, 235, 0.08)",
     number: "01",
+    icon: Coins,
   },
   {
     tag: "FOR INSTITUTIONS",
@@ -29,12 +32,14 @@ const tracks = [
       "Audited accounts, a published charter and a governance record you can read end to end.",
     cta: "See the record",
     href: "/governance",
-    accentColor: "#1A1D23",
-    accentBg: "rgba(26, 29, 35, 0.04)",
-    accentBorder: "rgba(26, 29, 35, 0.10)",
-    tagColor: "#4A505C",
-    cardBg: "linear-gradient(155deg, rgba(255,255,255,0.58) 0%, rgba(245,246,249,0.48) 100%)",
+    accentColor: "#0F172A",
+    badgeBg: "#F1F5F9",
+    badgeBorder: "#E2E8F0",
+    badgeText: "#334155",
+    topAccent: "#334155",
+    glowColor: "rgba(15, 23, 42, 0.06)",
     number: "02",
+    icon: ShieldCheck,
   },
   {
     tag: "FOR THE COMMUNITY",
@@ -44,17 +49,19 @@ const tracks = [
     cta: "Become a member",
     href: "/membership",
     accentColor: "#B88728",
-    accentBg: "rgba(184, 135, 40, 0.06)",
-    accentBorder: "rgba(184, 135, 40, 0.20)",
-    tagColor: "#8C6A28",
-    cardBg: "linear-gradient(155deg, rgba(255,255,255,0.55) 0%, rgba(253,246,228,0.45) 100%)",
+    badgeBg: "#FEF9EE",
+    badgeBorder: "#FDE68A",
+    badgeText: "#9A6B1A",
+    topAccent: "#D99400",
+    glowColor: "rgba(217, 148, 0, 0.09)",
     number: "03",
+    icon: Users,
   },
 ];
 
 export function EcosystemTracks() {
   return (
-    <section id="ecosystem" className="relative w-full py-10 sm:py-14 lg:py-16 overflow-hidden scroll-mt-24 bg-[#FAFAFC]">
+    <section id="ecosystem" className="relative w-full py-10 sm:py-14 lg:py-16 overflow-hidden scroll-mt-24 bg-[#F0F5F9]">
       {/* Anchor for Validators */}
       <div id="validators" className="absolute -top-24 pointer-events-none" />
 
@@ -68,109 +75,133 @@ export function EcosystemTracks() {
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
           className="mb-8 sm:mb-10"
         >
-          <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.24em] font-semibold text-[#9E7D3B] mb-2 select-none">
+          <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.24em] font-semibold text-[#9E7D3B] mb-2 select-none font-[var(--font-outfit)]">
             Three tracks
           </p>
           <h2
-            style={{ fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif" }}
-            className="text-xl sm:text-2xl lg:text-[26px] font-bold text-[#0D1117] tracking-tight"
+            style={{
+              fontFamily:
+                "var(--font-playfair), 'Playfair Display', Georgia, serif",
+            }}
+            className="text-2xl sm:text-3xl lg:text-[32px] font-normal text-[#0D1117] tracking-[-0.015em] leading-[1.18]"
           >
             How we serve the ecosystem
           </h2>
         </motion.div>
 
         {/* 3 Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 items-stretch">
-          {tracks.map((track, i) => (
-            <motion.div
-              key={track.title}
-              initial={{ opacity: 0, y: 22 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{
-                duration: 0.55,
-                delay: 0.08 + i * 0.1,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="group relative flex flex-col justify-between rounded-2xl sm:rounded-[22px] border overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(18,20,23,0.12)]"
-              style={{
-                background: track.cardBg,
-                borderColor: track.accentBorder,
-                boxShadow: "0 4px 24px rgba(18,20,23,0.05), 0 1px 4px rgba(18,20,23,0.03), inset 0 1px 0 rgba(255,255,255,0.8)",
-                backdropFilter: "blur(20px)",
-                WebkitBackdropFilter: "blur(20px)",
-              }}
-            >
-              {/* Top accent bar */}
-              <div
-                className="absolute top-0 left-0 right-0 h-[3px] rounded-t-[22px]"
-                style={{ backgroundColor: track.accentColor, opacity: 0.85 }}
-              />
-
-              <div className="p-7 sm:p-8 lg:p-9 pt-8 sm:pt-9">
-                {/* Number + Tag row */}
-                <div className="flex items-center justify-between mb-5">
-                  <p
-                    className="text-[11px] sm:text-[11.5px] uppercase tracking-[0.2em] font-semibold select-none"
-                    style={{ color: track.tagColor }}
-                  >
-                    {track.tag}
-                  </p>
-                  <span
-                    className="text-[13px] font-bold tabular-nums select-none"
-                    style={{ color: track.accentColor, opacity: 0.35 }}
-                  >
-                    {track.number}
-                  </span>
-                </div>
-
-                {/* Heading */}
-                <h3
-                  style={{
-                    fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
-                  }}
-                  className="text-xl sm:text-[22px] lg:text-[23px] font-bold leading-[1.22] text-[#0D1117] tracking-tight"
-                >
-                  {track.title}
-                </h3>
-
-                {/* Thin divider */}
-                <div
-                  className="mt-4 mb-4 h-px w-10 rounded-full"
-                  style={{ backgroundColor: track.accentColor, opacity: 0.22 }}
-                />
-
-                {/* Description */}
-                <p
-                  style={{
-                    fontFamily: "var(--font-serif), Newsreader, Georgia, serif",
-                  }}
-                  className="text-[14px] sm:text-[14.5px] leading-[1.68] text-[#404651] font-normal"
-                >
-                  {track.description}
-                </p>
-              </div>
-
-              {/* CTA Footer */}
-              <div
-                className="mx-7 sm:mx-8 mb-7 sm:mb-8 mt-0 pt-4 border-t"
-                style={{ borderColor: track.accentBorder }}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6 items-stretch">
+          {tracks.map((track, i) => {
+            const Icon = track.icon;
+            return (
+              <motion.div
+                key={track.title}
+                initial={{ opacity: 0, y: 22 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{
+                  duration: 0.55,
+                  delay: 0.08 + i * 0.1,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="h-full"
               >
                 <Link
                   href={track.href}
-                  className="inline-flex items-center gap-2 text-[13px] sm:text-[13.5px] font-semibold transition-all duration-200"
-                  style={{ color: track.accentColor }}
+                  className="group relative flex flex-col justify-between h-full rounded-[22px] border border-slate-200/90 bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:border-slate-300/90 hover:shadow-[0_20px_38px_-8px_rgba(15,23,42,0.12),0_4px_12px_-2px_rgba(15,23,42,0.04)] cursor-pointer"
+                  style={{
+                    background: `radial-gradient(circle at 88% 12%, ${track.glowColor} 0%, transparent 60%), #FFFFFF`,
+                    boxShadow:
+                      "0 8px 24px -4px rgba(15,23,42,0.06), 0 2px 6px -1px rgba(15,23,42,0.04), inset 0 1px 0 rgba(255,255,255,0.9)",
+                  }}
                 >
-                  <span className="group-hover:underline underline-offset-2">
-                    {track.cta}
-                  </span>
-                  <span className="transition-transform duration-200 group-hover:translate-x-1">
-                    →
-                  </span>
+                  {/* Top colored accent stripe */}
+                  <div
+                    className="absolute top-0 left-0 right-0 h-[3.5px] rounded-t-[22px] transition-all duration-300 group-hover:h-[4px]"
+                    style={{ backgroundColor: track.topAccent }}
+                  />
+
+                  <div className="p-6 sm:p-7 lg:p-8 flex flex-col h-full justify-between">
+                    {/* Top Row: Icon badge + Tag + Number */}
+                    <div>
+                      <div className="flex items-center justify-between gap-3 mb-5">
+                        {/* Icon Badge */}
+                        <div
+                          className="w-10 h-10 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-105"
+                          style={{
+                            background: track.badgeBg,
+                            border: `1px solid ${track.badgeBorder}`,
+                            color: track.badgeText,
+                          }}
+                        >
+                          <Icon className="w-5 h-5" strokeWidth={2.1} />
+                        </div>
+
+                        {/* Number & Tag */}
+                        <div className="flex items-center gap-2">
+                          <span
+                            className="text-[10.5px] sm:text-[11px] uppercase tracking-[0.16em] font-bold px-2.5 py-1 rounded-full select-none"
+                            style={{
+                              background: track.badgeBg,
+                              border: `1px solid ${track.badgeBorder}`,
+                              color: track.badgeText,
+                            }}
+                          >
+                            {track.tag}
+                          </span>
+                          <span
+                            className="text-[11.5px] font-bold tabular-nums px-2 py-0.5 rounded-md bg-slate-100 text-slate-500 select-none"
+                          >
+                            {track.number}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Card Title */}
+                      <h3
+                        style={{
+                          fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
+                        }}
+                        className="text-xl sm:text-[22px] lg:text-[23px] font-bold leading-[1.25] text-[#0F172A] tracking-[-0.015em] mb-2.5 transition-colors duration-200 group-hover:text-[#090D14]"
+                      >
+                        {track.title}
+                      </h3>
+
+                      {/* Card Description */}
+                      <p
+                        style={{
+                          fontFamily: "var(--font-sans), 'Plus Jakarta Sans', Inter, sans-serif",
+                        }}
+                        className="text-[13.5px] sm:text-[14px] leading-[1.65] text-[#475569] font-normal"
+                      >
+                        {track.description}
+                      </p>
+                    </div>
+
+                    {/* CTA Action Row */}
+                    <div className="mt-7 pt-4 border-t border-slate-100 flex items-center justify-between">
+                      <span
+                        className="text-[13px] sm:text-[13.5px] font-semibold transition-colors duration-200"
+                        style={{ color: track.accentColor }}
+                      >
+                        {track.cta}
+                      </span>
+                      <span
+                        className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 group-hover:translate-x-1"
+                        style={{
+                          background: track.badgeBg,
+                          border: `1px solid ${track.badgeBorder}`,
+                          color: track.badgeText,
+                        }}
+                      >
+                        <ArrowRight className="w-3.5 h-3.5" strokeWidth={2.4} />
+                      </span>
+                    </div>
+                  </div>
                 </Link>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Partner Marquee */}

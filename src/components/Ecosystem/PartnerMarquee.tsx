@@ -89,8 +89,8 @@ export function PartnerMarquee({
         onMouseLeave={handleMouseLeave}
       >
         {/* Soft edge fade masks */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-14 sm:w-28 bg-gradient-to-r from-[#E9ECF0] via-[#E9ECF0]/80 to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-14 sm:w-28 bg-gradient-to-l from-[#E9ECF0] via-[#E9ECF0]/80 to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-14 sm:w-28 bg-gradient-to-r from-[#F0F5F9] via-[#F0F5F9]/80 to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-14 sm:w-28 bg-gradient-to-l from-[#F0F5F9] via-[#F0F5F9]/80 to-transparent" />
 
         <div
           ref={trackRef}

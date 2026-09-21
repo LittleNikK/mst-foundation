@@ -52,35 +52,15 @@ function RotatingWord({
 
 export function Hero() {
   return (
-    <section className="relative w-full min-h-[calc(100vh-4.5rem)] flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-6 sm:pb-8">
-      {/* Background Image behind the hero section container card */}
-      <div className="absolute inset-0 z-0 pointer-events-none select-none">
-        <Image
-          src="/asstes/bg-2.jpg"
-          alt="Hero Background"
-          fill
-          priority
-          className="object-cover object-center"
-        />
-      </div>
-
-      {/* Outer Floating Glassmorphic Container Card with fresh luminous gradient */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto rounded-[32px] sm:rounded-[40px] lg:rounded-[44px] border border-white/50 bg-gradient-to-br from-white/55 via-white/40 to-white/30 p-7 sm:p-12 lg:p-14 xl:p-16 shadow-[0_8px_32px_rgba(15,23,42,0.12),0_2px_8px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.9)] backdrop-blur-2xl overflow-hidden">
-
-        {/* Luminous Sunbeam & Atmospheric Radial Glows inside the card */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute right-[-10%] top-[-20%] w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle_at_center,rgba(251,191,36,0.30)_0%,rgba(253,230,138,0.14)_40%,transparent_70%)] blur-3xl select-none"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute left-[-15%] bottom-[-20%] w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle_at_center,rgba(186,210,232,0.35)_0%,rgba(210,228,244,0.15)_50%,transparent_70%)] blur-3xl select-none"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,255,255,0.55)_0%,transparent_60%)] select-none"
-        />
-
+    <section
+      className="relative w-full min-h-[calc(100vh-4.5rem)] flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-6 sm:pb-8 bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage:
+          "linear-gradient(rgba(255, 255, 255, 0.48), rgba(255, 255, 255, 0.48)), url('/asstes/bg-2.jpg')",
+      }}
+    >
+      {/* Outer Floating Glassmorphic Container Card */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto rounded-[32px] sm:rounded-[40px] lg:rounded-[44px] border border-white/60 bg-white/30 backdrop-blur-2xl p-7 sm:p-12 lg:p-14 xl:p-16 shadow-[0_16px_40px_rgba(15,23,42,0.08),inset_0_1px_0_rgba(255,255,255,0.9)] overflow-hidden">
         {/* Inner Content Grid */}
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-12 items-center">
 
@@ -174,9 +154,6 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-5 xl:col-span-4 relative flex items-center justify-center lg:justify-end select-none pointer-events-none"
           >
-            {/* Ambient soft glow ring behind the graphic */}
-            <div className="absolute w-72 sm:w-96 lg:w-[440px] h-72 sm:h-96 lg:h-[440px] rounded-full bg-gradient-to-tr from-amber-200/35 via-yellow-100/25 to-sky-100/25 blur-3xl" />
-
             {/* Full-size floating logo with no box background */}
             <motion.div
               animate={{ y: [-5, 6, -5] }}
