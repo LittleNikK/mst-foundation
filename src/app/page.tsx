@@ -14,6 +14,7 @@ import {
   NewsEvents,
   FAQ,
   JoinFoundation,
+  ScrollToTop,
 } from "@/components";
 
 export default function Home() {
@@ -38,6 +39,7 @@ export default function Home() {
         <JoinFoundation />
       </main>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }

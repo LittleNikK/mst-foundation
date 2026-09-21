@@ -40,4 +40,5 @@ export { JoinFoundation } from "./JoinFoundation/JoinFoundation";
 // UI Kit
 export { Button } from "./ui/Button";
 export { Card } from "./ui/Card";
+export { ScrollToTop } from "./ScrollToTop/ScrollToTop";
 

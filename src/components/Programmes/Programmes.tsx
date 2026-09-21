@@ -4,27 +4,23 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useSpring, easeOut, useMotionValueEvent, MotionValue } from "framer-motion";
 
-const VH_PER_CARD = 165;
-
 /* ------------------------------------------------------------------ */
-/*  Timeline Helpers (exact PublicObligations 1:1 forward/reverse)     */
+/*  Timeline Helpers                                                  */
+/*  Card 0 lands cleanly and transitions promptly (~35vh dwell),     */
+/*  while Cards 1, 2, 3 retain their exact glide and dwell pace.     */
 /* ------------------------------------------------------------------ */
 const TIMELINE = {
-  leadIn: 0.30, // Generous landing dwell (~180vh) so Card 0 stays calm and static in both directions
-  step(total: number) {
-    return (1.0 - this.leadIn) / (total - 1);
-  },
-  card(index: number, total: number) {
-    if (index === 0) {
-      return { entryStart: 0, entryEnd: 0.001 };
+  cards: [
+    { entryStart: 0.000, entryEnd: 0.001 },
+    { entryStart: 0.150, entryEnd: 0.390 },
+    { entryStart: 0.460, entryEnd: 0.700 },
+    { entryStart: 0.770, entryEnd: 1.000 },
+  ],
+  card(index: number, _total?: number) {
+    if (index >= 0 && index < this.cards.length) {
+      return this.cards[index];
     }
-    const s = this.step(total);
-    // Strict PublicObligations formula:
-    // Glides over 75% of the step, rests over 25%.
-    // Final card reaches completion at EXACTLY 1.00!
-    const entryStart = this.leadIn + (index - 0.75) * s;
-    const entryEnd = this.leadIn + index * s;
-    return { entryStart, entryEnd };
+    return { entryStart: 0, entryEnd: 0.001 };
   },
 };
 
@@ -215,7 +211,7 @@ function StackCopy({
   const { entryStart, entryEnd } = TIMELINE.card(index, total);
   const nextCard = !isLast ? TIMELINE.card(index + 1, total) : null;
   const nextEntryStart = nextCard ? nextCard.entryStart : 1.0;
-  const nextEntryFade = nextCard ? nextCard.entryStart + 0.10 : 1.0;
+  const nextEntryFade = nextCard ? (nextCard.entryStart + nextCard.entryEnd) / 2 : 1.0;
 
   const opacity = useTransform(
     progress,
@@ -334,7 +330,7 @@ export function Programmes() {
     const total = frontiers.length;
     let progressTarget = 0;
     if (i === 0) {
-      progressTarget = TIMELINE.leadIn * 0.5;
+      progressTarget = 0.07;
     } else if (i === total - 1) {
       progressTarget = 0.999;
     } else {
@@ -347,7 +343,7 @@ export function Programmes() {
     window.scrollTo({ top: target, behavior: "smooth" });
   };
 
-  const scrollHeightVh = (frontiers.length - 1) * VH_PER_CARD + 100;
+  const scrollHeightVh = 470;
 
   return (
     <section
