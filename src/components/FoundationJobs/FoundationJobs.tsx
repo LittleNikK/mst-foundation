@@ -10,9 +10,9 @@ import { Shield, Landmark, Users } from "lucide-react";
 const jobs = [
   {
     icon: Shield,
-    title: "Stewardship",
+    title: "Custody",
     description:
-      "Holding the code, treasury and trademarks of every organization in trust, so no single party can take them private.",
+      "The code, treasury, and trademarks of every organization in the ecosystem, held so no single party can privatize them.",
     cta: "See the ecosystem",
     href: "/ecosystem",
     number: "01",
@@ -26,10 +26,10 @@ const jobs = [
   },
   {
     icon: Landmark,
-    title: "Governance",
+    title: "Accountability",
     description:
-      "An elected council, standing committees and minutes published after every meeting. No shareholders to answer to.",
-    cta: "Read the charter",
+      "An elected council and standing committees, answerable to members. Not to shareholders.",
+    cta: "Read Our Structure ",
     href: "/governance",
     number: "02",
     cardBg: "linear-gradient(145deg, #111318 0%, #1A1D26 60%, #0E1014 100%)",
@@ -42,9 +42,9 @@ const jobs = [
   },
   {
     icon: Users,
-    title: "Adoption",
+    title: "Growth",
     description:
-      "Grants, education and research that help people use what the ecosystem builds, and publish what we learn doing it.",
+      "Grants, education, and research that help builders use what the ecosystem makes, with everything we learn published back.",
     cta: "Browse programmes",
     href: "/programmes",
     number: "03",
@@ -102,9 +102,9 @@ export function FoundationJobs() {
               }}
               className="text-3xl sm:text-4xl lg:text-[42px] xl:text-[46px] font-normal leading-[1.12] tracking-[-0.015em] text-[#0D1117]"
             >
-              Three jobs, held in
+              Three responsibilities,
               <br />
-              public
+              kept in trust
             </motion.h2>
           </div>
 
@@ -120,7 +120,7 @@ export function FoundationJobs() {
               Useful infrastructure tends to outlive the companies that start it.
               The Foundation exists so that the code, the treasury and the
               brand sit with a non-profit body whose only mandate is to keep
-              them available.
+              them available.Infrastructure outlasts the teams that build it only if someone is mandated to keep it that way. That's the whole of what SmartAngelos exists to do.
             </motion.p>
           </div>
         </div>

@@ -104,9 +104,9 @@ export function EcosystemOrgs() {
               style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}
               className="text-[14.5px] sm:text-[15.5px] lg:text-[16px] leading-[1.7] text-[#373E4A] font-normal"
             >
-              Each organization runs its own roadmap and its own contributors. The
-              Foundation holds what they share and keeps the lights on between funding
-              cycles.
+
+              A shared foundation for the ecosystem. SmartAngelos holds the treasury, standards, and trademarks that the ecosystem's organizations share.
+
             </motion.p>
           </div>
         </div>

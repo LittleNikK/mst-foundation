@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { hasHeroLoaded, markHeroLoaded } from "@/lib/loaderState";
 import {
   Loader,
   Navbar,
@@ -18,12 +19,17 @@ import {
 } from "@/components";
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => !hasHeroLoaded());
+
+  const handleLoaderDone = () => {
+    markHeroLoaded();
+    setLoading(false);
+  };
 
   return (
     <div className="relative min-h-screen flex flex-col bg-[#E9ECF0] bg-blueprint-grid overflow-x-clip">
       {/* Fullscreen Video Hero Loader Overlay */}
-      {loading && <Loader onDone={() => setLoading(false)} />}
+      {loading && <Loader onDone={handleLoaderDone} />}
 
       {/* Main Page Layout - Pre-rendered under the loader curtain */}
       <Navbar />

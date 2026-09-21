@@ -6,9 +6,10 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { markHeroLoaded } from "@/lib/loaderState";
 
 const navLinks = [
-  { href: "/about", label: "About" },
+  { href: "#about", label: "About" },
   { href: "#governance", label: "Governance" },
   { href: "#funding", label: "Funding" },
   { href: "#validators", label: "Validators" },
@@ -22,6 +23,14 @@ export function Navbar() {
   const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // If user visits any single page, mark hero as already loaded
+  // so subsequent redirects back to the home page do not play the loader
+  useEffect(() => {
+    if (pathname !== "/") {
+      markHeroLoaded();
+    }
+  }, [pathname]);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;

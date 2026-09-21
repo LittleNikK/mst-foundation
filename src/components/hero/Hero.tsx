@@ -53,7 +53,8 @@ function RotatingWord({
 export function Hero() {
   return (
     <section
-      className="relative w-full min-h-[calc(100vh-4.5rem)] flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-6 sm:pb-8 bg-cover bg-center bg-no-repeat"
+      id="about"
+      className="relative w-full min-h-[calc(100vh-4.5rem)] flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-6 sm:pb-8 bg-cover bg-center bg-no-repeat scroll-mt-20"
       style={{
         backgroundImage:
           "linear-gradient(rgba(255, 255, 255, 0.48), rgba(255, 255, 255, 0.48)), url('/asstes/bg-2.jpg')",
@@ -165,11 +166,11 @@ export function Hero() {
               className="relative w-[300px] sm:w-[380px] lg:w-[420px] xl:w-[460px] aspect-square flex items-center justify-center drop-shadow-[0_16px_32px_rgba(202,138,4,0.18)]"
             >
               <Image
-                src="/logo.png"
+                src="/logo-transparent.png"
                 alt="Smart Angelos Foundation"
                 fill
                 priority
-                className="object-contain mix-blend-multiply"
+                className="object-contain"
               />
             </motion.div>
           </motion.div>

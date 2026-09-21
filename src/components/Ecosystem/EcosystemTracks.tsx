@@ -11,9 +11,9 @@ import { PartnerMarquee } from "./PartnerMarquee";
 const tracks = [
   {
     tag: "FOR BUILDERS",
-    title: "Grants and tooling",
+    title: "Grants & Funding",
     description:
-      "Funding, documentation and maintainer support for the work the ecosystem depends on.",
+      "Funding protocol, security, and research work across the ecosystem Protocol & Core Dev  ·  Security & Audits  ·  Research",
     cta: "Apply for a grant",
     href: "/grants",
     accentColor: "#2563EB",
@@ -27,9 +27,9 @@ const tracks = [
   },
   {
     tag: "FOR INSTITUTIONS",
-    title: "Assurance and reporting",
+    title: "Governance & Assurance",
     description:
-      "Audited accounts, a published charter and a governance record you can read end to end.",
+      "A governance structure with no shareholders and no controlling party Elected Annually · Minutes Published · Accountable to Members",
     cta: "See the record",
     href: "/governance",
     accentColor: "#0F172A",
@@ -43,9 +43,9 @@ const tracks = [
   },
   {
     tag: "FOR THE COMMUNITY",
-    title: "Membership and voting",
+    title: "Voice & Vote",
     description:
-      "Join free, elect the council, and hold the Foundation to the mandate it publishes.",
+      "Accountability starts with the people who elect the council Free Membership · Direct Vote · Public Turnout Record",
     cta: "Become a member",
     href: "/membership",
     accentColor: "#B88728",
