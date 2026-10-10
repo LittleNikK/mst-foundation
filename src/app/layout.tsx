@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
-import { Newsreader, Plus_Jakarta_Sans, Anton, Montserrat, Playfair_Display, Inter, Outfit, Jost } from "next/font/google";
+import { Newsreader, Plus_Jakarta_Sans, Anton, Montserrat, Playfair_Display, Inter, Outfit, Jost, Sora } from "next/font/google";
 import "./globals.css";
+
+const sora = Sora({
+  subsets: ["latin"],
+  variable: "--font-sora",
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
 
 const jost = Jost({
   subsets: ["latin"],
@@ -68,7 +75,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${serifFont.variable} ${playfair.variable} ${sansFont.variable} ${displayFont.variable} ${montserrat.variable} ${inter.variable} ${outfit.variable} ${jost.variable}`}
+      className={`${sora.variable} ${serifFont.variable} ${playfair.variable} ${sansFont.variable} ${displayFont.variable} ${montserrat.variable} ${inter.variable} ${outfit.variable} ${jost.variable}`}
     >
       <body className="relative min-h-screen bg-[#E9ECF0] text-[#121417] antialiased selection:bg-[#F5BA13]/25 selection:text-[#121417] overflow-x-clip font-[var(--font-sans)]">
         {children}

@@ -10,7 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 /*  and subtle blur. Sizer trick prevents layout shifts.              */
 /* ------------------------------------------------------------------ */
 function RotatingWord({
-  words = ["accountable", "commonly held", "transparent"],
+  words = ["foundation", "home", "steward"],
   interval = 4000,
 }: {
   words?: string[];
@@ -69,16 +69,17 @@ export function Hero() {
           <div className="lg:col-span-7 xl:col-span-8 flex flex-col justify-center max-w-4xl">
 
             {/* Crisp Eyebrow Badge */}
-            {/* Bold Headline in Jost */}
+            {/* Bold Headline in Sora */}
             <motion.h1
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               style={{
-                fontFamily:
-                  "var(--font-jost), 'Jost', sans-serif",
+                fontFamily: 'var(--font-sora), "Sora", sans-serif',
+                fontWeight: 800,
+                letterSpacing: "-0.03em",
               }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] xl:text-[54px] 2xl:text-[60px] font-bold leading-[1.12] tracking-[-0.02em] text-[#0D1117]"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-[46px] xl:text-[54px] 2xl:text-[60px] font-extrabold leading-[1.12] text-[#0D1117]"
             >
               <span className="block text-[#0D1117]">
                 Smart Angelos
@@ -86,7 +87,7 @@ export function Hero() {
               <span className="block mt-1 sm:mt-2 text-[#0D1117]">
                 <span className="inline whitespace-nowrap">The non-profit{" "}
                   <RotatingWord
-                    words={["home", "steward", "foundation"]}
+                    words={["foundation", "home", "steward"]}
                     interval={3500}
                   /></span>
                 <br />
@@ -166,7 +167,7 @@ export function Hero() {
               className="relative w-[300px] sm:w-[380px] lg:w-[420px] xl:w-[460px] aspect-square flex items-center justify-center drop-shadow-[0_16px_32px_rgba(202,138,4,0.18)]"
             >
               <Image
-                src="/logo-transparent.png"
+                src="/logo-transparent1.png"
                 alt="Smart Angelos Foundation"
                 fill
                 priority

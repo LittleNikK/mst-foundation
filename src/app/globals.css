@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -27,6 +28,7 @@
   --color-card-bg: var(--color-card-bg);
   --color-muted: var(--color-muted);
 
+  --font-sora: var(--font-sora), "Sora", sans-serif;
   --font-serif: var(--font-serif), Newsreader, Georgia, Cambria, serif;
   --font-playfair: var(--font-playfair), 'Playfair Display', Georgia, serif;
   --font-inter: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -39,7 +41,9 @@
 }
 
 h1 {
-  font-family: var(--font-jost), 'Jost', var(--font-outfit), sans-serif;
+  font-family: var(--font-sora), "Sora", sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
 }
 
 * {
@@ -75,7 +79,7 @@ a {
 
 /* Blueprint Architecture Grid pattern */
 .bg-blueprint-grid {
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(148, 163, 184, 0.12) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(148, 163, 184, 0.12) 1px, transparent 1px);
   background-size: 32px 32px;
@@ -105,6 +109,7 @@ a {
   0% {
     transform: translateX(0%);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -114,6 +119,7 @@ a {
   0% {
     transform: translateX(-50%);
   }
+
   100% {
     transform: translateX(0%);
   }
@@ -135,12 +141,12 @@ a {
   overflow: hidden;
 }
 
-.animated-button-gold > span:nth-child(-n+4) {
+.animated-button-gold>span:nth-child(-n+4) {
   position: absolute;
   pointer-events: none;
 }
 
-.animated-button-gold > span:nth-child(1) {
+.animated-button-gold>span:nth-child(1) {
   top: 0px;
   left: 0px;
   width: 100%;
@@ -154,12 +160,13 @@ a {
   0% {
     transform: translateX(100%);
   }
+
   100% {
     transform: translateX(-100%);
   }
 }
 
-.animated-button-gold > span:nth-child(2) {
+.animated-button-gold>span:nth-child(2) {
   top: 0px;
   right: 0px;
   height: 100%;
@@ -173,12 +180,13 @@ a {
   0% {
     transform: translateY(100%);
   }
+
   100% {
     transform: translateY(-100%);
   }
 }
 
-.animated-button-gold > span:nth-child(3) {
+.animated-button-gold>span:nth-child(3) {
   bottom: 0px;
   left: 0px;
   width: 100%;
@@ -192,12 +200,13 @@ a {
   0% {
     transform: translateX(-100%);
   }
+
   100% {
     transform: translateX(100%);
   }
 }
 
-.animated-button-gold > span:nth-child(4) {
+.animated-button-gold>span:nth-child(4) {
   top: 0px;
   left: 0px;
   height: 100%;
@@ -211,6 +220,7 @@ a {
   0% {
     transform: translateY(-100%);
   }
+
   100% {
     transform: translateY(100%);
   }

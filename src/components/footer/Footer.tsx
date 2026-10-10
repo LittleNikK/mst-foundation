@@ -103,9 +103,9 @@ export function Footer() {
               <div>
                 {/* Brand Badge */}
                 <Link href="/" className="inline-flex items-center gap-2.5 select-none group">
-                  <div className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-full shrink-0">
+                  <div className="relative flex h-8 w-8 items-center justify-center shrink-0">
                     <Image
-                      src="/logo.png"
+                      src="/logo-transparent1.png"
                       alt="Smart Angelos Foundation Logo"
                       width={36}
                       height={36}
