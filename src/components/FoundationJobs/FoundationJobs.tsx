@@ -120,7 +120,7 @@ export function FoundationJobs() {
               Useful infrastructure tends to outlive the companies that start it.
               The Foundation exists so that the code, the treasury and the
               brand sit with a non-profit body whose only mandate is to keep
-              them available.Infrastructure outlasts the teams that build it only if someone is mandated to keep it that way. That's the whole of what SmartAngelos exists to do.
+              them available.Infrastructure outlasts the teams that build it only if someone is mandated to keep it that way. That&apos;s the whole of what SmartAngelos exists to do.
             </motion.p>
           </div>
         </div>

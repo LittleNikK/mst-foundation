@@ -10,7 +10,9 @@ interface LoaderProps {
 export function Loader({ onDone }: LoaderProps) {
   const [isExiting, setIsExiting] = useState(false);
   const onDoneRef = useRef(onDone);
-  onDoneRef.current = onDone;
+  useEffect(() => {
+    onDoneRef.current = onDone;
+  }, [onDone]);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {

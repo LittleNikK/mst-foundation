@@ -105,7 +105,7 @@ export function EcosystemOrgs() {
               className="text-[14.5px] sm:text-[15.5px] lg:text-[16px] leading-[1.7] text-[#373E4A] font-normal"
             >
 
-              A shared foundation for the ecosystem. SmartAngelos holds the treasury, standards, and trademarks that the ecosystem's organizations share.
+              A shared foundation for the ecosystem. SmartAngelos holds the treasury, standards, and trademarks that the ecosystem&apos;s organizations share.
 
             </motion.p>
           </div>
@@ -237,8 +237,8 @@ export function EcosystemOrgs() {
                 style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}
                 className="text-2xl sm:text-[27px] lg:text-[29px] font-normal italic leading-[1.38] text-white tracking-[-0.01em]"
               >
-                "A foundation is a promise written down: that what we build
-                together stays available to everyone who needs it."
+                &ldquo;A foundation is a promise written down: that what we build
+                together stays available to everyone who needs it.&rdquo;
               </blockquote>
             </div>
 
