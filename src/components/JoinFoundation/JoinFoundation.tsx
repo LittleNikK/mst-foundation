@@ -92,8 +92,8 @@ export function JoinFoundation() {
         </div>
 
         {/* ── Inner Content: Two Partitions Grid (Compact for Single Viewport) ── */}
-        <div className="relative z-10 px-5 sm:px-8 lg:px-12 xl:px-14 py-7 sm:py-9 lg:py-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-14 items-center">
+        <div className="relative z-10 px-4 xs:px-5 sm:px-8 lg:px-12 xl:px-14 py-6 sm:py-9 lg:py-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 xl:gap-14 items-center">
 
             {/* ── Left Partition: Headline, Subtitle, and Pills ── */}
             <div className="lg:col-span-6 flex flex-col justify-center text-left">
@@ -106,11 +106,11 @@ export function JoinFoundation() {
                   fontFamily:
                     "var(--font-playfair), 'Playfair Display', Georgia, serif",
                 }}
-                className="text-3xl sm:text-4xl lg:text-[44px] xl:text-[50px] font-normal leading-[1.12] tracking-[-0.015em] text-[#1A1A1A]"
+                className="text-2xl xs:text-3xl sm:text-4xl lg:text-[44px] xl:text-[50px] font-normal leading-[1.12] tracking-[-0.015em] text-[#000066]"
               >
                 Let’s Explore
                 <br />
-                A <span className="text-[#D99400]">Partnership</span>
+                A <span className="text-[#FFCC00]">Partnership</span>
               </motion.h2>
 
               <motion.p
@@ -228,7 +228,7 @@ export function JoinFoundation() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.55, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-                className="relative z-10 w-full bg-white rounded-[18px] sm:rounded-[22px] p-5 sm:p-6 lg:p-7 shadow-[0_16px_40px_-10px_rgba(0,0,0,0.07),0_2px_6px_rgba(0,0,0,0.02)] border border-[#EFE8DF]"
+                className="relative z-10 w-full bg-white rounded-[18px] sm:rounded-[22px] p-4 xs:p-5 sm:p-6 lg:p-7 shadow-[0_16px_40px_-10px_rgba(0,0,0,0.07),0_2px_6px_rgba(0,0,0,0.02)] border border-[#EFE8DF]"
               >
                 <AnimatePresence mode="wait">
                   {submitted ? (
@@ -327,8 +327,8 @@ export function JoinFoundation() {
                           onBlur={() => setFocused(null)}
                           className="w-full h-[38px] sm:h-[40px] rounded-[7px] border bg-white px-3 text-[13.5px] text-[#1A1A1A] placeholder-[#B5ADA4] outline-none transition-all duration-200"
                           style={{
-                            borderColor: focused === "email" ? "#F5BA13" : "#E5DDD4",
-                            boxShadow: focused === "email" ? "0 0 0 3px rgba(245, 186, 19, 0.20)" : "none",
+                            borderColor: focused === "email" ? "#FFCC00" : "#E5DDD4",
+                            boxShadow: focused === "email" ? "0 0 0 3px rgba(255, 204, 0, 0.25)" : "none",
                           }}
                         />
                       </div>
@@ -340,7 +340,7 @@ export function JoinFoundation() {
                           style={{
                             fontFamily: "var(--font-sans), 'Plus Jakarta Sans', Inter, sans-serif",
                           }}
-                          className="block text-[12px] font-medium text-[#8A4A26] mb-1"
+                          className="block text-[12px] font-medium text-[#000066] mb-1"
                         >
                           Company name *
                         </label>
@@ -355,8 +355,8 @@ export function JoinFoundation() {
                           onBlur={() => setFocused(null)}
                           className="w-full h-[38px] sm:h-[40px] rounded-[7px] border bg-white px-3 text-[13.5px] text-[#1A1A1A] placeholder-[#B5ADA4] outline-none transition-all duration-200"
                           style={{
-                            borderColor: focused === "company" ? "#F5BA13" : "#E5DDD4",
-                            boxShadow: focused === "company" ? "0 0 0 3px rgba(245, 186, 19, 0.20)" : "none",
+                            borderColor: focused === "company" ? "#FFCC00" : "#E5DDD4",
+                            boxShadow: focused === "company" ? "0 0 0 3px rgba(255, 204, 0, 0.25)" : "none",
                           }}
                         />
                       </div>
@@ -368,7 +368,7 @@ export function JoinFoundation() {
                           style={{
                             fontFamily: "var(--font-sans), 'Plus Jakarta Sans', Inter, sans-serif",
                           }}
-                          className="block text-[12px] font-medium text-[#8A4A26] mb-1"
+                          className="block text-[12px] font-medium text-[#000066] mb-1"
                         >
                           What brings you here?{" "}
                           <span className="text-[#9BA3AF] font-normal text-[11px]">(optional)</span>
@@ -383,8 +383,8 @@ export function JoinFoundation() {
                           onBlur={() => setFocused(null)}
                           className="w-full rounded-[7px] border bg-white p-2.5 sm:p-3 text-[13.5px] text-[#1A1A1A] placeholder-[#B5ADA4] outline-none transition-all duration-200 resize-none"
                           style={{
-                            borderColor: focused === "reason" ? "#F5BA13" : "#E5DDD4",
-                            boxShadow: focused === "reason" ? "0 0 0 3px rgba(245, 186, 19, 0.20)" : "none",
+                            borderColor: focused === "reason" ? "#FFCC00" : "#E5DDD4",
+                            boxShadow: focused === "reason" ? "0 0 0 3px rgba(255, 204, 0, 0.25)" : "none",
                           }}
                         />
                       </div>
@@ -393,7 +393,7 @@ export function JoinFoundation() {
                       <div className="pt-1.5">
                         <button
                           type="submit"
-                          className="w-full h-[40px] sm:h-[42px] rounded-[7px] bg-[#F5BA13] hover:bg-[#E5AC0B] active:scale-[0.99] text-[#121417] font-semibold text-[13.5px] sm:text-[14px] tracking-normal transition-all duration-200 cursor-pointer shadow-xs hover:shadow-sm flex items-center justify-center gap-2"
+                          className="w-full h-[40px] sm:h-[42px] rounded-[7px] bg-[#FFCC00] hover:bg-[#E6B800] active:scale-[0.99] text-[#000066] font-bold text-[13.5px] sm:text-[14px] tracking-normal transition-all duration-200 cursor-pointer shadow-xs hover:shadow-sm flex items-center justify-center gap-2"
                         >
                           <span>Contact us</span>
                           <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -407,7 +407,7 @@ export function JoinFoundation() {
                         <span>We only use your address for Foundation business.</span>
                         <Link
                           href="/charter"
-                          className="font-medium text-[#8A4A26] hover:text-[#D99400] transition-colors duration-150 underline underline-offset-2"
+                          className="font-semibold text-[#000066] hover:text-[#FFCC00] transition-colors duration-150 underline underline-offset-2"
                         >
                           Read the charter →
                         </Link>

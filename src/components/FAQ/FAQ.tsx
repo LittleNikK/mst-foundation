@@ -152,7 +152,7 @@ export function FAQ() {
         {/* ========================================================= */}
         {/* TOP HEADER BLOCK: Brand Yellow Background                 */}
         {/* ========================================================= */}
-        <div className="bg-[#F5BA13] pt-14 pb-12 sm:pt-18 sm:pb-16 px-6 sm:px-10 lg:px-16 text-center border-b border-[#E2A90D]">
+        <div className="bg-[#FFCC00] pt-10 pb-8 sm:pt-16 sm:pb-14 px-4 sm:px-10 lg:px-16 text-center border-b border-[#E6B800]">
           <div className="max-w-3xl mx-auto">
             
             {/* Main Heading in Playfair Display Serif */}
@@ -164,7 +164,7 @@ export function FAQ() {
               style={{
                 fontFamily: "var(--font-playfair), 'Playfair Display', Georgia, serif",
               }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-normal leading-[1.15] tracking-[-0.015em] text-[#121417]"
+              className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-normal leading-[1.15] tracking-[-0.015em] text-[#000066]"
             >
               Frequently Asked Questions
             </motion.h2>
@@ -175,7 +175,7 @@ export function FAQ() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.55, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-4 sm:mt-5 text-[14.5px] sm:text-[15.5px] md:text-[16px] leading-[1.68] text-[#24272E] max-w-2xl mx-auto font-normal font-[var(--font-sans)]"
+              className="mt-3 sm:mt-5 text-[13.5px] xs:text-[14px] sm:text-[15.5px] md:text-[16px] leading-[1.6] sm:leading-[1.68] text-[#000066]/85 max-w-2xl mx-auto font-medium font-[var(--font-sans)]"
             >
               Essential questions about our non-profit mission, governance, treasury stewardship,
               and grant programs are completely natural. We’ve organized clear answers to guide
@@ -188,7 +188,7 @@ export function FAQ() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.55, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5"
+              className="mt-6 sm:mt-10 flex flex-wrap items-center justify-center gap-2 sm:gap-3.5"
             >
               {CATEGORIES.map((cat) => {
                 const isActive = cat.key === activeCategoryKey;
@@ -197,10 +197,10 @@ export function FAQ() {
                     key={cat.key}
                     type="button"
                     onClick={() => handleCategoryChange(cat.key)}
-                    className={`rounded-full px-5 sm:px-6 py-2.5 sm:py-3 text-[13px] sm:text-[14px] font-medium tracking-tight transition-all duration-200 cursor-pointer select-none ${
+                    className={`rounded-full px-3.5 xs:px-4 sm:px-6 py-2 sm:py-3 text-[12px] xs:text-[12.5px] sm:text-[14px] font-semibold tracking-tight transition-all duration-200 cursor-pointer select-none ${
                       isActive
-                        ? "bg-[#121417] text-white shadow-lg ring-1 ring-black/15 scale-[1.02]"
-                        : "bg-[#121417]/80 text-white/90 hover:bg-[#121417] hover:text-white"
+                        ? "bg-[#000066] text-[#FFCC00] shadow-lg ring-2 ring-[#000066] scale-[1.02]"
+                        : "bg-[#000066]/85 text-white hover:bg-[#000066] hover:text-[#FFCC00]"
                     }`}
                   >
                     {cat.pillLabel}
@@ -214,8 +214,8 @@ export function FAQ() {
         {/* ========================================================= */}
         {/* BOTTOM SECTION: Pure White Background + Split Layout      */}
         {/* ========================================================= */}
-        <div className="bg-[#FFFFFF] p-8 sm:p-12 lg:p-16 xl:p-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+        <div className="bg-[#FFFFFF] p-5 xs:p-6 sm:p-12 lg:p-16 xl:p-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 items-start">
             
             {/* ── Left Column: Active Category Title ── */}
             <div className="lg:col-span-5 lg:sticky lg:top-28">
@@ -231,7 +231,7 @@ export function FAQ() {
                     style={{
                       fontFamily: "var(--font-playfair), 'Playfair Display', Georgia, serif",
                     }}
-                    className="text-3xl sm:text-4xl lg:text-[46px] xl:text-[50px] font-normal leading-[1.12] tracking-tight text-[#14171D]"
+                    className="text-2xl xs:text-3xl sm:text-4xl lg:text-[46px] xl:text-[50px] font-normal leading-[1.12] tracking-tight text-[#14171D]"
                   >
                     {currentCategory.displayTitle}
                     <sup className="text-xl sm:text-2xl font-light ml-1 -top-3 sm:-top-4 text-[#14171D]">

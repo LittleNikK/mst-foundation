@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Newsreader, Plus_Jakarta_Sans, Anton, Montserrat, Playfair_Display, Inter, Outfit, Jost, Sora } from "next/font/google";
 import "./globals.css";
 
@@ -60,6 +60,12 @@ const montserrat = Montserrat({
   weight: ["600", "700", "800"],
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   title: "Smart Angelos Foundation | Parent of MST Blockchain",

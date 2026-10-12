@@ -69,11 +69,11 @@ const researchAreas = [
       "Automated treasury circuit-breakers & dispute arbitration",
     ],
     icon: Scale,
-    accent: "#B88728",
-    badgeBg: "#FEF9EE",
-    badgeBorder: "#FDE68A",
-    badgeText: "#9A6B1A",
-    glowColor: "rgba(184, 135, 40, 0.08)",
+    accent: "#FFCC00",
+    badgeBg: "#FFFDEB",
+    badgeBorder: "#FEF08A",
+    badgeText: "#000066",
+    glowColor: "rgba(255, 204, 0, 0.08)",
   },
   {
     number: "04",
@@ -113,13 +113,13 @@ export default function ResearchPage() {
           >
             <Link
               href="/"
-              className="inline-flex items-center gap-1.5 hover:text-[#0D1117] transition-colors"
+              className="inline-flex items-center gap-1.5 hover:text-[#000066] transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Home</span>
             </Link>
             <span className="text-slate-400">/</span>
-            <span className="text-[#0D1117] font-semibold">Research</span>
+            <span className="text-[#000066] font-semibold">Research</span>
           </motion.div>
 
           {/* ── Hero Island Header Card ── */}
@@ -127,23 +127,23 @@ export default function ResearchPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-            className="relative rounded-[28px] sm:rounded-[36px] lg:rounded-[40px] border border-white/60 bg-white/45 backdrop-blur-2xl p-7 sm:p-10 lg:p-14 shadow-[0_16px_40px_rgba(15,23,42,0.07),inset_0_1px_0_rgba(255,255,255,0.9)] overflow-hidden mb-10 sm:mb-12"
+            className="relative rounded-[24px] sm:rounded-[36px] lg:rounded-[40px] border border-white/60 bg-white/45 backdrop-blur-2xl p-5 xs:p-6 sm:p-10 lg:p-14 shadow-[0_16px_40px_rgba(15,23,42,0.07),inset_0_1px_0_rgba(255,255,255,0.9)] overflow-hidden mb-8 sm:mb-12"
           >
             {/* Ambient Radial Background Glows */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute right-[-5%] top-[-20%] w-[520px] h-[520px] rounded-full bg-[radial-gradient(circle_at_center,rgba(245,186,19,0.18)_0%,transparent_65%)] blur-2xl select-none"
+              className="pointer-events-none absolute right-[-5%] top-[-20%] w-[520px] h-[520px] rounded-full bg-[radial-gradient(circle_at_center,rgba(255,204,0,0.18)_0%,transparent_65%)] blur-2xl select-none"
             />
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute left-[-10%] bottom-[-20%] w-[450px] h-[450px] rounded-full bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.12)_0%,transparent_65%)] blur-2xl select-none"
+              className="pointer-events-none absolute left-[-10%] bottom-[-20%] w-[450px] h-[450px] rounded-full bg-[radial-gradient(circle_at_center,rgba(0,0,102,0.12)_0%,transparent_65%)] blur-2xl select-none"
             />
 
             <div className="relative z-10 max-w-4xl">
               {/* Bold Editorial Headline in Jost */}
               <h1
                 style={{ fontFamily: "var(--font-jost), 'Jost', sans-serif" }}
-                className="text-3xl sm:text-5xl lg:text-[54px] xl:text-[60px] font-bold text-[#0D1117] tracking-tight leading-[1.08] mb-5 sm:mb-6"
+                className="text-2xl xs:text-3xl sm:text-5xl lg:text-[54px] xl:text-[60px] font-bold text-[#000066] tracking-tight leading-[1.08] mb-4 sm:mb-6"
               >
                 Advancing the MST ecosystem
               </h1>
@@ -167,12 +167,12 @@ export default function ResearchPage() {
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="rounded-[20px] border border-amber-300/70 bg-amber-50/80 p-5 sm:p-6 mb-12 sm:mb-16 flex items-start gap-4 shadow-xs"
           >
-            <AlertCircle className="w-5 h-5 text-[#B88728] shrink-0 mt-0.5" />
+            <AlertCircle className="w-5 h-5 text-[#FFCC00] shrink-0 mt-0.5" />
             <div>
-              <p className="text-[11.5px] font-bold uppercase tracking-wider text-[#8E6317] font-[var(--font-outfit)] mb-1">
+              <p className="text-[11.5px] font-bold uppercase tracking-wider text-[#000066] font-[var(--font-outfit)] mb-1">
                 Publication Status · No Published Research Yet
               </p>
-              <p className="text-[13.5px] sm:text-[14px] leading-[1.65] text-[#5A4112] font-normal">
+              <p className="text-[13.5px] sm:text-[14px] leading-[1.65] text-[#334155] font-normal">
                 <strong>Note:</strong> The Foundation is currently reviewing fellowship
                 applications for our first research cohort. All future working papers,
                 benchmarks, and security audits will be published openly under permissive
@@ -185,7 +185,7 @@ export default function ResearchPage() {
           <section className="mb-14 sm:mb-20">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start mb-8 sm:mb-10">
               <div className="lg:col-span-7">
-                <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-semibold text-[#9E7D3B] select-none font-[var(--font-outfit)] mb-2">
+                <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-semibold text-[#000066] select-none font-[var(--font-outfit)] mb-2">
                   Focus Domains
                 </p>
                 <h2
@@ -193,7 +193,7 @@ export default function ResearchPage() {
                     fontFamily:
                       "var(--font-playfair), 'Playfair Display', Georgia, serif",
                   }}
-                  className="text-2xl sm:text-3xl lg:text-[36px] font-normal text-[#0D1117] tracking-[-0.015em] leading-[1.18]"
+                  className="text-2xl sm:text-3xl lg:text-[36px] font-normal text-[#000066] tracking-[-0.015em] leading-[1.18]"
                 >
                   Research Areas We&apos;re Prioritizing
                 </h2>
@@ -254,7 +254,7 @@ export default function ResearchPage() {
                         style={{
                           fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
                         }}
-                        className="text-xl sm:text-[22px] font-bold text-[#0D1117] leading-[1.25] tracking-tight mb-2.5 group-hover:text-[#090D14]"
+                        className="text-xl sm:text-[22px] font-bold text-[#000066] leading-[1.25] tracking-tight mb-2.5 group-hover:text-[#000066]"
                       >
                         {area.title}
                       </h3>
@@ -267,14 +267,14 @@ export default function ResearchPage() {
                       <ul className="space-y-2 mb-4">
                         {area.topics.map((t) => (
                           <li key={t} className="flex items-start gap-2 text-[12.5px] sm:text-[13px] text-[#475569] leading-relaxed">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#B88728] shrink-0 mt-2" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#FFCC00] shrink-0 mt-2" />
                             <span>{t}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-[12px] font-semibold text-[#8E6317]">
+                    <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-[12px] font-semibold text-[#000066]">
                       <span>Open RFP Topic</span>
                       <Link
                         href="/grants#apply"
@@ -300,7 +300,7 @@ export default function ResearchPage() {
             <div className="rounded-[28px] sm:rounded-[36px] bg-white border border-slate-200/90 p-7 sm:p-10 lg:p-12 shadow-[0_16px_40px_rgba(15,23,42,0.06)]">
               <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 pb-6 border-b border-slate-100 gap-4">
                 <div>
-                  <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-semibold text-[#9E7D3B] select-none font-[var(--font-outfit)] mb-1.5">
+                  <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-semibold text-[#000066] select-none font-[var(--font-outfit)] mb-1.5">
                     Repository Archive
                   </p>
                   <h2
@@ -308,7 +308,7 @@ export default function ResearchPage() {
                       fontFamily:
                         "var(--font-playfair), 'Playfair Display', Georgia, serif",
                     }}
-                    className="text-2xl sm:text-3xl lg:text-[34px] font-normal text-[#0D1117] tracking-[-0.015em]"
+                    className="text-2xl sm:text-3xl lg:text-[34px] font-normal text-[#000066] tracking-[-0.015em]"
                   >
                     Papers Index
                   </h2>
@@ -320,18 +320,18 @@ export default function ResearchPage() {
 
               {/* Empty State Banner */}
               <div className="py-12 px-6 rounded-[22px] bg-[#FAF7F2] border border-amber-200/70 text-center flex flex-col items-center justify-center max-w-xl mx-auto">
-                <div className="w-12 h-12 rounded-full bg-amber-100 border border-amber-200 flex items-center justify-center text-[#B88728] mb-4">
+                <div className="w-12 h-12 rounded-full bg-amber-100 border border-amber-200 flex items-center justify-center text-[#000066] mb-4">
                   <BookOpen className="w-6 h-6" />
                 </div>
 
                 <h3
                   style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}
-                  className="text-xl font-bold text-[#0D1117] mb-2"
+                  className="text-xl font-bold text-[#000066] mb-2"
                 >
                   No research has been published yet.
                 </h3>
 
-                <p className="text-[13.5px] sm:text-[14px] leading-relaxed text-[#5A4112] mb-6">
+                <p className="text-[13.5px] sm:text-[14px] leading-relaxed text-[#334155] mb-6">
                   Working papers from our inaugural research fellowship cohort are currently
                   undergoing formal review. Preprints will be archived here and permanently
                   hashed to the network.
@@ -339,7 +339,7 @@ export default function ResearchPage() {
 
                 <Link
                   href="/grants#apply"
-                  className="inline-flex items-center gap-2 h-[40px] px-5 rounded-[7px] bg-[#F5BA13] hover:bg-[#E5AC0B] text-[#121417] font-semibold text-[13px] transition-all duration-200 active:scale-[0.98] shadow-sm cursor-pointer"
+                  className="inline-flex items-center gap-2 h-[40px] px-5 rounded-[7px] bg-[#FFCC00] hover:bg-[#e6b800] text-[#000066] font-semibold text-[13px] transition-all duration-200 active:scale-[0.98] shadow-sm cursor-pointer"
                 >
                   <span>Submit a Research Proposal</span>
                   <ArrowRight className="w-4 h-4" />
@@ -349,14 +349,14 @@ export default function ResearchPage() {
           </section>
 
           {/* ── Bottom Call-to-Action Island ── */}
-          <section className="relative rounded-[24px] sm:rounded-[32px] overflow-hidden bg-[#0D1117] text-white p-8 sm:p-12 lg:p-14 shadow-xl">
+          <section className="relative rounded-[24px] sm:rounded-[32px] overflow-hidden bg-[#000066] text-white p-8 sm:p-12 lg:p-14 shadow-xl">
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -right-20 -top-20 w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle_at_center,rgba(245,186,19,0.22)_0%,transparent_70%)] blur-2xl select-none"
+              className="pointer-events-none absolute -right-20 -top-20 w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle_at_center,rgba(255,204,0,0.22)_0%,transparent_70%)] blur-2xl select-none"
             />
 
             <div className="relative z-10 max-w-3xl">
-              <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.24em] font-semibold text-[#F5BA13] select-none font-[var(--font-outfit)] mb-3">
+              <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.24em] font-semibold text-[#FFCC00] select-none font-[var(--font-outfit)] mb-3">
                 Academic &amp; Independent Fellowships
               </p>
               <h2
@@ -365,7 +365,7 @@ export default function ResearchPage() {
               >
                 Conduct funded research with SmartAngelos.
               </h2>
-              <p className="text-[14.5px] sm:text-[15.5px] leading-relaxed text-slate-300 mb-8 max-w-2xl font-normal">
+              <p className="text-[14.5px] sm:text-[15.5px] leading-relaxed text-slate-200 mb-8 max-w-2xl font-normal">
                 We provide non-dilutive grant funding, computing resources, and maintainer
                 collaboration for researchers tackling foundational questions in decentralized
                 systems.
@@ -374,7 +374,7 @@ export default function ResearchPage() {
               <div className="flex flex-wrap items-center gap-3.5 sm:gap-4">
                 <Link
                   href="/grants#apply"
-                  className="inline-flex items-center justify-center gap-2 h-[42px] sm:h-[44px] px-6 rounded-[7px] bg-[#F5BA13] hover:bg-[#E5AC0B] text-[#121417] font-semibold text-[13.5px] sm:text-[14px] tracking-normal transition-all duration-200 active:scale-[0.98] shadow-sm cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 h-[42px] sm:h-[44px] px-6 rounded-[7px] bg-[#FFCC00] hover:bg-[#e6b800] text-[#000066] font-semibold text-[13.5px] sm:text-[14px] tracking-normal transition-all duration-200 active:scale-[0.98] shadow-sm cursor-pointer"
                 >
                   <span>Apply for Research Grant</span>
                   <ArrowRight className="w-4 h-4" />

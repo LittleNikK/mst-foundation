@@ -92,20 +92,17 @@ export function Navbar() {
         )}
       >
         {/* Left: Brand */}
-        <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
-          <div className="relative flex h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 items-center justify-center shrink-0">
+        <Link href="/" className="flex items-center group shrink-0" aria-label="Smart Angelos Foundation">
+          <div className="relative flex h-13 w-13 sm:h-[72px] sm:w-[72px] md:h-[78px] md:w-[78px] items-center justify-center shrink-0">
             <Image
-              src="/logo-transparent1.png"
-              alt="Smart Angelos Foundation Logo"
-              width={44}
-              height={44}
-              className="h-full w-full object-contain transition-transform duration-200 group-hover:scale-105"
+              src="/logo-transparent.png"
+              alt="Smart Angelos Foundation"
+              width={92}
+              height={92}
+              className="h-full w-full object-contain scale-125 transition-transform duration-200 group-hover:scale-130"
               priority
             />
           </div>
-          <span className="text-sm sm:text-base md:text-[17px] font-bold tracking-tight text-slate-900 whitespace-nowrap">
-            Smart Angelos
-          </span>
         </Link>
 
         {/* Desktop Nav Items + Action Button */}
@@ -123,7 +120,7 @@ export function Navbar() {
                   <Link
                     href={fullHref}
                     onClick={(e) => handleLinkClick(e, link.href)}
-                    className="font-[var(--font-inter)] text-[13.5px] xl:text-[14px] 2xl:text-[14.5px] font-medium tracking-tight text-[#2B303B] whitespace-nowrap transition-colors duration-150 hover:text-black"
+                    className="font-[var(--font-inter)] text-[13.5px] xl:text-[14px] 2xl:text-[14.5px] font-medium tracking-tight text-[#2B303B] whitespace-nowrap transition-colors duration-150 hover:text-[#000066]"
                   >
                     {link.label}
                   </Link>
@@ -141,7 +138,7 @@ export function Navbar() {
           <Link
             href={pathname === "/" ? "#funding" : "/#funding"}
             onClick={(e) => handleLinkClick(e, "#funding")}
-            className="inline-flex items-center justify-center rounded-[6px] border border-[#B68B42] bg-[#B68B42]/10 px-3.5 py-1.5 sm:px-4 sm:py-2 font-[var(--font-inter)] text-[13px] sm:text-[13.5px] font-medium text-[#9E7329] whitespace-nowrap transition-all duration-200 hover:bg-[#B68B42] hover:text-white active:scale-[0.98] shrink-0"
+            className="inline-flex items-center justify-center rounded-[6px] border border-[#FFCC00] bg-[#FFCC00]/15 px-3.5 py-1.5 sm:px-4 sm:py-2 font-[var(--font-inter)] text-[13px] sm:text-[13.5px] font-semibold text-[#000066] whitespace-nowrap transition-all duration-200 hover:bg-[#FFCC00] hover:text-[#000066] shadow-xs active:scale-[0.98] shrink-0"
           >
             Apply for a Grant
           </Link>
@@ -151,7 +148,7 @@ export function Navbar() {
         <button
           type="button"
           onClick={() => setMobileMenuOpen((prev) => !prev)}
-          className="flex lg:hidden p-2 rounded-lg text-slate-700 hover:text-black hover:bg-black/5 pointer-events-auto transition-colors"
+          className="flex lg:hidden p-2 rounded-lg text-slate-700 hover:text-[#000066] hover:bg-black/5 pointer-events-auto transition-colors"
           aria-label="Toggle navigation menu"
         >
           {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -173,7 +170,7 @@ export function Navbar() {
                   key={link.label}
                   href={fullHref}
                   onClick={(e) => handleLinkClick(e, link.href)}
-                  className="font-[var(--font-inter)] text-[15px] font-medium tracking-tight text-[#2B303B] py-1 hover:text-black transition-colors"
+                  className="font-[var(--font-inter)] text-[15px] font-medium tracking-tight text-[#2B303B] py-1 hover:text-[#000066] transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -186,7 +183,7 @@ export function Navbar() {
           <Link
             href={pathname === "/" ? "#funding" : "/#funding"}
             onClick={(e) => handleLinkClick(e, "#funding")}
-            className="inline-flex items-center justify-center rounded-[6px] border border-[#B68B42] bg-[#B68B42]/10 px-4 py-2 font-[var(--font-inter)] text-[14px] font-medium text-[#9E7329] transition-all hover:bg-[#B68B42] hover:text-white"
+            className="inline-flex items-center justify-center rounded-[6px] border border-[#FFCC00] bg-[#FFCC00]/15 px-4 py-2 font-[var(--font-inter)] text-[14px] font-semibold text-[#000066] transition-all hover:bg-[#FFCC00] hover:text-[#000066]"
           >
             Apply for a Grant
           </Link>

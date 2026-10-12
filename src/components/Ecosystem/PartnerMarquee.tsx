@@ -27,13 +27,13 @@ function PartnerSlotCard({ slot }: { slot: PartnerSlot }) {
   return (
     <Link
       href={slot.href || "#"}
-      className="group relative flex items-center justify-center rounded-xl sm:rounded-[14px] border border-dashed border-[#8A95A5]/40 bg-white/50 px-6 py-3 sm:px-8 sm:py-3.5 shadow-[0_2px_10px_rgba(0,0,0,0.03)] backdrop-blur-sm transition-all duration-200 hover:border-[#B88728]/60 hover:bg-white/80 hover:shadow-[0_6px_20px_rgba(0,0,0,0.07)] select-none flex-none"
+      className="group relative flex items-center justify-center rounded-xl sm:rounded-[14px] border border-dashed border-[#8A95A5]/40 bg-white/50 px-6 py-3 sm:px-8 sm:py-3.5 shadow-[0_2px_10px_rgba(0,0,0,0.03)] backdrop-blur-sm transition-all duration-200 hover:border-[#FFCC00] hover:bg-white/80 hover:shadow-[0_6px_20px_rgba(0,0,102,0.08)] select-none flex-none"
     >
       <span
         style={{
           fontFamily: "var(--font-serif), Newsreader, 'Times New Roman', Georgia, serif",
         }}
-        className="text-[13px] sm:text-[14px] font-normal text-[#5A6172] transition-colors duration-200 group-hover:text-[#0D1117] whitespace-nowrap"
+        className="text-[13px] sm:text-[14px] font-normal text-[#5A6172] transition-colors duration-200 group-hover:text-[#000066] whitespace-nowrap"
       >
         {slot.label}
       </span>
@@ -76,9 +76,7 @@ export function PartnerMarquee({
       {/* Eyebrow label */}
       <div className="mb-4 sm:mb-5 flex items-center gap-3">
         <div className="h-px flex-1 bg-gradient-to-r from-[#CBD5E1]/80 to-transparent" />
-        <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-semibold text-[#8A95A5] select-none whitespace-nowrap">
-          Working with · Partner slots
-        </p>
+
         <div className="h-px flex-1 bg-gradient-to-l from-[#CBD5E1]/80 to-transparent" />
       </div>
 

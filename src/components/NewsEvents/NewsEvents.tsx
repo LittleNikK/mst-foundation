@@ -102,7 +102,7 @@ function ListItem({
           style={{
             fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
           }}
-          className="flex-1 text-[17px] sm:text-[18.5px] lg:text-[19.5px] font-medium leading-[1.3] tracking-[-0.01em] text-[#121417] group-hover:text-black transition-colors duration-200"
+          className="flex-1 text-[17px] sm:text-[18.5px] lg:text-[19.5px] font-medium leading-[1.3] tracking-[-0.01em] text-[#000066] group-hover:text-[#00004d] transition-colors duration-200"
         >
           {item.title}
         </h3>
@@ -183,7 +183,7 @@ export function NewsEvents() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[11px] sm:text-[12px] uppercase tracking-[0.24em] font-semibold text-[#9E7D3B] select-none font-[var(--font-outfit)]"
+            className="text-[11px] sm:text-[12px] uppercase tracking-[0.24em] font-bold text-[#000066] select-none font-[var(--font-outfit)]"
           >
             NEWS &amp; EVENTS
           </motion.p>
@@ -196,7 +196,7 @@ export function NewsEvents() {
               fontFamily:
                 "var(--font-outfit), 'Outfit', sans-serif",
             }}
-            className="mt-3 sm:mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-[52px] xl:text-[56px] font-semibold leading-[1.1] tracking-[-0.02em] text-[#121417]"
+            className="mt-3 sm:mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-[52px] xl:text-[56px] font-semibold leading-[1.1] tracking-[-0.02em] text-[#000066]"
           >
             What we are publishing
             <br />

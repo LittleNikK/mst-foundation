@@ -19,7 +19,7 @@ interface CardDef {
 const CARDS: CardDef[] = [
   { number: "01", accentColor: "#3B7DD8", pastel: "#CFE3FA", title: "Treasury", description: "Reserves, runway and every outgoing line, reconciled monthly." },
   { number: "02", accentColor: "#6B7280", pastel: "#E3E6EC", title: "Council votes", description: "Every resolution, how each seat voted, and the minute that recorded it." },
-  { number: "03", accentColor: "#B88728", pastel: "#F5E7C4", title: "Grant pipeline", description: "Applications move through four stages, and the queue is visible to applicants." },
+  { number: "03", accentColor: "#FFCC00", pastel: "#FFF4B8", title: "Grant pipeline", description: "Applications move through four stages, and the queue is visible to applicants." },
   { number: "04", accentColor: "#3B7DD8", pastel: "#CDEBD9", title: "Documents", description: "The charter, bylaws, minutes and accounts, versioned and permanently archived." },
   { number: "05", accentColor: "#6B7280", pastel: "#F4E4E6", title: "The council", description: "Four seats, elected annually. Names go up as the first assembly confirms them." },
   { number: "06", accentColor: "#2C5AA0", pastel: "#D8E0F2", title: "Assembly record", description: "Motions, turnout and outcomes from every members\u2019 assembly, kept as a permanent register." },
@@ -170,9 +170,9 @@ function useCardMetrics(deckRef: React.RefObject<HTMLDivElement | null>) {
       const w = el ? el.clientWidth : (typeof window !== "undefined" ? Math.min(window.innerWidth - 64, 1152) : 1152);
 
       if (w < 600) {
-        // Mobile: 1 card + ~15% peek
-        const cardW = Math.max(280, Math.round(w * 0.85));
-        setMetrics({ width: cardW, gap: 14, height: 390, stackStep: 16 });
+        // Mobile: 1 card + ~15% peek, strictly capped to container width
+        const cardW = Math.max(260, Math.min(w - 20, Math.round(w * 0.86)));
+        setMetrics({ width: cardW, gap: 12, height: 395, stackStep: 14 });
       } else if (w < 960) {
         // Tablet: 1.5 cards
         const gap = 18;
@@ -323,6 +323,23 @@ export default function PublicObligations() {
     setActive(i);
   };
 
+  const touchStartX = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    if (deltaX < -35) {
+      goNext();
+    } else if (deltaX > 35) {
+      goPrev();
+    }
+    touchStartX.current = null;
+  };
+
   return (
     <section
       id="obligations"
@@ -333,9 +350,9 @@ export default function PublicObligations() {
       <div id="governance" className="absolute -top-24 pointer-events-none" />
       <div id="transparency" className="absolute -top-24 pointer-events-none" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 lg:px-16 py-16 sm:py-20 lg:py-24">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-10 lg:px-16 py-12 sm:py-20 lg:py-24">
         {/* Header */}
-        <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-semibold text-[#B88728] select-none mb-3 font-[var(--font-outfit)]">
+        <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-bold text-[#FFCC00] select-none mb-3 font-[var(--font-outfit)]">
           EVERYTHING IN PUBLIC
         </p>
         <h2
@@ -343,15 +360,17 @@ export default function PublicObligations() {
             fontFamily:
               "var(--font-playfair), 'Playfair Display', Georgia, serif",
           }}
-          className="text-3xl sm:text-4xl lg:text-[44px] xl:text-[48px] font-normal leading-[1.12] tracking-[-0.015em] text-[#EAF1F2] mb-8 sm:mb-10"
+          className="text-2xl sm:text-4xl lg:text-[44px] xl:text-[48px] font-normal leading-[1.12] tracking-[-0.015em] text-[#EAF1F2] mb-6 sm:mb-10"
         >
           How a foundation earns the name
         </h2>
 
-        {/* Stacking deck */}
+        {/* Stacking deck with touch swipe support */}
         <div
           ref={deckRef}
-          className="relative overflow-hidden w-full"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          className="relative overflow-hidden w-full touch-pan-y"
           style={{ height: metrics.height }}
         >
           {CARDS.map((card, i) => (

@@ -18,7 +18,7 @@ export function Loader({ onDone }: LoaderProps) {
   useEffect(() => {
     // Start video playback safely
     if (videoRef.current) {
-      videoRef.current.play().catch(() => {});
+      videoRef.current.play().catch(() => { });
     }
 
     // Schedule curtain exit after crisp headline presentation (~1.4s)
@@ -88,10 +88,10 @@ export function Loader({ onDone }: LoaderProps) {
                 fontWeight: 800,
                 textTransform: "uppercase",
               }}
-              className="text-5xl sm:text-7xl md:text-8xl lg:text-[94px] xl:text-[108px] font-normal uppercase tracking-[-0.015em] leading-[0.96] sm:leading-[0.93] text-slate-950 drop-shadow-[0_2px_14px_rgba(255,255,255,0.7)] max-w-6xl"
+              className="text-5xl sm:text-7xl md:text-8xl lg:text-[94px] xl:text-[108px] font-normal uppercase tracking-[-0.015em] leading-[0.96] sm:leading-[0.93] text-[#000066] drop-shadow-[0_2px_14px_rgba(255,255,255,0.7)] max-w-6xl"
             >
               <span className="block">BUILDING AN</span>
-              <span className="block mt-0.5 sm:mt-1 text-amber-600 drop-shadow-[0_2px_14px_rgba(255,255,255,0.7)]">
+              <span className="block mt-0.5 sm:mt-1 text-[#FFCC00] drop-shadow-[0_2px_14px_rgba(0,0,102,0.3)]">
                 ACCOUNTABLE
               </span>
               <span className="block mt-0.5 sm:mt-1">

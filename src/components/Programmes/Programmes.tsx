@@ -256,7 +256,7 @@ function StackCopy({
           fontFamily:
             "var(--font-montserrat), 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif",
         }}
-        className="text-[26px] sm:text-[30px] lg:text-[34px] font-semibold text-[#111827] tracking-tight leading-[1.18] mb-5 sm:mb-6 max-w-[420px]"
+        className="text-[26px] sm:text-[30px] lg:text-[34px] font-semibold text-[#000066] tracking-tight leading-[1.18] mb-5 sm:mb-6 max-w-[420px]"
       >
         {item.title}
       </h3>
@@ -267,7 +267,7 @@ function StackCopy({
 
       <Link
         href="/grants/apply"
-        className="inline-block text-[14px] font-normal text-[#111827] border-b border-[#111827] pb-0.5 self-start hover:opacity-70 transition-opacity select-none"
+        className="inline-block text-[14px] font-semibold text-[#000066] border-b-2 border-[#000066] pb-0.5 self-start hover:text-[#FFCC00] hover:border-[#FFCC00] transition-colors select-none"
       >
         Discover
       </Link>
@@ -385,8 +385,8 @@ export function Programmes() {
                     >
                       <span
                         className={`text-[15px] sm:text-[16px] transition-colors duration-200 ${isActive
-                          ? "text-[#111827] font-medium"
-                          : "text-[#9CA3AF] hover:text-[#4B5563]"
+                          ? "text-[#000066] font-semibold"
+                          : "text-[#9CA3AF] hover:text-[#000066]"
                           }`}
                       >
                         {isActive ? `•  ${item.tag}` : item.tag}
@@ -406,7 +406,7 @@ export function Programmes() {
                     key={item.id}
                     onClick={() => goTo(i)}
                     className={`shrink-0 text-[13.5px] whitespace-nowrap pb-1 transition-colors duration-200 cursor-pointer ${isActive
-                      ? "text-[#111827] font-medium border-b border-[#111827]"
+                      ? "text-[#000066] font-semibold border-b-2 border-[#FFCC00]"
                       : "text-[#9CA3AF]"
                       }`}
                   >
@@ -419,13 +419,13 @@ export function Programmes() {
             {/* ── Center Column: "The Frontiers" title + image card + vertical dots ── */}
             <div className="relative flex flex-col items-center">
               {/* Top centered label */}
-              <p className="text-[14px] sm:text-[15px] text-[#111827] font-normal tracking-tight text-center mb-5 sm:mb-6 select-none">
+              <p className="text-[14px] sm:text-[15px] text-[#000066] font-bold tracking-tight text-center mb-5 sm:mb-6 select-none uppercase">
                 Programmes
               </p>
 
               <div className="relative flex items-center">
                 {/* Central Portrait Card */}
-                <div className="relative aspect-[3.2/4] w-[310px] sm:w-[360px] md:w-[390px] lg:w-[420px] rounded-[20px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.10)] bg-[#121417]">
+                <div className="relative aspect-[3.2/4] w-[310px] sm:w-[360px] md:w-[390px] lg:w-[420px] rounded-[20px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,102,0.12)] bg-[#121417]">
                   {frontiers.map((item, i) => (
                     <StackImage
                       key={item.id}
@@ -446,8 +446,8 @@ export function Programmes() {
                         key={item.id}
                         onClick={() => goTo(i)}
                         className={`cursor-pointer transition-all duration-300 rounded-full ${isActive
-                          ? "w-1 h-5 bg-[#111827]"
-                          : "w-1 h-1 bg-[#D1D5DB] hover:bg-[#9CA3AF]"
+                          ? "w-1.5 h-6 bg-[#FFCC00] shadow-sm"
+                          : "w-1.5 h-1.5 bg-[#D1D5DB] hover:bg-[#000066]"
                           }`}
                       />
                     );

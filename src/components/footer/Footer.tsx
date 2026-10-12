@@ -47,7 +47,7 @@ export function Footer() {
     <footer className="relative w-full overflow-hidden px-4 sm:px-6 lg:px-8 pb-6 sm:pb-8 pt-2 sm:pt-4 bg-[#F1F3F6]">
       {/* Outer Card Container */}
       <div className="relative z-10 w-full max-w-7xl mx-auto rounded-[24px] sm:rounded-[32px] lg:rounded-[36px] overflow-hidden border border-white/60 shadow-[0_16px_48px_rgba(15,23,42,0.07)] bg-[#ECEFF2]">
-        
+
         {/* Background Mountainous Scenery Image */}
         <div className="absolute inset-0 z-0 pointer-events-none select-none">
           <Image
@@ -94,10 +94,10 @@ export function Footer() {
 
         {/* ── Content Area ── */}
         <div className="relative z-10 pt-8 sm:pt-10 lg:pt-12 px-6 sm:px-10 lg:px-12 pb-0">
-          
+
           {/* Top Row: Brand column on left + 3 Link columns on right */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-            
+
             {/* Left Column: Brand, Headline, Paragraph, Button, Copyright */}
             <div className="lg:col-span-5 flex flex-col justify-between">
               <div>
@@ -105,7 +105,7 @@ export function Footer() {
                 <Link href="/" className="inline-flex items-center gap-2.5 select-none group">
                   <div className="relative flex h-8 w-8 items-center justify-center shrink-0">
                     <Image
-                      src="/logo-transparent1.png"
+                      src="/logo-transparent.png"
                       alt="Smart Angelos Foundation Logo"
                       width={36}
                       height={36}
@@ -116,7 +116,7 @@ export function Footer() {
                     style={{
                       fontFamily: "var(--font-sans), 'Plus Jakarta Sans', Inter, sans-serif",
                     }}
-                    className="text-[16px] font-bold text-[#0D1117] tracking-tight"
+                    className="text-[16px] font-bold text-[#000066] tracking-tight"
                   >
                     Smart Angelos
                   </span>
@@ -127,7 +127,7 @@ export function Footer() {
                   style={{
                     fontFamily: "var(--font-sans), 'Plus Jakarta Sans', Inter, sans-serif",
                   }}
-                  className="mt-3 text-[19px] sm:text-[21px] font-bold text-[#0D1117] leading-snug tracking-[-0.015em] max-w-sm"
+                  className="mt-3 text-[19px] sm:text-[21px] font-bold text-[#000066] leading-snug tracking-[-0.015em] max-w-sm"
                 >
                   The non-profit home for public infrastructure.
                 </h3>
@@ -142,14 +142,14 @@ export function Footer() {
                   A non-profit foundation, maintained by its community. We hold shared infrastructure in trust, fund builders through grants, and govern by open, elected membership.
                 </p>
 
-                {/* Black Pill Button */}
+                {/* Blue & Gold Pill Button */}
                 <div className="mt-4">
                   <Link
                     href="/whitepaper"
-                    className="inline-flex items-center gap-2 h-[36px] px-4 rounded-full bg-[#0D1117] hover:bg-black text-white text-[12.5px] font-medium shadow-xs transition-all duration-200 active:scale-[0.98]"
+                    className="inline-flex items-center gap-2 h-[36px] px-4 rounded-full bg-[#000066] hover:bg-[#00004d] text-[#FFCC00] text-[12.5px] font-semibold shadow-xs transition-all duration-200 active:scale-[0.98]"
                   >
                     <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                      <path d="M4 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V6.414A2 2 0 0 0 13.414 5L11 2.586A2 2 0 0 0 9.586 2H4zm5 1.5V6a1 1 0 0 0 1 1h2.5L9 3.5zM4 3h4v4a2 2 0 0 0 2 2h4v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/>
+                      <path d="M4 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V6.414A2 2 0 0 0 13.414 5L11 2.586A2 2 0 0 0 9.586 2H4zm5 1.5V6a1 1 0 0 0 1 1h2.5L9 3.5zM4 3h4v4a2 2 0 0 0 2 2h4v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" />
                     </svg>
                     <span>Read Whitepaper</span>
                   </Link>
@@ -175,7 +175,7 @@ export function Footer() {
                     style={{
                       fontFamily: "var(--font-sans), 'Plus Jakarta Sans', Inter, sans-serif",
                     }}
-                    className="font-bold text-[14px] text-[#0D1117] mb-2.5 sm:mb-3 tracking-tight select-none"
+                    className="font-bold text-[14px] text-[#000066] mb-2.5 sm:mb-3 tracking-tight select-none"
                   >
                     {col.title}
                   </p>
@@ -187,7 +187,7 @@ export function Footer() {
                             href={link.href}
                             target={link.external ? "_blank" : undefined}
                             rel={link.external ? "noreferrer" : undefined}
-                            className="text-[13px] sm:text-[13.5px] text-[#4A5361] hover:text-[#0D1117] transition-colors duration-150 leading-[1.65] font-normal inline-block"
+                            className="text-[13px] sm:text-[13.5px] text-[#4A5361] hover:text-[#000066] transition-colors duration-150 leading-[1.65] font-medium inline-block"
                           >
                             {link.text}
                           </Link>

@@ -3,19 +3,19 @@
 
 :root {
   --background: #E9ECF0;
-  --foreground: #121417;
+  --foreground: #000066;
 
-  --color-gold: #B88728;
-  --color-gold-bright: #F5BA13;
-  --color-gold-light: #FEF3C7;
-  --color-ink: #121417;
+  --color-gold: #FFCC00;
+  --color-gold-bright: #FFCC00;
+  --color-gold-light: #FFFBEB;
+  --color-ink: #000066;
   --color-card-bg: #FAFBFD;
   --color-muted: #595E6B;
 
   --brand-white: #ffffff;
-  --brand-yellow: #F5BA13;
-  --brand-yellow-light: #FDE68A;
-  --brand-blue: #1E3A8A;
+  --brand-yellow: #FFCC00;
+  --brand-yellow-light: #FFF4B8;
+  --brand-blue: #000066;
 }
 
 @theme inline {
@@ -50,8 +50,10 @@ h1 {
   box-sizing: border-box;
 }
 
-html {
-  zoom: 1.1;
+@media (min-width: 1024px) {
+  html {
+    zoom: 1.1;
+  }
 }
 
 html,
@@ -59,12 +61,19 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
+  max-width: 100vw;
   min-height: 100%;
+  overflow-x: clip;
   scroll-behavior: smooth;
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+img,
+video {
+  max-width: 100%;
 }
 
 button,
@@ -73,8 +82,8 @@ a {
 }
 
 ::selection {
-  background: rgba(245, 186, 19, 0.3);
-  color: #121417;
+  background: rgba(255, 204, 0, 0.35);
+  color: #000066;
 }
 
 /* Blueprint Architecture Grid pattern */
@@ -151,9 +160,9 @@ a {
   left: 0px;
   width: 100%;
   height: 2px;
-  background: linear-gradient(to left, rgba(245, 186, 19, 0), #F5BA13);
+  background: linear-gradient(to left, rgba(255, 204, 0, 0), #FFCC00);
   animation: 2s animateTop linear infinite;
-  filter: drop-shadow(0 0 3px #F5BA13);
+  filter: drop-shadow(0 0 3px #FFCC00);
 }
 
 @keyframes animateTop {
@@ -171,9 +180,9 @@ a {
   right: 0px;
   height: 100%;
   width: 2px;
-  background: linear-gradient(to top, rgba(245, 186, 19, 0), #F5BA13);
+  background: linear-gradient(to top, rgba(255, 204, 0, 0), #FFCC00);
   animation: 2s animateRight linear -1s infinite;
-  filter: drop-shadow(0 0 3px #F5BA13);
+  filter: drop-shadow(0 0 3px #FFCC00);
 }
 
 @keyframes animateRight {
@@ -191,9 +200,9 @@ a {
   left: 0px;
   width: 100%;
   height: 2px;
-  background: linear-gradient(to right, rgba(245, 186, 19, 0), #F5BA13);
+  background: linear-gradient(to right, rgba(255, 204, 0, 0), #FFCC00);
   animation: 2s animateBottom linear infinite;
-  filter: drop-shadow(0 0 3px #F5BA13);
+  filter: drop-shadow(0 0 3px #FFCC00);
 }
 
 @keyframes animateBottom {
@@ -211,9 +220,9 @@ a {
   left: 0px;
   height: 100%;
   width: 2px;
-  background: linear-gradient(to bottom, rgba(245, 186, 19, 0), #F5BA13);
+  background: linear-gradient(to bottom, rgba(255, 204, 0, 0), #FFCC00);
   animation: 2s animateLeft linear -1s infinite;
-  filter: drop-shadow(0 0 3px #F5BA13);
+  filter: drop-shadow(0 0 3px #FFCC00);
 }
 
 @keyframes animateLeft {
@@ -231,8 +240,9 @@ a {
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  background-color: rgba(255, 255, 255, 0.75);
-  color: #0D1117;
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #000066;
+  border-color: #000066;
   text-decoration: none;
   transition: color 0.4s ease, border-color 0.4s ease, box-shadow 0.3s ease;
 }
@@ -244,7 +254,7 @@ a {
   left: 50%;
   width: 140%;
   height: 0%;
-  background-color: #0D1117;
+  background-color: #000066;
   transform: translate(-50%, -50%) rotate(45deg);
   transform-origin: 50% 50%;
   z-index: 0;
@@ -256,7 +266,7 @@ a {
 }
 
 .btn-hover-diagonal:hover {
-  color: #ffffff;
-  border-color: #0D1117;
-  box-shadow: 0 4px 14px rgba(13, 17, 23, 0.18);
+  color: #FFCC00;
+  border-color: #000066;
+  box-shadow: 0 4px 14px rgba(0, 0, 102, 0.25);
 }

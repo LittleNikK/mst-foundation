@@ -58,10 +58,10 @@ const institutionalFacts = [
     value: "2026",
     placeholder: "[TBD]",
     detail: "Established alongside the decentralized genesis of the network",
-    accent: "#B88728",
-    badgeBg: "#FEF9EE",
-    badgeBorder: "#FDE68A",
-    badgeText: "#9A6B1A",
+    accent: "#FFCC00",
+    badgeBg: "#FFFDEB",
+    badgeBorder: "#FFCC00",
+    badgeText: "#000066",
   },
 ];
 
@@ -149,13 +149,13 @@ export default function AboutPage() {
           >
             <Link
               href="/"
-              className="inline-flex items-center gap-1.5 hover:text-[#0D1117] transition-colors"
+              className="inline-flex items-center gap-1.5 hover:text-[#000066] transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Home</span>
             </Link>
             <span className="text-slate-400">/</span>
-            <span className="text-[#0D1117] font-semibold">About</span>
+            <span className="text-[#000066] font-semibold">About</span>
           </motion.div>
 
           {/* ── Hero Island Header Card ── */}
@@ -163,7 +163,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-            className="relative rounded-[28px] sm:rounded-[36px] lg:rounded-[40px] border border-white/60 bg-white/45 backdrop-blur-2xl p-7 sm:p-10 lg:p-14 shadow-[0_16px_40px_rgba(15,23,42,0.07),inset_0_1px_0_rgba(255,255,255,0.9)] overflow-hidden mb-10 sm:mb-14"
+            className="relative rounded-[24px] sm:rounded-[36px] lg:rounded-[40px] border border-white/60 bg-white/45 backdrop-blur-2xl p-5 xs:p-6 sm:p-10 lg:p-14 shadow-[0_16px_40px_rgba(15,23,42,0.07),inset_0_1px_0_rgba(255,255,255,0.9)] overflow-hidden mb-8 sm:mb-14"
           >
             {/* Soft Ambient Radial Accents */}
             <div
@@ -181,7 +181,7 @@ export default function AboutPage() {
               {/* Bold Editorial Headline in Jost */}
               <h1
                 style={{ fontFamily: "var(--font-jost), 'Jost', sans-serif" }}
-                className="text-3xl sm:text-5xl lg:text-[56px] xl:text-[62px] font-bold text-[#0D1117] tracking-tight leading-[1.08] mb-5 sm:mb-6"
+                className="text-2xl xs:text-3xl sm:text-5xl lg:text-[56px] xl:text-[62px] font-bold text-[#000066] tracking-tight leading-[1.08] mb-4 sm:mb-6"
               >
                 Independent by design
               </h1>
@@ -199,7 +199,7 @@ export default function AboutPage() {
               {/* Mandate Summary */}
               <p
                 style={{ fontFamily: "var(--font-sans), 'Plus Jakarta Sans', sans-serif" }}
-                className="text-[14px] sm:text-[15px] lg:text-[15.5px] leading-[1.7] text-[#4F5969] font-normal max-w-3xl border-l-2 border-[#B88728]/60 pl-4 sm:pl-5"
+                className="text-[14px] sm:text-[15px] lg:text-[15.5px] leading-[1.7] text-[#4F5969] font-normal max-w-3xl border-l-2 border-[#FFCC00]/80 pl-4 sm:pl-5"
               >
                 Our mandate is narrow and public: fund public-good work across the
                 MST ecosystem, support a healthy and distributed validator set,
@@ -213,7 +213,7 @@ export default function AboutPage() {
           <section className="mb-12 sm:mb-16">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8 gap-3">
               <div>
-                <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-semibold text-[#9E7D3B] select-none font-[var(--font-outfit)] mb-1.5">
+                <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-bold text-[#000066] select-none font-[var(--font-outfit)] mb-1.5">
                   Institutional Profile
                 </p>
                 <h2
@@ -221,7 +221,7 @@ export default function AboutPage() {
                     fontFamily:
                       "var(--font-playfair), 'Playfair Display', Georgia, serif",
                   }}
-                  className="text-2xl sm:text-3xl lg:text-[34px] font-normal text-[#0D1117] tracking-[-0.015em]"
+                  className="text-2xl sm:text-3xl lg:text-[34px] font-normal text-[#000066] tracking-[-0.015em]"
                 >
                   At a Glance
                 </h2>
@@ -305,9 +305,9 @@ export default function AboutPage() {
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="rounded-[18px] border border-amber-300/60 bg-amber-50/70 p-4 sm:p-5 flex items-start gap-3.5 shadow-xs"
             >
-              <Info className="w-5 h-5 text-[#B88728] shrink-0 mt-0.5" />
+              <Info className="w-5 h-5 text-[#FFCC00] shrink-0 mt-0.5" />
               <div>
-                <p className="text-[12px] font-bold uppercase tracking-wider text-[#8E6317] font-[var(--font-outfit)] mb-0.5">
+                <p className="text-[12px] font-bold uppercase tracking-wider text-[#000066] font-[var(--font-outfit)] mb-0.5">
                   Transparency Notice
                 </p>
                 <p className="text-[13px] sm:text-[13.5px] leading-[1.65] text-[#5A4112] font-normal">
@@ -325,7 +325,7 @@ export default function AboutPage() {
           <section className="mb-12 sm:mb-16">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start mb-8 sm:mb-10">
               <div className="lg:col-span-7">
-                <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-semibold text-[#9E7D3B] select-none font-[var(--font-outfit)] mb-2">
+                <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-bold text-[#000066] select-none font-[var(--font-outfit)] mb-2">
                   Guiding Principles
                 </p>
                 <h2
@@ -333,7 +333,7 @@ export default function AboutPage() {
                     fontFamily:
                       "var(--font-playfair), 'Playfair Display', Georgia, serif",
                   }}
-                  className="text-2xl sm:text-3xl lg:text-[38px] font-normal text-[#0D1117] tracking-[-0.015em] leading-[1.15]"
+                  className="text-2xl sm:text-3xl lg:text-[38px] font-normal text-[#000066] tracking-[-0.015em] leading-[1.15]"
                 >
                   Mission &amp; Philosophy
                 </h2>
@@ -389,7 +389,7 @@ export default function AboutPage() {
                           style={{
                             fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
                           }}
-                          className="text-xl sm:text-[21px] font-bold text-[#0D1117] leading-[1.25] tracking-tight mb-3 group-hover:text-[#090D14]"
+                          className="text-xl sm:text-[21px] font-bold text-[#000066] leading-[1.25] tracking-tight mb-3 group-hover:text-[#00004d]"
                         >
                           {pillar.title}
                         </h3>
@@ -405,8 +405,8 @@ export default function AboutPage() {
                         </p>
                       </div>
 
-                      <div className="pt-5 mt-5 border-t border-slate-100 flex items-center gap-1.5 text-[12.5px] font-semibold text-[#8E6317] select-none">
-                        <CheckCircle2 className="w-4 h-4 text-[#B88728]" />
+                      <div className="pt-5 mt-5 border-t border-slate-100 flex items-center gap-1.5 text-[12.5px] font-semibold text-[#000066] select-none">
+                        <CheckCircle2 className="w-4 h-4 text-[#FFCC00]" />
                         <span>Core constitutional tenet</span>
                       </div>
                     </div>
@@ -420,7 +420,7 @@ export default function AboutPage() {
           <section className="mb-14 sm:mb-20">
             <div className="rounded-[28px] sm:rounded-[36px] bg-white border border-slate-200/90 p-7 sm:p-10 lg:p-12 shadow-[0_16px_40px_rgba(15,23,42,0.06)]">
               <div className="max-w-2xl mb-8 sm:mb-10">
-                <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-semibold text-[#9E7D3B] select-none font-[var(--font-outfit)] mb-2">
+                <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-bold text-[#000066] select-none font-[var(--font-outfit)] mb-2">
                   Scope of Authority
                 </p>
                 <h2
@@ -428,7 +428,7 @@ export default function AboutPage() {
                     fontFamily:
                       "var(--font-playfair), 'Playfair Display', Georgia, serif",
                   }}
-                  className="text-2xl sm:text-3xl lg:text-[34px] font-normal text-[#0D1117] tracking-[-0.015em] mb-3"
+                  className="text-2xl sm:text-3xl lg:text-[34px] font-normal text-[#000066] tracking-[-0.015em] mb-3"
                 >
                   Our Narrow &amp; Public Mandate
                 </h2>
@@ -466,14 +466,14 @@ export default function AboutPage() {
           </section>
 
           {/* ── Bottom Call-to-Action Island ── */}
-          <section className="relative rounded-[24px] sm:rounded-[32px] overflow-hidden bg-[#0D1117] text-white p-8 sm:p-12 lg:p-14 shadow-xl">
+          <section className="relative rounded-[24px] sm:rounded-[32px] overflow-hidden bg-[#000066] text-white p-8 sm:p-12 lg:p-14 shadow-xl">
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -right-20 -top-20 w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle_at_center,rgba(245,186,19,0.22)_0%,transparent_70%)] blur-2xl select-none"
+              className="pointer-events-none absolute -right-20 -top-20 w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle_at_center,rgba(255,204,0,0.22)_0%,transparent_70%)] blur-2xl select-none"
             />
 
             <div className="relative z-10 max-w-3xl">
-              <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.24em] font-semibold text-[#F5BA13] select-none font-[var(--font-outfit)] mb-3">
+              <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.24em] font-bold text-[#FFCC00] select-none font-[var(--font-outfit)] mb-3">
                 Open Governance
               </p>
               <h2
@@ -482,7 +482,7 @@ export default function AboutPage() {
               >
                 Hold the Foundation accountable to its mandate.
               </h2>
-              <p className="text-[14.5px] sm:text-[15.5px] leading-relaxed text-slate-300 mb-8 max-w-2xl font-normal">
+              <p className="text-[14.5px] sm:text-[15.5px] leading-relaxed text-slate-200 mb-8 max-w-2xl font-normal">
                 Join our free community membership, review the unredacted treasury
                 filings, and vote in the annual council elections.
               </p>
@@ -490,7 +490,7 @@ export default function AboutPage() {
               <div className="flex flex-wrap items-center gap-3.5 sm:gap-4">
                 <Link
                   href="/#talk-to-us"
-                  className="inline-flex items-center justify-center gap-2 h-[42px] sm:h-[44px] px-6 rounded-[7px] bg-[#F5BA13] hover:bg-[#E5AC0B] text-[#121417] font-semibold text-[13.5px] sm:text-[14px] tracking-normal transition-all duration-200 active:scale-[0.98] shadow-sm cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 h-[42px] sm:h-[44px] px-6 rounded-[7px] bg-[#FFCC00] hover:bg-[#E6B800] text-[#000066] font-bold text-[13.5px] sm:text-[14px] tracking-normal transition-all duration-200 active:scale-[0.98] shadow-sm cursor-pointer"
                 >
                   <span>Become a Member</span>
                   <ChevronRight className="w-4 h-4" />

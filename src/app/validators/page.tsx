@@ -49,10 +49,10 @@ const healthMetrics = [
     value: "Max 4.2%",
     status: "Per Operator Cap",
     detail: "Anti-monopoly delegation ceiling enforced by Foundation bylaws",
-    accent: "#B88728",
-    badgeBg: "#FEF9EE",
-    badgeBorder: "#FDE68A",
-    badgeText: "#9A6B1A",
+    accent: "#FFCC00",
+    badgeBg: "#FFFDEB",
+    badgeBorder: "#FFCC00",
+    badgeText: "#000066",
   },
   {
     label: "Nakamoto Coefficient",
@@ -133,13 +133,13 @@ export default function ValidatorsPage() {
           >
             <Link
               href="/"
-              className="inline-flex items-center gap-1.5 hover:text-[#0D1117] transition-colors"
+              className="inline-flex items-center gap-1.5 hover:text-[#000066] transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Home</span>
             </Link>
             <span className="text-slate-400">/</span>
-            <span className="text-[#0D1117] font-semibold">Validators</span>
+            <span className="text-[#000066] font-semibold">Validators</span>
           </motion.div>
 
           {/* ── Hero Island Header Card ── */}
@@ -147,7 +147,7 @@ export default function ValidatorsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-            className="relative rounded-[28px] sm:rounded-[36px] lg:rounded-[40px] border border-white/60 bg-white/45 backdrop-blur-2xl p-7 sm:p-10 lg:p-14 shadow-[0_16px_40px_rgba(15,23,42,0.07),inset_0_1px_0_rgba(255,255,255,0.9)] overflow-hidden mb-10 sm:mb-12"
+            className="relative rounded-[24px] sm:rounded-[36px] lg:rounded-[40px] border border-white/60 bg-white/45 backdrop-blur-2xl p-5 xs:p-6 sm:p-10 lg:p-14 shadow-[0_16px_40px_rgba(15,23,42,0.07),inset_0_1px_0_rgba(255,255,255,0.9)] overflow-hidden mb-8 sm:mb-12"
           >
             {/* Ambient Radial Background Glows */}
             <div
@@ -163,7 +163,7 @@ export default function ValidatorsPage() {
               {/* Bold Editorial Headline in Jost */}
               <h1
                 style={{ fontFamily: "var(--font-jost), 'Jost', sans-serif" }}
-                className="text-3xl sm:text-5xl lg:text-[54px] xl:text-[60px] font-bold text-[#0D1117] tracking-tight leading-[1.08] mb-5 sm:mb-6"
+                className="text-2xl xs:text-3xl sm:text-5xl lg:text-[54px] xl:text-[60px] font-bold text-[#000066] tracking-tight leading-[1.08] mb-4 sm:mb-6"
               >
                 Securing the network, together
               </h1>
@@ -207,7 +207,7 @@ export default function ValidatorsPage() {
           <section className="mb-14 sm:mb-20">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8 gap-3">
               <div>
-                <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-semibold text-[#9E7D3B] select-none font-[var(--font-outfit)] mb-1.5">
+                <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-bold text-[#000066] select-none font-[var(--font-outfit)] mb-1.5">
                   Consensus Telemetry
                 </p>
                 <h2
@@ -215,7 +215,7 @@ export default function ValidatorsPage() {
                     fontFamily:
                       "var(--font-playfair), 'Playfair Display', Georgia, serif",
                   }}
-                  className="text-2xl sm:text-3xl lg:text-[34px] font-normal text-[#0D1117] tracking-[-0.015em]"
+                  className="text-2xl sm:text-3xl lg:text-[34px] font-normal text-[#000066] tracking-[-0.015em]"
                 >
                   Network Health Dashboard
                 </h2>
@@ -266,7 +266,7 @@ export default function ValidatorsPage() {
 
                     <p
                       style={{ fontFamily: "var(--font-jost), 'Jost', sans-serif" }}
-                      className="text-2xl sm:text-[28px] font-bold text-[#0D1117] tracking-tight mb-2"
+                      className="text-2xl sm:text-[28px] font-bold text-[#000066] tracking-tight mb-2"
                     >
                       {metric.value}
                     </p>
@@ -284,7 +284,7 @@ export default function ValidatorsPage() {
           <section className="mb-14 sm:mb-20">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start mb-8 sm:mb-10">
               <div className="lg:col-span-7">
-                <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-semibold text-[#9E7D3B] select-none font-[var(--font-outfit)] mb-2">
+                <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-bold text-[#000066] select-none font-[var(--font-outfit)] mb-2">
                   Selection Framework
                 </p>
                 <h2
@@ -292,7 +292,7 @@ export default function ValidatorsPage() {
                     fontFamily:
                       "var(--font-playfair), 'Playfair Display', Georgia, serif",
                   }}
-                  className="text-2xl sm:text-3xl lg:text-[36px] font-normal text-[#0D1117] tracking-[-0.015em] leading-[1.18]"
+                  className="text-2xl sm:text-3xl lg:text-[36px] font-normal text-[#000066] tracking-[-0.015em] leading-[1.18]"
                 >
                   Delegation Criteria
                 </h2>
@@ -468,14 +468,14 @@ export default function ValidatorsPage() {
           </section>
 
           {/* ── Call to Action Island ── */}
-          <section id="cta" className="relative rounded-[24px] sm:rounded-[32px] overflow-hidden bg-[#0D1117] text-white p-8 sm:p-12 lg:p-14 shadow-xl">
+          <section id="cta" className="relative rounded-[24px] sm:rounded-[32px] overflow-hidden bg-[#000066] text-white p-8 sm:p-12 lg:p-14 shadow-xl">
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -right-20 -top-20 w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle_at_center,rgba(245,186,19,0.22)_0%,transparent_70%)] blur-2xl select-none"
+              className="pointer-events-none absolute -right-20 -top-20 w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle_at_center,rgba(255,204,0,0.22)_0%,transparent_70%)] blur-2xl select-none"
             />
 
             <div className="relative z-10 max-w-3xl">
-              <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.24em] font-semibold text-[#F5BA13] select-none font-[var(--font-outfit)] mb-3">
+              <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.24em] font-bold text-[#FFCC00] select-none font-[var(--font-outfit)] mb-3">
                 Operator Intake
               </p>
               <h2
@@ -484,7 +484,7 @@ export default function ValidatorsPage() {
               >
                 Ready to secure the ecosystem?
               </h2>
-              <p className="text-[14.5px] sm:text-[15.5px] leading-relaxed text-slate-300 mb-8 max-w-2xl font-normal">
+              <p className="text-[14.5px] sm:text-[15.5px] leading-relaxed text-slate-200 mb-8 max-w-2xl font-normal">
                 Review our minimum hardware and security requirements, connect with
                 fellow node operators, and register your intent for upcoming Foundation
                 delegation cohorts.
@@ -493,7 +493,7 @@ export default function ValidatorsPage() {
               <div className="flex flex-wrap items-center gap-3.5 sm:gap-4">
                 <Link
                   href="/#talk-to-us"
-                  className="inline-flex items-center justify-center gap-2 h-[42px] sm:h-[44px] px-6 rounded-[7px] bg-[#F5BA13] hover:bg-[#E5AC0B] text-[#121417] font-semibold text-[13.5px] sm:text-[14px] tracking-normal transition-all duration-200 active:scale-[0.98] shadow-sm cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 h-[42px] sm:h-[44px] px-6 rounded-[7px] bg-[#FFCC00] hover:bg-[#E6B800] text-[#000066] font-bold text-[13.5px] sm:text-[14px] tracking-normal transition-all duration-200 active:scale-[0.98] shadow-sm cursor-pointer"
                 >
                   <span>Apply for Delegation</span>
                   <ArrowRight className="w-4 h-4" />

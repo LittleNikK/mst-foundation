@@ -71,11 +71,11 @@ const grantCategories = [
     description:
       "Applied and academic work on consensus, cryptography, governance, and decentralization for the MST ecosystem.",
     icon: BookOpen,
-    accent: "#B88728",
-    badgeBg: "#FEF9EE",
-    badgeBorder: "#FDE68A",
-    badgeText: "#9A6B1A",
-    glowColor: "rgba(184, 135, 40, 0.08)",
+    accent: "#FFCC00",
+    badgeBg: "#FFFDEB",
+    badgeBorder: "#FFCC00",
+    badgeText: "#000066",
+    glowColor: "rgba(255, 204, 0, 0.12)",
   },
   {
     number: "05",
@@ -182,13 +182,13 @@ export default function GrantsPage() {
           >
             <Link
               href="/"
-              className="inline-flex items-center gap-1.5 hover:text-[#0D1117] transition-colors"
+              className="inline-flex items-center gap-1.5 hover:text-[#000066] transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Home</span>
             </Link>
             <span className="text-slate-400">/</span>
-            <span className="text-[#0D1117] font-semibold">Funding &amp; Grants</span>
+            <span className="text-[#000066] font-semibold">Funding &amp; Grants</span>
           </motion.div>
 
           {/* ── Hero Island Header Card ── */}
@@ -212,7 +212,7 @@ export default function GrantsPage() {
               {/* Bold Editorial Headline in Jost */}
               <h1
                 style={{ fontFamily: "var(--font-jost), 'Jost', sans-serif" }}
-                className="text-3xl sm:text-5xl lg:text-[54px] xl:text-[60px] font-bold text-[#0D1117] tracking-tight leading-[1.08] mb-5 sm:mb-6"
+                className="text-3xl sm:text-5xl lg:text-[54px] xl:text-[60px] font-bold text-[#000066] tracking-tight leading-[1.08] mb-5 sm:mb-6"
               >
                 Funding the builders of MST
               </h1>
@@ -227,7 +227,7 @@ export default function GrantsPage() {
               </p>
 
               {/* Scope Boundary Callout */}
-              <p className="text-[13.5px] sm:text-[14px] leading-[1.6] text-[#64748B] font-medium border-l-2 border-[#B88728]/60 pl-4 max-w-2xl">
+              <p className="text-[13.5px] sm:text-[14px] leading-[1.6] text-[#64748B] font-medium border-l-2 border-[#FFCC00]/80 pl-4 max-w-2xl">
                 We do not fund speculative projects, token launches, or marketing campaigns.
               </p>
             </div>
@@ -237,7 +237,7 @@ export default function GrantsPage() {
           <section className="mb-14 sm:mb-20">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8 gap-3">
               <div>
-                <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-semibold text-[#9E7D3B] select-none font-[var(--font-outfit)] mb-1.5">
+                <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-bold text-[#000066] select-none font-[var(--font-outfit)] mb-1.5">
                   Confirmed Tracks
                 </p>
                 <h2
@@ -245,7 +245,7 @@ export default function GrantsPage() {
                     fontFamily:
                       "var(--font-playfair), 'Playfair Display', Georgia, serif",
                   }}
-                  className="text-2xl sm:text-3xl lg:text-[34px] font-normal text-[#0D1117] tracking-[-0.015em]"
+                  className="text-2xl sm:text-3xl lg:text-[34px] font-normal text-[#000066] tracking-[-0.015em]"
                 >
                   Grant Categories
                 </h2>
@@ -510,15 +510,15 @@ export default function GrantsPage() {
           {/* ── Apply CTA Banner ── */}
           <section
             id="apply"
-            className="relative rounded-[24px] sm:rounded-[32px] overflow-hidden bg-[#0D1117] text-white p-8 sm:p-12 lg:p-14 shadow-xl scroll-mt-28"
+            className="relative rounded-[24px] sm:rounded-[32px] overflow-hidden bg-[#000066] text-white p-8 sm:p-12 lg:p-14 shadow-xl scroll-mt-28"
           >
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -right-20 -top-20 w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle_at_center,rgba(245,186,19,0.22)_0%,transparent_70%)] blur-2xl select-none"
+              className="pointer-events-none absolute -right-20 -top-20 w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle_at_center,rgba(255,204,0,0.22)_0%,transparent_70%)] blur-2xl select-none"
             />
 
             <div className="relative z-10 max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[#F5BA13] text-[11px] font-semibold uppercase tracking-wider mb-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[#FFCC00] text-[11px] font-bold uppercase tracking-wider mb-4">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Round 01 Intake</span>
               </div>
@@ -530,7 +530,7 @@ export default function GrantsPage() {
                 Ready to apply?
               </h2>
 
-              <p className="text-[15px] sm:text-[17px] leading-relaxed text-slate-300 mb-8 max-w-2xl font-normal">
+              <p className="text-[15px] sm:text-[17px] leading-relaxed text-slate-200 mb-8 max-w-2xl font-normal">
                 Every grant we award is disclosed publicly — amount, recipient, and purpose.
                 If you are building protocol infrastructure, tooling, or research for MST,
                 we want to review your proposal.
@@ -539,7 +539,7 @@ export default function GrantsPage() {
               <div className="flex flex-wrap items-center gap-3.5 sm:gap-4">
                 <Link
                   href="/#talk-to-us"
-                  className="inline-flex items-center justify-center gap-2 h-[44px] sm:h-[46px] px-7 rounded-[7px] bg-[#F5BA13] hover:bg-[#E5AC0B] text-[#121417] font-semibold text-[14px] tracking-normal transition-all duration-200 active:scale-[0.98] shadow-sm cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 h-[44px] sm:h-[46px] px-7 rounded-[7px] bg-[#FFCC00] hover:bg-[#E6B800] text-[#000066] font-bold text-[14px] tracking-normal transition-all duration-200 active:scale-[0.98] shadow-sm cursor-pointer"
                 >
                   <span>Submit Grant Proposal</span>
                   <ArrowRight className="w-4 h-4" />

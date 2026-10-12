@@ -45,7 +45,7 @@ export function ScrollToTop() {
           transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
           aria-label="Scroll to top"
           title="Scroll to top"
-          className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 flex items-center justify-center w-12 h-12 sm:w-[50px] sm:h-[50px] rounded-full bg-[#F5BA13] hover:bg-[#FACC15] text-[#121417] shadow-[0_8px_24px_rgba(0,0,0,0.18),0_2px_8px_rgba(245,186,19,0.35)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.22),0_4px_14px_rgba(245,186,19,0.50)] transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F5BA13] focus-visible:ring-offset-2"
+          className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-50 flex items-center justify-center w-11 h-11 sm:w-[50px] sm:h-[50px] rounded-full bg-[#FFCC00] hover:bg-[#E6B800] text-[#000066] shadow-[0_8px_24px_rgba(0,0,102,0.22),0_2px_8px_rgba(255,204,0,0.45)] hover:shadow-[0_12px_28px_rgba(0,0,102,0.30),0_4px_14px_rgba(255,204,0,0.60)] transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFCC00] focus-visible:ring-offset-2"
         >
           <svg
             className="w-5 h-5 sm:w-6 sm:h-6"

@@ -74,7 +74,7 @@ export function EcosystemOrgs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-semibold text-[#9E7D3B] select-none mb-3 font-[var(--font-outfit)]"
+              className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-bold text-[#000066] select-none mb-3 font-[var(--font-outfit)]"
             >
               THE ECOSYSTEM
             </motion.p>
@@ -87,7 +87,7 @@ export function EcosystemOrgs() {
                 fontFamily:
                   "var(--font-playfair), 'Playfair Display', Georgia, serif",
               }}
-              className="text-3xl sm:text-4xl md:text-[40px] lg:text-[44px] xl:text-[48px] font-normal leading-[1.12] tracking-[-0.015em] text-[#0D1117]"
+              className="text-3xl sm:text-4xl md:text-[40px] lg:text-[44px] xl:text-[48px] font-normal leading-[1.12] tracking-[-0.015em] text-[#000066]"
             >
               One non-profit parent,
               <br />
@@ -276,7 +276,7 @@ export function EcosystemOrgs() {
                 independently reviewed. The dashes are placeholders until the
                 first reporting year closes.
               </p>
-              <div className="grid grid-cols-4 gap-4 pt-5 border-t border-black/[0.06] font-[var(--font-outfit)]">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-4 pt-5 border-t border-black/[0.06] font-[var(--font-outfit)]">
                 {stats.map((s) => (
                   <div key={s.label}>
                     <p
@@ -285,7 +285,7 @@ export function EcosystemOrgs() {
                     >
                       {s.value}
                     </p>
-                    <p className="mt-0.5 text-[10.5px] sm:text-[11.5px] text-[#6B7382] font-normal leading-tight">
+                    <p className="mt-0.5 text-[11px] sm:text-[11.5px] text-[#6B7382] font-normal leading-tight">
                       {s.label}
                     </p>
                   </div>
@@ -308,7 +308,7 @@ export function EcosystemOrgs() {
             >
               <p
                 style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}
-                className="text-[16px] sm:text-[17.5px] font-medium text-[#0D1117] leading-snug"
+                className="text-[16px] sm:text-[17.5px] font-medium text-[#000066] leading-snug"
               >
                 Want the detail before the report
                 <br className="hidden sm:inline" />
@@ -317,7 +317,7 @@ export function EcosystemOrgs() {
 
               <Link
                 href="/secretariat"
-                className="animated-button-gold relative inline-flex items-center justify-center rounded-[6px] border border-[#B88728]/35 bg-white/90 px-5 py-2.5 text-[13px] font-medium text-[#8E6317] shadow-sm overflow-hidden flex-none self-start sm:self-auto font-[var(--font-outfit)]"
+                className="animated-button-gold relative inline-flex items-center justify-center rounded-[6px] border border-[#FFCC00]/50 bg-white/95 px-5 py-2.5 text-[13px] font-semibold text-[#000066] shadow-sm overflow-hidden flex-none self-start sm:self-auto font-[var(--font-outfit)]"
               >
                 <span></span>
                 <span></span>

@@ -48,13 +48,13 @@ const jobs = [
     cta: "Browse programmes",
     href: "/programmes",
     number: "03",
-    cardBg: "linear-gradient(145deg, #1A1200 0%, #261A00 60%, #150E00 100%)",
-    glowColor: "rgba(245, 186, 19, 0.14)",
-    accentColor: "#E5AC30",
-    iconBg: "rgba(245, 186, 19, 0.10)",
-    iconBorder: "rgba(245, 186, 19, 0.22)",
-    borderColor: "rgba(245, 186, 19, 0.12)",
-    numColor: "rgba(245, 186, 19, 0.07)",
+    cardBg: "linear-gradient(145deg, #332B03 0%, #544606 50%, #262002 100%)",
+    glowColor: "rgba(255, 204, 0, 0.28)",
+    accentColor: "#FFCC00",
+    iconBg: "rgba(255, 204, 0, 0.15)",
+    iconBorder: "rgba(255, 204, 0, 0.35)",
+    borderColor: "rgba(255, 204, 0, 0.30)",
+    numColor: "rgba(255, 204, 0, 0.14)",
   },
 ];
 
@@ -86,7 +86,7 @@ export function FoundationJobs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-semibold text-[#9E7D3B] select-none mb-3"
+              className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-bold text-[#000066] select-none mb-3"
             >
               WHAT THE FOUNDATION DOES
             </motion.p>
@@ -100,7 +100,7 @@ export function FoundationJobs() {
                 fontFamily:
                   "var(--font-playfair), 'Playfair Display', Georgia, serif",
               }}
-              className="text-3xl sm:text-4xl lg:text-[42px] xl:text-[46px] font-normal leading-[1.12] tracking-[-0.015em] text-[#0D1117]"
+              className="text-3xl sm:text-4xl lg:text-[42px] xl:text-[46px] font-normal leading-[1.12] tracking-[-0.015em] text-[#000066]"
             >
               Three responsibilities,
               <br />

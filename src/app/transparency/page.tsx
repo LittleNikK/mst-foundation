@@ -53,10 +53,10 @@ const treasuryCards = [
     value: "$0.00",
     status: "Inaugural Round",
     detail: "Total grants and operational disbursements deployed in current fiscal year.",
-    accent: "#B88728",
-    badgeBg: "#FEF9EE",
-    badgeBorder: "#FDE68A",
-    badgeText: "#9A6B1A",
+    accent: "#FFCC00",
+    badgeBg: "#FFFDEB",
+    badgeBorder: "#FFCC00",
+    badgeText: "#000066",
     icon: FileSpreadsheet,
   },
 ];
@@ -80,13 +80,13 @@ export default function TransparencyPage() {
           >
             <Link
               href="/"
-              className="inline-flex items-center gap-1.5 hover:text-[#0D1117] transition-colors"
+              className="inline-flex items-center gap-1.5 hover:text-[#000066] transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Home</span>
             </Link>
             <span className="text-slate-400">/</span>
-            <span className="text-[#0D1117] font-semibold">Transparency</span>
+            <span className="text-[#000066] font-semibold">Transparency</span>
           </motion.div>
 
           {/* ── Hero Island Header Card ── */}
@@ -110,7 +110,7 @@ export default function TransparencyPage() {
               {/* Bold Editorial Headline in Jost */}
               <h1
                 style={{ fontFamily: "var(--font-jost), 'Jost', sans-serif" }}
-                className="text-3xl sm:text-5xl lg:text-[54px] xl:text-[60px] font-bold text-[#0D1117] tracking-tight leading-[1.08] mb-5 sm:mb-6"
+                className="text-3xl sm:text-5xl lg:text-[54px] xl:text-[60px] font-bold text-[#000066] tracking-tight leading-[1.08] mb-5 sm:mb-6"
               >
                 What we fund. What we hold. What we spend.
               </h1>
@@ -151,7 +151,7 @@ export default function TransparencyPage() {
           <section className="mb-14 sm:mb-20">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8 gap-3">
               <div>
-                <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-semibold text-[#9E7D3B] select-none font-[var(--font-outfit)] mb-1.5">
+                <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-bold text-[#000066] select-none font-[var(--font-outfit)] mb-1.5">
                   Balance Sheet Overview
                 </p>
                 <h2
@@ -159,7 +159,7 @@ export default function TransparencyPage() {
                     fontFamily:
                       "var(--font-playfair), 'Playfair Display', Georgia, serif",
                   }}
-                  className="text-2xl sm:text-3xl lg:text-[34px] font-normal text-[#0D1117] tracking-[-0.015em]"
+                  className="text-2xl sm:text-3xl lg:text-[34px] font-normal text-[#000066] tracking-[-0.015em]"
                 >
                   Treasury Holdings
                 </h2>
@@ -221,7 +221,7 @@ export default function TransparencyPage() {
                       </p>
                       <h3
                         style={{ fontFamily: "var(--font-jost), 'Jost', sans-serif" }}
-                        className="text-2xl sm:text-[28px] font-bold text-[#0D1117] tracking-tight mb-2"
+                        className="text-2xl sm:text-[28px] font-bold text-[#000066] tracking-tight mb-2"
                       >
                         {card.value}
                       </h3>
@@ -240,7 +240,7 @@ export default function TransparencyPage() {
           <section className="mb-14 sm:mb-20">
             <div className="rounded-[28px] sm:rounded-[36px] bg-white border border-slate-200/90 p-7 sm:p-10 lg:p-12 shadow-[0_16px_40px_rgba(15,23,42,0.06)]">
               <div className="max-w-2xl mb-8">
-                <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-semibold text-[#9E7D3B] select-none font-[var(--font-outfit)] mb-1.5">
+                <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-bold text-[#000066] select-none font-[var(--font-outfit)] mb-1.5">
                   Statutory Reporting
                 </p>
                 <h2
@@ -248,7 +248,7 @@ export default function TransparencyPage() {
                     fontFamily:
                       "var(--font-playfair), 'Playfair Display', Georgia, serif",
                   }}
-                  className="text-2xl sm:text-3xl lg:text-[34px] font-normal text-[#0D1117] tracking-[-0.015em] mb-3"
+                  className="text-2xl sm:text-3xl lg:text-[34px] font-normal text-[#000066] tracking-[-0.015em] mb-3"
                 >
                   Annual Reports
                 </h2>
@@ -260,10 +260,10 @@ export default function TransparencyPage() {
 
               {/* Empty State Card */}
               <div className="p-8 sm:p-10 rounded-[22px] bg-[#FAF7F2] border border-amber-200/70 text-center flex flex-col items-center justify-center max-w-xl mx-auto">
-                <Clock className="w-10 h-10 text-[#B88728] mb-3 opacity-80" />
+                <Clock className="w-10 h-10 text-[#FFCC00] mb-3 opacity-80" />
                 <h3
                   style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}
-                  className="text-xl font-bold text-[#0D1117] mb-2"
+                  className="text-xl font-bold text-[#000066] mb-2"
                 >
                   First Annual Report in Preparation
                 </h3>
@@ -379,14 +379,14 @@ export default function TransparencyPage() {
           </section>
 
           {/* ── Bottom Call-to-Action Island ── */}
-          <section className="relative rounded-[24px] sm:rounded-[32px] overflow-hidden bg-[#0D1117] text-white p-8 sm:p-12 lg:p-14 shadow-xl">
+          <section className="relative rounded-[24px] sm:rounded-[32px] overflow-hidden bg-[#000066] text-white p-8 sm:p-12 lg:p-14 shadow-xl">
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -right-20 -top-20 w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle_at_center,rgba(245,186,19,0.22)_0%,transparent_70%)] blur-2xl select-none"
+              className="pointer-events-none absolute -right-20 -top-20 w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle_at_center,rgba(255,204,0,0.22)_0%,transparent_70%)] blur-2xl select-none"
             />
 
             <div className="relative z-10 max-w-3xl">
-              <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.24em] font-semibold text-[#F5BA13] select-none font-[var(--font-outfit)] mb-3">
+              <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.24em] font-bold text-[#FFCC00] select-none font-[var(--font-outfit)] mb-3">
                 Verifiable Trust
               </p>
               <h2
@@ -395,7 +395,7 @@ export default function TransparencyPage() {
               >
                 Everything in public. Reconciled monthly.
               </h2>
-              <p className="text-[14.5px] sm:text-[15.5px] leading-relaxed text-slate-300 mb-8 max-w-2xl font-normal">
+              <p className="text-[14.5px] sm:text-[15.5px] leading-relaxed text-slate-200 mb-8 max-w-2xl font-normal">
                 Inspect how every dollar is committed to research, grants, and infrastructure.
                 Participate in public assembly discussions and review audited bylaws.
               </p>
@@ -403,7 +403,7 @@ export default function TransparencyPage() {
               <div className="flex flex-wrap items-center gap-3.5 sm:gap-4">
                 <Link
                   href="/governance"
-                  className="inline-flex items-center justify-center gap-2 h-[42px] sm:h-[44px] px-6 rounded-[7px] bg-[#F5BA13] hover:bg-[#E5AC0B] text-[#121417] font-semibold text-[13.5px] sm:text-[14px] tracking-normal transition-all duration-200 active:scale-[0.98] shadow-sm cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 h-[42px] sm:h-[44px] px-6 rounded-[7px] bg-[#FFCC00] hover:bg-[#E6B800] text-[#000066] font-bold text-[13.5px] sm:text-[14px] tracking-normal transition-all duration-200 active:scale-[0.98] shadow-sm cursor-pointer"
                 >
                   <span>Governance Record</span>
                   <ArrowRight className="w-4 h-4" />
