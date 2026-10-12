@@ -28,7 +28,7 @@ function RotatingWord({
   const longest = words.reduce((a, b) => (b.length > a.length ? b : a), "");
 
   return (
-    <span className="relative inline-grid align-baseline text-[#FFCC00]">
+    <span className="relative inline-grid align-baseline text-[#FFCC00] px-0.5">
       {/* Invisible sizer — reserves width for the widest word */}
       <span className="invisible col-start-1 row-start-1 select-none" aria-hidden="true">
         {longest}
@@ -37,11 +37,16 @@ function RotatingWord({
       <AnimatePresence mode="wait">
         <motion.span
           key={words[index]}
-          initial={{ opacity: 0, y: 12, filter: "blur(3px)" }}
+          initial={{ opacity: 0, y: 12, filter: "blur(2px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          exit={{ opacity: 0, y: -12, filter: "blur(3px)" }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="relative col-start-1 row-start-1 inline-block text-[#FFCC00] whitespace-nowrap"
+          exit={{ opacity: 0, y: -12, filter: "blur(2px)" }}
+          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            WebkitTextStroke: "1px rgba(0, 0, 102, 0.45)",
+            paintOrder: "stroke fill",
+            textShadow: "-0.5px -0.5px 0 rgba(0, 0, 102, 0.4), 0.5px -0.5px 0 rgba(0, 0, 102, 0.4), -0.5px 0.5px 0 rgba(0, 0, 102, 0.4), 0.5px 0.5px 0 rgba(0, 0, 102, 0.4), 0 2px 4px rgba(0, 0, 102, 0.2)",
+          }}
+          className="relative col-start-1 row-start-1 inline-block text-[#FFCC00] whitespace-nowrap font-extrabold tracking-normal"
         >
           {words[index]}
         </motion.span>
