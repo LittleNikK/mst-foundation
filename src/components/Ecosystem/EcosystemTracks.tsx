@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { PartnerMarquee } from "./PartnerMarquee";
 
 /* ------------------------------------------------------------------ */
 /*  Three Tracks Data — Fresh & High-Visibility Design                */
@@ -62,7 +61,7 @@ export function EcosystemTracks() {
       {/* Anchor for Validators */}
       <div id="validators" className="absolute -top-24 pointer-events-none" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl min-w-0 px-3 sm:px-6 lg:px-8">
 
         {/* Section Header */}
         <motion.div
@@ -87,7 +86,7 @@ export function EcosystemTracks() {
         </motion.div>
 
         {/* 3 Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6 items-stretch">
+        <div className="grid min-w-0 grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 items-stretch">
           {tracks.map((track, i) => {
             return (
               <motion.div
@@ -100,23 +99,23 @@ export function EcosystemTracks() {
                   delay: 0.08 + i * 0.1,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="h-full"
+                className="min-w-0 h-full"
               >
                 <Link
                   href={track.href}
-                  className="group relative flex flex-col justify-between h-full aspect-square min-h-[340px] rounded-none border border-slate-200/90 bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:border-slate-300/90 hover:shadow-[0_20px_38px_-8px_rgba(15,23,42,0.12),0_4px_12px_-2px_rgba(15,23,42,0.04)] cursor-pointer"
+                  className="group relative flex min-w-0 w-full max-w-full flex-col justify-between h-full aspect-[4/3] min-h-[300px] sm:aspect-square sm:min-h-[340px] rounded-none border border-slate-200/90 bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:border-slate-300/90 hover:shadow-[0_20px_38px_-8px_rgba(15,23,42,0.12),0_4px_12px_-2px_rgba(15,23,42,0.04)] cursor-pointer"
                   style={{
                     background: `radial-gradient(circle at 88% 12%, ${track.glowColor} 0%, transparent 60%), #FFFFFF`,
                     boxShadow:
                       "0 8px 24px -4px rgba(15,23,42,0.06), 0 2px 6px -1px rgba(15,23,42,0.04), inset 0 1px 0 rgba(255,255,255,0.9)",
                   }}
                 >
-                  <div className="p-6 sm:p-7 lg:p-8 flex flex-col h-full justify-between">
+                  <div className="min-w-0 p-4 sm:p-7 lg:p-8 flex flex-col h-full justify-between">
                     {/* Top Row: Tag + Number */}
                     <div>
                       <div className="flex items-center justify-between gap-3 mb-5">
                         <span
-                          className="text-[10.5px] sm:text-[11px] uppercase tracking-[0.16em] font-bold px-2.5 py-1 rounded-full select-none"
+                          className="max-w-[calc(100%-2.5rem)] break-words text-[10px] sm:text-[11px] uppercase tracking-[0.12em] sm:tracking-[0.16em] font-bold px-2.5 py-1 rounded-full select-none"
                           style={{
                             background: track.badgeBg,
                             border: `1px solid ${track.badgeBorder}`,
@@ -137,7 +136,7 @@ export function EcosystemTracks() {
                         style={{
                           fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
                         }}
-                        className="text-xl sm:text-[22px] lg:text-[23px] font-bold leading-[1.25] text-[#000066] tracking-[-0.015em] mb-2.5 transition-colors duration-200 group-hover:text-[#00004d]"
+                        className="break-words text-xl sm:text-[22px] lg:text-[23px] font-bold leading-[1.25] text-[#000066] tracking-[-0.015em] mb-2.5 transition-colors duration-200 group-hover:text-[#00004d]"
                       >
                         {track.title}
                       </h3>
@@ -147,7 +146,7 @@ export function EcosystemTracks() {
                         style={{
                           fontFamily: "var(--font-sans), 'Plus Jakarta Sans', Inter, sans-serif",
                         }}
-                        className="text-[13.5px] sm:text-[14px] leading-[1.65] text-[#475569] font-normal"
+                        className="break-words text-[13px] sm:text-[14px] leading-[1.6] sm:leading-[1.65] text-[#475569] font-normal"
                       >
                         {track.description}
                       </p>
@@ -179,10 +178,6 @@ export function EcosystemTracks() {
           })}
         </div>
 
-        {/* Partner Marquee */}
-        <div className="mt-10 sm:mt-12 lg:mt-14">
-          <PartnerMarquee />
-        </div>
       </div>
     </section>
   );

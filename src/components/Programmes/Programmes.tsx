@@ -4,17 +4,25 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useSpring, easeOut, useMotionValueEvent, MotionValue } from "framer-motion";
 
+const VH_PER_CARD = 94; // Track is 282vh (total scrollHeight 382vh)
+
 /* ------------------------------------------------------------------ */
-/*  Timeline Helpers                                                  */
-/*  Card 0 lands cleanly and transitions promptly (~35vh dwell),     */
-/*  while Cards 1, 2, 3 retain their exact glide and dwell pace.     */
+/*  Timeline — explicit balanced card windows                          */
+/*                                                                    */
+/*  Card 0 dwell before Card 1 enters : ~90 vh (delayed calm dwell)   */
+/*  Cards 1, 2 animation glides       : ~72 vh (smooth, steady pace)  */
+/*  Gaps between cards 0-1 and 1-2    : ~21.5 vh (comfortable pause)  */
+/*  Card 3 (last card)                : ~32 vh smooth entry into view, */
+/*                                      and a short release to next   */
 /* ------------------------------------------------------------------ */
 const TIMELINE = {
+  // Keep leadIn as a tiny sentinel so existing goTo(0) code works
+  leadIn: 0.319,
   cards: [
-    { entryStart: 0.000, entryEnd: 0.001 },
-    { entryStart: 0.150, entryEnd: 0.390 },
-    { entryStart: 0.460, entryEnd: 0.700 },
-    { entryStart: 0.770, entryEnd: 1.000 },
+    { entryStart: 0.000, entryEnd: 0.001 }, // Card 0: static anchor (~90vh calm dwell)
+    { entryStart: 0.319, entryEnd: 0.574 }, // Card 1: enters after Card 0 dwell (~72vh glide)
+    { entryStart: 0.650, entryEnd: 0.855 }, // Card 2: ~58vh glide
+    { entryStart: 0.870, entryEnd: 0.985 }, // Card 3: smooth entry (~32vh) & release
   ],
   card(index: number, _total?: number) {
     if (index >= 0 && index < this.cards.length) {
@@ -211,7 +219,7 @@ function StackCopy({
   const { entryStart, entryEnd } = TIMELINE.card(index, total);
   const nextCard = !isLast ? TIMELINE.card(index + 1, total) : null;
   const nextEntryStart = nextCard ? nextCard.entryStart : 1.0;
-  const nextEntryFade = nextCard ? (nextCard.entryStart + nextCard.entryEnd) / 2 : 1.0;
+  const nextEntryFade = nextCard ? nextCard.entryStart + 0.10 : 1.0;
 
   const opacity = useTransform(
     progress,
@@ -287,11 +295,11 @@ export function Programmes() {
     offset: ["start start", "end end"],
   });
 
-  // Snappy, low-inertia spring physics that stops immediately when scroll input pauses:
+  // Responsive, smooth spring physics without direction lag:
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 90,
-    damping: 30,
-    mass: 0.20,
+    stiffness: 140,
+    damping: 24,
+    mass: 0.15,
     restDelta: 0.0005,
   });
 
@@ -330,9 +338,11 @@ export function Programmes() {
     const total = frontiers.length;
     let progressTarget = 0;
     if (i === 0) {
-      progressTarget = 0.07;
+      // Midpoint of Card 0's dwell zone (0 → 0.319)
+      progressTarget = 0.16;
     } else if (i === total - 1) {
-      progressTarget = 0.999;
+      // Center of Card 3 (reaches center at 0.985)
+      progressTarget = 0.985;
     } else {
       const c = TIMELINE.card(i, total);
       const nextC = TIMELINE.card(i + 1, total);
@@ -343,12 +353,12 @@ export function Programmes() {
     window.scrollTo({ top: target, behavior: "smooth" });
   };
 
-  const scrollHeightVh = 470;
+  const scrollHeightVh = (frontiers.length - 1) * VH_PER_CARD + 100;
 
   return (
     <section
       id="what-we-do"
-      className="relative w-full scroll-mt-24 bg-[#FAFAFC]"
+      className="relative w-full bg-[#FAFAFC]"
     >
       {/* Anchors for Funding & Research */}
       <div id="funding" className="absolute -top-24 pointer-events-none" />
@@ -364,12 +374,12 @@ export function Programmes() {
         className="relative w-full"
         style={{ height: `${scrollHeightVh}vh` }}
       >
-        <div className="sticky top-0 h-screen w-full flex flex-col justify-center items-center px-6 sm:px-10 lg:px-16 overflow-hidden">
+        <div className="sticky top-0 h-screen w-full flex flex-col justify-center items-center px-4 sm:px-10 lg:px-16 overflow-hidden">
 
 
 
           {/* Main 3-column stage */}
-          <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[240px_auto_1fr] gap-8 lg:gap-14 xl:gap-20 items-center">
+          <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 gap-3 sm:gap-5 lg:grid-cols-[240px_auto_1fr] lg:gap-14 xl:gap-20 items-center">
 
             {/* ── Left Column: Nav list with decorative wheel ── */}
             <div className="relative hidden lg:flex flex-col justify-center">
@@ -398,14 +408,14 @@ export function Programmes() {
             </div>
 
             {/* Mobile nav for smaller screens */}
-            <div className="flex lg:hidden gap-5 overflow-x-auto pb-1 -mx-2 px-2 w-full justify-center">
+            <div className="flex lg:hidden gap-0 overflow-hidden pb-1 -mx-2 px-2 w-full justify-between">
               {frontiers.map((item, i) => {
                 const isActive = i === active;
                 return (
                   <button
                     key={item.id}
                     onClick={() => goTo(i)}
-                    className={`shrink-0 text-[13.5px] whitespace-nowrap pb-1 transition-colors duration-200 cursor-pointer ${isActive
+                    className={`shrink-0 text-[10px] sm:text-[13.5px] whitespace-nowrap pb-1 transition-colors duration-200 cursor-pointer ${isActive
                       ? "text-[#000066] font-semibold border-b-2 border-[#FFCC00]"
                       : "text-[#9CA3AF]"
                       }`}
@@ -425,7 +435,7 @@ export function Programmes() {
 
               <div className="relative flex items-center">
                 {/* Central Portrait Card */}
-                <div className="relative aspect-[3.2/4] w-[310px] sm:w-[360px] md:w-[390px] lg:w-[420px] rounded-[20px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,102,0.12)] bg-[#121417]">
+                <div className="relative aspect-[3.2/4] w-[min(70vw,310px)] sm:w-[min(74vw,360px)] md:w-[390px] lg:w-[420px] rounded-[20px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,102,0.12)] bg-[#121417]">
                   {frontiers.map((item, i) => (
                     <StackImage
                       key={item.id}
@@ -457,7 +467,7 @@ export function Programmes() {
             </div>
 
             {/* ── Right Column: Stacked Copy ── */}
-            <div className="relative w-full max-w-[440px] h-[240px] sm:h-[260px]">
+            <div className="relative w-full max-w-[440px] h-[clamp(150px,25vh,240px)] sm:h-[260px]">
               {frontiers.map((item, i) => (
                 <StackCopy
                   key={item.id}

@@ -50,7 +50,7 @@ export function Loader({ onDone }: LoaderProps) {
           initial={{ y: "0%" }}
           exit={{ y: "-105%" }}
           transition={{ duration: 0.65, ease: [0.76, 0, 0.24, 1] }}
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-[#87B4D4] via-[#BFD8E8] to-[#E9F1F6] text-slate-950 select-none will-change-transform"
+          className="fixed inset-0 z-[100] flex min-h-[100svh] flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-[#87B4D4] via-[#BFD8E8] to-[#E9F1F6] text-slate-950 select-none will-change-transform"
         >
           {/* Background Video Layer with Sky Ambiance Fallback */}
           <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
@@ -78,7 +78,7 @@ export function Loader({ onDone }: LoaderProps) {
           </div>
 
           {/* Hero Headline Content Inside Loader */}
-          <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-center text-center my-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative z-10 my-auto flex w-full max-w-6xl flex-col items-center px-3 text-center sm:px-6 lg:px-8">
             <motion.h1
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
@@ -88,7 +88,7 @@ export function Loader({ onDone }: LoaderProps) {
                 fontWeight: 800,
                 textTransform: "uppercase",
               }}
-              className="text-5xl sm:text-7xl md:text-8xl lg:text-[94px] xl:text-[108px] font-normal uppercase tracking-[-0.015em] leading-[0.96] sm:leading-[0.93] text-[#000066] drop-shadow-[0_2px_14px_rgba(255,255,255,0.7)] max-w-6xl"
+              className="max-w-[min(94vw,72rem)] text-[clamp(2rem,10vw,3rem)] font-normal uppercase tracking-[-0.02em] leading-[0.94] text-[#000066] drop-shadow-[0_2px_14px_rgba(255,255,255,0.7)] sm:max-w-6xl sm:text-7xl sm:leading-[0.93] md:text-8xl lg:text-[94px] xl:text-[108px]"
             >
               <span className="block">BUILDING AN</span>
               <span className="block mt-0.5 sm:mt-1 text-[#FFCC00] drop-shadow-[0_2px_14px_rgba(0,0,102,0.3)]">

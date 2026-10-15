@@ -14,7 +14,6 @@ export { Loader } from "./hero/Loader";
 
 // Ecosystem Section
 export { EcosystemTracks } from "./Ecosystem/EcosystemTracks";
-export { PartnerMarquee } from "./Ecosystem/PartnerMarquee";
 
 // Foundation Mandate Section
 export { FoundationJobs } from "./FoundationJobs/FoundationJobs";

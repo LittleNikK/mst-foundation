@@ -42,9 +42,9 @@ function RotatingWord({
           exit={{ opacity: 0, y: -12, filter: "blur(2px)" }}
           transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            WebkitTextStroke: "1px rgba(0, 0, 102, 0.45)",
+            WebkitTextStroke: "1px rgba(0, 0, 102, 0.22)",
             paintOrder: "stroke fill",
-            textShadow: "-0.5px -0.5px 0 rgba(0, 0, 102, 0.4), 0.5px -0.5px 0 rgba(0, 0, 102, 0.4), -0.5px 0.5px 0 rgba(0, 0, 102, 0.4), 0.5px 0.5px 0 rgba(0, 0, 102, 0.4), 0 2px 4px rgba(0, 0, 102, 0.2)",
+            textShadow: "-0.5px -0.5px 0 rgba(0, 0, 102, 0.2), 0.5px -0.5px 0 rgba(0, 0, 102, 0.2), -0.5px 0.5px 0 rgba(0, 0, 102, 0.2), 0.5px 0.5px 0 rgba(0, 0, 102, 0.2), 0 2px 4px rgba(0, 0, 102, 0.1)",
           }}
           className="relative col-start-1 row-start-1 inline-block text-[#FFCC00] whitespace-nowrap font-extrabold tracking-normal"
         >
@@ -59,14 +59,14 @@ export function Hero() {
   return (
     <section
       id="about"
-      className="relative w-full min-h-[calc(100vh-4.5rem)] min-h-[calc(100dvh-4.5rem)] flex items-center justify-center overflow-hidden px-3 xs:px-4 sm:px-6 lg:px-8 pt-24 sm:pt-24 lg:pt-28 pb-6 sm:pb-8 bg-cover bg-center bg-no-repeat scroll-mt-20"
+      className="relative w-full min-h-[calc(100vh-4.5rem)] min-h-[calc(100dvh-4.5rem)] flex items-center justify-center overflow-hidden px-3 xs:px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 lg:pt-28 pb-6 sm:pb-8 bg-cover bg-center bg-no-repeat scroll-mt-20"
       style={{
         backgroundImage:
           "linear-gradient(rgba(255, 255, 255, 0.48), rgba(255, 255, 255, 0.48)), url('/asstes/bg-2.jpg')",
       }}
     >
       {/* Outer Floating Glassmorphic Container Card */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto rounded-[24px] xs:rounded-[28px] sm:rounded-[40px] lg:rounded-[44px] border border-white/60 bg-white/30 backdrop-blur-2xl p-5 xs:p-6 sm:p-10 lg:p-14 xl:p-16 shadow-[0_16px_40px_rgba(15,23,42,0.08),inset_0_1px_0_rgba(255,255,255,0.9)] overflow-hidden">
+      <div className="relative z-10 w-full max-w-7xl mx-auto rounded-[24px] xs:rounded-[28px] sm:rounded-[40px] lg:rounded-[44px] border border-white/60 bg-white/30 backdrop-blur-2xl p-4 xs:p-5 sm:p-10 lg:p-14 xl:p-16 shadow-[0_16px_40px_rgba(15,23,42,0.08),inset_0_1px_0_rgba(255,255,255,0.9)] overflow-hidden">
         {/* Inner Content Grid */}
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-12 items-center">
 
@@ -118,26 +118,26 @@ export function Hero() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-6 sm:mt-9 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-4 lg:gap-5"
+              className="mt-6 sm:mt-9 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-4 lg:gap-5 min-w-0"
             >
               {/* Button Group: Always on the same line side-by-side */}
-              <div className="flex flex-row items-center gap-2.5 sm:gap-3.5 w-auto">
+              <div className="flex w-full flex-row items-center gap-2 sm:gap-3.5 sm:w-auto">
                 {/* Primary Button — 4-Span Continuous Traveling Border Effect */}
                 <Link
                   href="/whitepaper"
-                  className="animated-button-gold relative inline-flex items-center justify-center h-[38px] sm:h-[42px] rounded-[6px] border border-[#FFCC00]/50 bg-white/95 px-3.5 sm:px-6 text-[12.5px] sm:text-[13.5px] font-semibold text-[#000066] shadow-sm overflow-hidden text-center transition-all duration-200 active:scale-[0.98] shrink-0"
+                  className="animated-button-gold relative inline-flex min-w-0 flex-1 items-center justify-center h-[38px] sm:h-[42px] rounded-[6px] border border-[#FFCC00]/50 bg-white/95 px-2 sm:px-6 text-[11.5px] sm:text-[13.5px] font-semibold text-[#000066] shadow-sm overflow-hidden text-center transition-all duration-200 active:scale-[0.98] shrink-0 sm:flex-none"
                 >
                   <span></span>
                   <span></span>
                   <span></span>
                   <span></span>
-                  <span className="relative z-10 whitespace-nowrap">Read the whitepaper</span>
+                  <span className="relative z-10 whitespace-nowrap">Learn More</span>
                 </Link>
 
                 {/* Secondary Button — Button No 3 Diagonal Expand Hover Effect */}
                 <Link
                   href="/briefing"
-                  className="btn-hover-diagonal relative inline-flex items-center justify-center h-[38px] sm:h-[42px] rounded-[6px] border border-[#000066] px-3.5 sm:px-6 text-[12.5px] sm:text-[13.5px] font-medium text-[#000066] shadow-sm transition-all duration-200 active:scale-[0.98] text-center shrink-0"
+                  className="btn-hover-diagonal relative inline-flex min-w-0 flex-1 items-center justify-center h-[38px] sm:h-[42px] rounded-[6px] border border-[#000066] px-2 sm:px-6 text-[11.5px] sm:text-[13.5px] font-medium text-[#000066] shadow-sm transition-all duration-200 active:scale-[0.98] text-center shrink-0 sm:flex-none"
                 >
                   <span className="relative z-10 whitespace-nowrap">Book a briefing</span>
                 </Link>
@@ -161,7 +161,7 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.95, x: 20 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5 xl:col-span-4 relative flex items-center justify-center lg:justify-end select-none pointer-events-none mt-2 lg:mt-0"
+            className="min-w-0 lg:col-span-5 xl:col-span-4 relative flex w-full items-center justify-center lg:justify-end select-none pointer-events-none mt-2 lg:mt-0"
           >
             {/* Full-size floating logo with responsive dimensions */}
             <motion.div
@@ -171,7 +171,7 @@ export function Hero() {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="relative w-[190px] xs:w-[230px] sm:w-[320px] lg:w-[400px] xl:w-[440px] max-w-full aspect-square flex items-center justify-center drop-shadow-[0_16px_32px_rgba(255,204,0,0.25)]"
+              className="relative w-[min(190px,72vw)] xs:w-[min(230px,72vw)] sm:w-[320px] lg:w-[400px] xl:w-[440px] max-w-full aspect-square flex items-center justify-center drop-shadow-[0_16px_32px_rgba(255,204,0,0.25)]"
             >
               {/* Illuminating background gradient so logo text is crisp and legible */}
               <div

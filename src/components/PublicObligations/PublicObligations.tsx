@@ -170,9 +170,10 @@ function useCardMetrics(deckRef: React.RefObject<HTMLDivElement | null>) {
       const w = el ? el.clientWidth : (typeof window !== "undefined" ? Math.min(window.innerWidth - 64, 1152) : 1152);
 
       if (w < 600) {
-        // Mobile: 1 card + ~15% peek, strictly capped to container width
-        const cardW = Math.max(260, Math.min(w - 20, Math.round(w * 0.86)));
-        setMetrics({ width: cardW, gap: 12, height: 395, stackStep: 14 });
+        // Mobile: keep a usable card width while scaling its height with the viewport.
+        const cardW = Math.max(248, Math.min(w - 20, Math.round(w * 0.86)));
+        const cardH = Math.max(340, Math.min(395, Math.round(w * 1.2)));
+        setMetrics({ width: cardW, gap: 12, height: cardH, stackStep: 14 });
       } else if (w < 960) {
         // Tablet: 1.5 cards
         const gap = 18;
@@ -249,7 +250,7 @@ function StackCard({
         isPast ? "cursor-pointer hover:brightness-[1.02]" : ""
       }`}
     >
-      <div className="flex flex-col h-full p-5 sm:p-6">
+      <div className="flex min-w-0 flex-col h-full p-4 sm:p-6">
         <span
           className="text-[11px] font-bold tracking-[0.16em] uppercase mb-1 font-[var(--font-outfit)]"
           style={{ color: card.accentColor }}
@@ -258,13 +259,13 @@ function StackCard({
         </span>
         <h3
           style={{ fontFamily: "var(--font-display), Anton, sans-serif" }}
-          className="text-[21px] sm:text-[23px] lg:text-[24px] font-normal uppercase tracking-[0.02em] text-[#0F172A] leading-[1.12] mb-1 max-w-[90%]"
+          className="text-[20px] sm:text-[23px] lg:text-[24px] font-normal uppercase tracking-[0.02em] text-[#0F172A] leading-[1.12] mb-1 max-w-[90%] break-words"
         >
           {card.title}
         </h3>
         <p
           style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}
-          className="text-[12px] sm:text-[12.5px] leading-[1.45] text-[#334155] mb-3 max-w-[95%] font-normal"
+          className="text-[12px] sm:text-[12.5px] leading-[1.45] text-[#334155] mb-3 max-w-[95%] font-normal break-words"
         >
           {card.description}
         </p>
@@ -350,7 +351,7 @@ export default function PublicObligations() {
       <div id="governance" className="absolute -top-24 pointer-events-none" />
       <div id="transparency" className="absolute -top-24 pointer-events-none" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-10 lg:px-16 py-12 sm:py-20 lg:py-24">
+      <div className="relative z-10 mx-auto max-w-7xl px-3 sm:px-10 lg:px-16 py-10 sm:py-20 lg:py-24">
         {/* Header */}
         <p className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-bold text-[#FFCC00] select-none mb-3 font-[var(--font-outfit)]">
           EVERYTHING IN PUBLIC

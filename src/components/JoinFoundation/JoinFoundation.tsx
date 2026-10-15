@@ -24,7 +24,7 @@ export function JoinFoundation() {
   return (
     <section
       id="talk-to-us"
-      className="relative w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 scroll-mt-16 bg-[#F1F3F6]"
+      className="relative w-full overflow-hidden px-3 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 scroll-mt-16 bg-[#F1F3F6]"
     >
       {/* Anchor for Contact */}
       <div id="contact" className="absolute -top-24 pointer-events-none" />
@@ -53,13 +53,13 @@ export function JoinFoundation() {
             <path
               d="M-40 560 L140 560 C210 490 230 400 185 330 C145 270 95 245 85 185 C75 125 25 65 -40 30 Z"
               fill="url(#left-wave-gradient)"
-              stroke="#ECC4B2"
+              stroke="#ffe02eff"
               strokeWidth="1.5"
             />
             <defs>
               <linearGradient id="left-wave-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#F9E6DC" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#F6DDD1" stopOpacity="0.95" />
+                <stop offset="0%" stopColor="#ffe02eff" stopOpacity="0.85" />
+                <stop offset="100%" stopColor="#ffe684ff" stopOpacity="0.95" />
               </linearGradient>
             </defs>
           </svg>
@@ -79,24 +79,24 @@ export function JoinFoundation() {
             <path
               d="M 560 -20 L 560 740 C 440 710 365 635 345 535 C 320 425 390 345 355 245 C 325 160 380 60 560 -20 Z"
               fill="url(#right-wave-gradient)"
-              stroke="#ECC4B2"
+              stroke="#ffe02eff"
               strokeWidth="1.5"
             />
             <defs>
               <linearGradient id="right-wave-gradient" x1="100%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#F9E6DC" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#F6DDD1" stopOpacity="0.95" />
+                <stop offset="0%" stopColor="#ffe02eff" stopOpacity="0.85" />
+                <stop offset="100%" stopColor="#ffe684ff" stopOpacity="0.95" />
               </linearGradient>
             </defs>
           </svg>
         </div>
 
         {/* ── Inner Content: Two Partitions Grid (Compact for Single Viewport) ── */}
-        <div className="relative z-10 px-4 xs:px-5 sm:px-8 lg:px-12 xl:px-14 py-6 sm:py-9 lg:py-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 xl:gap-14 items-center">
+        <div className="relative z-10 px-3 sm:px-8 lg:px-12 xl:px-14 py-5 sm:py-9 lg:py-10">
+          <div className="grid min-w-0 grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 lg:gap-10 xl:gap-14 items-center">
 
             {/* ── Left Partition: Headline, Subtitle, and Pills ── */}
-            <div className="lg:col-span-6 flex flex-col justify-center text-left">
+            <div className="min-w-0 lg:col-span-6 flex flex-col justify-center text-left">
               <motion.h2
                 initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -147,7 +147,7 @@ export function JoinFoundation() {
             </div>
 
             {/* ── Right Partition: Form Card ── */}
-            <div className="lg:col-span-6 relative">
+            <div className="min-w-0 lg:col-span-6 relative">
 
               {/* Luxury Pen Prop resting on the right side of the card */}
               <div
@@ -228,7 +228,7 @@ export function JoinFoundation() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.55, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-                className="relative z-10 w-full bg-white rounded-[18px] sm:rounded-[22px] p-4 xs:p-5 sm:p-6 lg:p-7 shadow-[0_16px_40px_-10px_rgba(0,0,0,0.07),0_2px_6px_rgba(0,0,0,0.02)] border border-[#EFE8DF]"
+                className="relative z-10 w-full min-w-0 bg-white rounded-[18px] sm:rounded-[22px] p-3 sm:p-6 lg:p-7 shadow-[0_16px_40px_-10px_rgba(0,0,0,0.07),0_2px_6px_rgba(0,0,0,0.02)] border border-[#EFE8DF]"
               >
                 <AnimatePresence mode="wait">
                   {submitted ? (
@@ -292,7 +292,7 @@ export function JoinFoundation() {
                           id="foundation-name"
                           type="text"
                           required
-                          placeholder="John Doe"
+                          placeholder="Your name"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           onFocus={() => setFocused("name")}

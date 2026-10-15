@@ -1,11 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  motion,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
 import { Shield, Landmark, Users } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
-/*  Three Jobs Data — Premium Dark Card Design                          */
 /* ------------------------------------------------------------------ */
 const jobs = [
   {
@@ -16,29 +24,15 @@ const jobs = [
     cta: "See the ecosystem",
     href: "/ecosystem",
     number: "01",
-    cardBg: "linear-gradient(145deg, #0F1829 0%, #152240 60%, #0D1520 100%)",
-    glowColor: "rgba(59, 125, 216, 0.18)",
-    accentColor: "#6BA3E8",
-    iconBg: "rgba(59, 125, 216, 0.12)",
-    iconBorder: "rgba(59, 125, 216, 0.25)",
-    borderColor: "rgba(59, 125, 216, 0.14)",
-    numColor: "rgba(59, 125, 216, 0.08)",
   },
   {
     icon: Landmark,
     title: "Accountability",
     description:
       "An elected council and standing committees, answerable to members. Not to shareholders.",
-    cta: "Read Our Structure ",
+    cta: "Read Our Structure",
     href: "/governance",
     number: "02",
-    cardBg: "linear-gradient(145deg, #111318 0%, #1A1D26 60%, #0E1014 100%)",
-    glowColor: "rgba(200, 210, 230, 0.08)",
-    accentColor: "#A0AABE",
-    iconBg: "rgba(160, 170, 190, 0.10)",
-    iconBorder: "rgba(160, 170, 190, 0.20)",
-    borderColor: "rgba(160, 170, 190, 0.10)",
-    numColor: "rgba(160, 170, 190, 0.06)",
   },
   {
     icon: Users,
@@ -48,189 +42,473 @@ const jobs = [
     cta: "Browse programmes",
     href: "/programmes",
     number: "03",
-    cardBg: "linear-gradient(145deg, #332B03 0%, #544606 50%, #262002 100%)",
-    glowColor: "rgba(255, 204, 0, 0.28)",
-    accentColor: "#FFCC00",
-    iconBg: "rgba(255, 204, 0, 0.15)",
-    iconBorder: "rgba(255, 204, 0, 0.35)",
-    borderColor: "rgba(255, 204, 0, 0.30)",
-    numColor: "rgba(255, 204, 0, 0.14)",
   },
 ];
 
-export function FoundationJobs() {
+/* ------------------------------------------------------------------ */
+/*  THEME — change these to re-skin the whole section                   */
+/* ------------------------------------------------------------------ */
+const THEME = {
+  page: "#ffffff",
+  card: "#282f96ff", // card + headline colour
+  ink: "#ffffff", // text / lines drawn on the cards
+};
+
+// If your site has a fixed/floating navbar that overlaps the top of the pinned
+// stage, put its height (px) here and the stage content will sit below it.
+const NAV_OFFSET = 0;
+
+const SANS = "'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif";
+const MONO = "'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, monospace";
+const SERIF_ITALIC =
+  "'Playfair Display', var(--font-playfair), Georgia, 'Times New Roman', serif";
+
+const FONT_IMPORT =
+  "@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,500&family=Roboto:wght@300;400;500&family=Roboto+Mono:wght@500;600&display=swap');";
+
+/* ------------------------------------------------------------------ */
+/*  SCROLL CHOREOGRAPHY                                                 */
+/*  P = progress (0 → 1) through the pinned scroll distance.            */
+/* ------------------------------------------------------------------ */
+const N = jobs.length;
+const GROW_END = 0.58; // cards finish rising
+const WHEEL_START = 0.27; // wheel starts rolling in from the left edge
+const WHEEL_END = 0.94; // wheel stops (then a short hold, then unpin)
+
+// Geometry as fractions of the cards' height (measured from the video)
+const AXIS_FRAC = 0.331; // dashed line / wheel centre
+const RADIUS_FRAC = 0.173; // wheel circumradius
+const ROAD_FRAC = AXIS_FRAC + RADIUS_FRAC; // flat road line
+
+// Card i rises at speed 1 / (1 + 0.5 i): card 1 fastest, last card slowest
+const SPEED = (i: number) => 1 / (1 + 0.5 * i);
+const S_END = 1 / SPEED(N - 1);
+
+const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+
+// Every size is capped by BOTH viewport width and height, so the pinned stage
+// always fits on screen (short / zoomed windows included).
+const PAD = "clamp(12px, min(1.2vw, 2.2vh), 20px)";
+const TOP_SAFE = 42; // px kept free at the top of a card for number + icon
+
+function cardReveal(i: number, p: number) {
+  const s = clamp(p / GROW_END) * S_END;
+  return clamp(s * SPEED(i));
+}
+
+/* ------------------------------------------------------------------ */
+/*  Card                                                                */
+/* ------------------------------------------------------------------ */
+function JobCard({
+  job,
+  index,
+  progress,
+  animated,
+  staticReveal,
+  isDesktop,
+}: {
+  job: (typeof jobs)[number];
+  index: number;
+  progress: MotionValue<number>;
+  animated: boolean;
+  staticReveal: boolean;
+  isDesktop: boolean;
+}) {
+  const Icon = job.icon;
+
+  // Desktop scrub reveal clip-path
+  const clip = useTransform(
+    progress,
+    (p) => `inset(${(1 - cardReveal(index, p)) * 100}% 0% 0%)`
+  );
+
+  const pad = PAD;
+
   return (
-    <section className="relative w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-10 sm:py-14" style={{ background: "linear-gradient(145deg, #D6E4F0 0%, #E4EEF6 30%, #F0EBE0 65%, #E8EFF6 100%)" }}>
-      {/* Outer Container Card — glass */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto rounded-[28px] sm:rounded-[36px] lg:rounded-[42px] border border-white/50 bg-gradient-to-br from-white/52 via-white/42 to-white/32 p-8 sm:p-12 lg:p-14 xl:p-16 shadow-[0_8px_32px_rgba(15,23,42,0.10),0_2px_8px_rgba(0,0,0,0.05),inset_0_1px_0_rgba(255,255,255,0.85)] backdrop-blur-2xl overflow-hidden">
+    <motion.article
+      className="relative min-w-0 w-full rounded-[18px] sm:rounded-[20px] overflow-hidden md:h-full"
+      style={{ clipPath: animated ? clip : "inset(0% 0% 0%)" }}
+      initial={staticReveal ? { opacity: 0, y: 22 } : false}
+      whileInView={staticReveal ? { opacity: 1, y: 0 } : undefined}
+      viewport={{ once: true, margin: "-30px" }}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <div
+        className="relative flex min-w-0 flex-col justify-between rounded-[18px] sm:rounded-[20px] p-4 sm:p-5 md:p-0 md:h-full"
+        style={{ background: THEME.card, color: THEME.ink }}
+      >
+        {/* Top row: Number & Icon */}
+        <div className="flex items-center justify-between w-full md:contents">
+          {/* index number */}
+          <span
+            className="select-none md:absolute"
+            style={{
+              top: isDesktop ? pad : undefined,
+              left: isDesktop ? pad : undefined,
+              fontFamily: MONO,
+              fontWeight: 600,
+              fontSize: "clamp(12px, min(0.8vw, 1.5vh), 14px)",
+              letterSpacing: "0.04em",
+            }}
+          >
+            {job.number}
+          </span>
 
-        {/* Ambient radial glows */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute right-[-8%] top-[-15%] w-[650px] h-[650px] rounded-full bg-[radial-gradient(circle_at_center,rgba(251,191,36,0.30)_0%,rgba(253,230,138,0.14)_45%,transparent_70%)] blur-2xl select-none"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute left-[-12%] bottom-[-15%] w-[550px] h-[550px] rounded-full bg-[radial-gradient(circle_at_center,rgba(186,210,232,0.38)_0%,rgba(210,228,244,0.15)_55%,transparent_70%)] blur-2xl select-none"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,255,255,0.55)_0%,transparent_55%)] select-none"
-        />
+          {/* Icon */}
+          <Icon
+            aria-hidden="true"
+            className="stroke-[1.5] md:absolute"
+            style={{
+              top: isDesktop ? `calc(${pad} - 3px)` : undefined,
+              right: isDesktop ? pad : undefined,
+              width: "clamp(18px, min(1.2vw, 2.2vh), 20px)",
+              height: "clamp(18px, min(1.2vw, 2.2vh), 20px)",
+              opacity: 0.9,
+            }}
+          />
+        </div>
 
-        {/* Section Header */}
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-10 sm:mb-12">
-          <div className="lg:col-span-6 flex flex-col justify-center">
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[11px] sm:text-[12px] uppercase tracking-[0.22em] font-bold text-[#000066] select-none mb-3"
+        {/* flexible zone / road divider */}
+        <div className="relative min-h-[28px] sm:min-h-[36px] md:min-h-0 flex-1 my-3 sm:my-4 md:my-0">
+          {!animated && (
+            <>
+              <div
+                aria-hidden="true"
+                className="absolute inset-x-0"
+                style={{
+                  top: "50%",
+                  borderTop: "1.5px dashed rgba(255,255,255,0.35)",
+                }}
+              />
+              <div
+                aria-hidden="true"
+                className="absolute inset-x-0"
+                style={{ bottom: 0, height: 1.5, background: "rgba(255,255,255,0.7)" }}
+              />
+            </>
+          )}
+        </div>
+
+        {/* text block */}
+        <div
+          data-fj-text
+          className="relative z-10 flex flex-col md:block"
+          style={{ padding: isDesktop ? `0 ${pad} ${pad}` : undefined }}
+        >
+          <h3
+            className="text-xl sm:text-2xl md:text-[clamp(19px,min(1.8vw,3.2vh),32px)]"
+            style={{
+              fontFamily: SANS,
+              fontWeight: 400,
+              lineHeight: 1.15,
+              letterSpacing: "-0.01em",
+            }}
+          >
+            {job.title}
+          </h3>
+
+          <p
+            className="text-[13.5px] sm:text-sm md:text-[clamp(11px,min(0.78vw,1.35vh),13.5px)] text-white/90 leading-relaxed mt-2 sm:mt-2.5 md:mt-[clamp(6px,min(1vw,1.4vh),12px)] max-w-[38ch]"
+            style={{
+              fontFamily: SANS,
+              fontWeight: 400,
+            }}
+          >
+            {job.description}
+          </p>
+
+          <Link
+            href={job.href}
+            className="group flex items-center justify-between outline-none focus-visible:underline border-t border-white/35 mt-3 sm:mt-4 pt-2.5 sm:pt-3 text-[13.5px] sm:text-sm md:text-[clamp(12px,min(0.95vw,1.6vh),15px)]"
+            style={{
+              fontFamily: SERIF_ITALIC,
+              fontStyle: "italic",
+              color: THEME.ink,
+            }}
+          >
+            <span className="underline-offset-4 group-hover:underline">
+              {job.cta}
+            </span>
+            <span
+              aria-hidden="true"
+              className="transition-transform duration-300 group-hover:translate-x-1.5 font-sans not-italic text-base"
             >
-              WHAT THE FOUNDATION DOES
-            </motion.p>
+              →
+            </span>
+          </Link>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
 
+/* ------------------------------------------------------------------ */
+/*  Section                                                             */
+/* ------------------------------------------------------------------ */
+export function FoundationJobs() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
+  const roadRef = useRef<SVGPathElement>(null);
+  const axisRef = useRef<SVGLineElement>(null);
+  const wheelRef = useRef<SVGPolygonElement>(null);
+  const dotRef = useRef<SVGCircleElement>(null);
+  const size = useRef({ w: 0, h: 0, textH: 0 });
+
+  const reduce = useReducedMotion();
+  const [isDesktop, setIsDesktop] = useState(true);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const on = () => setIsDesktop(mq.matches);
+    on();
+    mq.addEventListener("change", on);
+    return () => mq.removeEventListener("change", on);
+  }, []);
+
+  const animated = isDesktop && !reduce;
+  const staticReveal = !animated && !reduce;
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
+  // a touch of inertia so the scrub feels buttery
+  const progress = useSpring(scrollYProgress, {
+    stiffness: 140,
+    damping: 26,
+    mass: 0.35,
+    restDelta: 0.0002,
+  });
+
+
+  /* ---- draws the road, axis and rolling polygon for progress p ---- */
+  const paint = useCallback((p: number) => {
+    const { w: W, h: H } = size.current;
+    if (!W || !H) return;
+
+    const cols = N;
+    const gap = W > 900 ? 16 : 12;
+    const colW = (W - gap * (cols - 1)) / cols;
+
+    // The road always sits just above the tallest text block, so the wheel and
+    // road can never overlap the text — on any screen height.
+    const textTop = H - size.current.textH;
+    const roadY = Math.min(ROAD_FRAC * H, textTop - Math.max(14, H * 0.03));
+    const R = Math.max(
+      10,
+      Math.min(H * RADIUS_FRAC, colW * 0.3, (roadY - TOP_SAFE) / 2)
+    );
+    const yc = roadY - R;
+
+    // wheel travel: enters from the left edge, ends near the right
+    const t = clamp((p - WHEEL_START) / (WHEEL_END - WHEEL_START));
+    const X = -1.2 * R + t * (0.93 * W + 1.2 * R);
+
+    // number of sides grows as the wheel travels (square → circle)
+    const q = clamp(X / W);
+    const n = Math.round(4 + 70 * Math.pow(q, 2.2));
+    const PI = Math.PI;
+
+    // ---- road: catenary arches matched to the n-gon -------------------
+    let d: string;
+    const apothem = R * Math.cos(PI / n);
+    const sec = 1 / Math.cos(PI / n);
+    const half = apothem * Math.asinh(Math.tan(PI / n));
+    const archW = half * 2;
+
+    if (n >= 34 || archW < 6) {
+      d = `M0 ${(yc + R).toFixed(1)} L${W} ${(yc + R).toFixed(1)}`;
+    } else {
+      const steps = Math.max(6, Math.min(16, Math.ceil(archW / 7)));
+      const kMax = Math.ceil(W / archW) + 1;
+      const parts: string[] = [];
+      for (let k = 0; k < kMax; k++) {
+        const cx = (k + 0.5) * archW;
+        for (let s = 0; s <= steps; s++) {
+          const x = cx - half + (archW * s) / steps;
+          const y = yc + R - apothem * (sec - Math.cosh((x - cx) / apothem));
+          parts.push(`${k === 0 && s === 0 ? "M" : "L"}${x.toFixed(1)} ${y.toFixed(1)}`);
+        }
+      }
+      d = parts.join("");
+    }
+    roadRef.current?.setAttribute("d", d);
+
+    // ---- wheel: rolls without slipping on those arches ----------------
+    const k = Math.floor(X / archW);
+    const u = clamp((X - (k + 0.5) * archW) / archW, -0.5, 0.5);
+    const spin = u * ((2 * PI) / n);
+    const pts: string[] = [];
+    for (let j = 0; j < n; j++) {
+      const a = PI / 2 + PI / n + (2 * PI * j) / n + spin;
+      pts.push(`${(X + R * Math.cos(a)).toFixed(1)},${(yc + R * Math.sin(a)).toFixed(1)}`);
+    }
+    wheelRef.current?.setAttribute("points", pts.join(" "));
+
+    dotRef.current?.setAttribute("cx", X.toFixed(1));
+    dotRef.current?.setAttribute("cy", yc.toFixed(1));
+
+    axisRef.current?.setAttribute("x1", "0");
+    axisRef.current?.setAttribute("x2", String(W));
+    axisRef.current?.setAttribute("y1", yc.toFixed(1));
+    axisRef.current?.setAttribute("y2", yc.toFixed(1));
+  }, []);
+
+  useMotionValueEvent(progress, "change", (v) => {
+    if (animated) paint(v);
+  });
+
+  // keep the overlay measured against the cards' real size
+  useEffect(() => {
+    if (!animated) return;
+    const el = stageRef.current;
+    if (!el) return;
+    const measure = () => {
+      const r = el.getBoundingClientRect();
+      let textH = 0;
+      el.querySelectorAll<HTMLElement>("[data-fj-text]").forEach((n) => {
+        textH = Math.max(textH, n.offsetHeight);
+      });
+      size.current = { w: r.width, h: r.height, textH };
+      svgRef.current?.setAttribute("viewBox", `0 0 ${r.width} ${r.height}`);
+      paint(progress.get());
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    // web-fonts change the text height after first paint
+    document.fonts?.ready.then(measure);
+    return () => ro.disconnect();
+  }, [animated, paint, progress]);
+
+  return (
+    <section
+      ref={sectionRef}
+      id="foundation-jobs"
+      className={`relative w-full ${reduce ? "" : "md:h-[420vh]"}`}
+      style={{ background: THEME.page }}
+    >
+      <style>{`${FONT_IMPORT}
+@media (min-width: 768px) {
+  #foundation-jobs .fj-stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100dvh;
+    box-sizing: border-box;
+    padding-top: calc(clamp(10px, 2vh, 22px) + ${NAV_OFFSET}px);
+    padding-bottom: clamp(20px, 4vh, 36px);
+  }
+}
+@media (min-width: 1024px) {
+  #foundation-jobs .fj-stage {
+    height: calc(100vh / 1.1);
+    height: calc(100dvh / 1.1);
+  }
+}`}</style>
+
+      {/* stage container */}
+      <div
+        className={`flex flex-col py-10 sm:py-14 md:py-0 md:justify-between px-4 sm:px-6 md:px-8 lg:px-12 w-full md:overflow-hidden ${
+          reduce ? "" : "fj-stage"
+        }`}
+      >
+        {/* ---------------- header ---------------- */}
+        <header
+          className="hidden md:grid md:grid-cols-3 md:items-end md:gap-x-6 md:gap-y-2 max-w-7xl mx-auto w-full shrink-0"
+          style={{ color: THEME.card }}
+        >
+          <div className="md:col-span-2">
             <motion.h2
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className="text-2xl sm:text-3xl md:text-[clamp(22px,min(3vw,4.8vh),44px)]"
               style={{
-                fontFamily:
-                  "var(--font-playfair), 'Playfair Display', Georgia, serif",
+                fontFamily: SANS,
+                fontWeight: 400,
+                lineHeight: 1.1,
+                letterSpacing: "-0.025em",
+                fontSize: isDesktop ? "clamp(22px, min(3vw, 4.8vh), 44px)" : undefined,
               }}
-              className="text-3xl sm:text-4xl lg:text-[42px] xl:text-[46px] font-normal leading-[1.12] tracking-[-0.015em] text-[#000066]"
             >
               Three responsibilities,
               <br />
-              kept in trust
+              <em
+                style={{
+                  fontFamily: SERIF_ITALIC,
+                  fontStyle: "italic",
+                  fontWeight: 400,
+                  letterSpacing: "-0.01em",
+                }}
+              >
+                kept in trust
+              </em>
             </motion.h2>
           </div>
 
-          <div className="lg:col-span-6 flex items-center lg:pt-10">
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              style={{ fontFamily: "var(--font-serif), Newsreader, Georgia, serif" }}
-              className="text-[14.5px] sm:text-[15.5px] lg:text-[16px] leading-[1.7] text-[#373E4A] font-normal"
-            >
-              Useful infrastructure tends to outlive the companies that start it.
-              The Foundation exists so that the code, the treasury and the
-              brand sit with a non-profit body whose only mandate is to keep
-              them available.Infrastructure outlasts the teams that build it only if someone is mandated to keep it that way. That&apos;s the whole of what SmartAngelos exists to do.
-            </motion.p>
-          </div>
-        </div>
+          <motion.p
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
+            className="text-[13.5px] sm:text-sm text-slate-600 md:text-inherit leading-relaxed"
+            style={{
+              fontFamily: SANS,
+              fontWeight: 400,
+              fontSize: isDesktop ? "clamp(11px, min(0.78vw, 1.35vh), 13.5px)" : undefined,
+            }}
+          >
+            Useful infrastructure tends to outlive the companies that start it.
+            The Foundation exists so that the code, the treasury and the brand
+            sit with a non-profit body whose only mandate is to keep them
+            available. Infrastructure outlasts the teams that build it only if
+            someone is mandated to keep it that way. That&apos;s the whole of
+            what SmartAngelos exists to do.
+          </motion.p>
+        </header>
 
-        {/* 3 Dark Cards Grid */}
-        <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 items-stretch">
-          {jobs.map((job, i) => {
-            const Icon = job.icon;
-            return (
-              <motion.div
+        {/* ---------------- cards + road/wheel overlay ---------------- */}
+        <div
+          ref={stageRef}
+          className="relative mt-0 md:mt-auto md:min-h-0 md:flex-1 max-w-7xl mx-auto w-full md:max-h-[480px]"
+        >
+          <div className="grid min-w-0 grid-cols-1 gap-3 sm:gap-4 md:absolute md:inset-0 md:grid-cols-3 md:gap-4 lg:gap-5">
+            {jobs.map((job, i) => (
+              <JobCard
                 key={job.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{
-                  duration: 0.6,
-                  delay: 0.08 + i * 0.1,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="group relative flex flex-col justify-between rounded-2xl sm:rounded-[22px] overflow-hidden transition-all duration-400 hover:-translate-y-2 hover:shadow-[0_32px_70px_rgba(0,0,0,0.35)]"
-                style={{
-                  background: job.cardBg,
-                  border: `1px solid ${job.borderColor}`,
-                  boxShadow: "0 8px 32px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.12)",
-                }}
-              >
-                {/* Per-card ambient glow blob */}
-                <div
-                  className="pointer-events-none absolute inset-0 rounded-[22px]"
-                  style={{
-                    background: `radial-gradient(ellipse at 80% 20%, ${job.glowColor} 0%, transparent 65%)`,
-                  }}
-                />
+                job={job}
+                index={i}
+                progress={progress}
+                animated={animated}
+                staticReveal={staticReveal}
+                isDesktop={isDesktop}
+              />
+            ))}
+          </div>
 
-                {/* Giant ghost numeral — purely decorative */}
-                <div
-                  className="pointer-events-none absolute bottom-[-20px] right-[-12px] select-none font-bold leading-none"
-                  style={{
-                    fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif",
-                    fontSize: "clamp(88px, 12vw, 128px)",
-                    color: job.numColor,
-                    letterSpacing: "-0.04em",
-                  }}
-                >
-                  {job.number}
-                </div>
-
-                {/* Card body */}
-                <div className="relative z-10 p-7 sm:p-8 lg:p-9">
-                  {/* Icon box */}
-                  <div
-                    className="mb-6 flex h-11 w-11 items-center justify-center rounded-[11px]"
-                    style={{
-                      backgroundColor: job.iconBg,
-                      border: `1px solid ${job.iconBorder}`,
-                    }}
-                  >
-                    <Icon
-                      className="h-[19px] w-[19px] stroke-[1.7]"
-                      style={{ color: job.accentColor }}
-                    />
-                  </div>
-
-                  {/* Heading */}
-                  <h3
-                    style={{ fontFamily: "var(--font-montserrat), 'Montserrat', sans-serif" }}
-                    className="text-[20px] sm:text-[22px] font-bold leading-[1.2] tracking-tight text-white"
-                  >
-                    {job.title}
-                  </h3>
-
-                  {/* Accent hairline */}
-                  <div
-                    className="mt-4 mb-4 h-px w-8 rounded-full opacity-40"
-                    style={{ backgroundColor: job.accentColor }}
-                  />
-
-                  {/* Description */}
-                  <p
-                    style={{
-                      fontFamily: "var(--font-serif), Newsreader, Georgia, serif",
-                      color: "rgba(210, 218, 232, 0.75)",
-                    }}
-                    className="text-[14px] sm:text-[14.5px] leading-[1.7] font-normal"
-                  >
-                    {job.description}
-                  </p>
-                </div>
-
-                {/* CTA Footer */}
-                <div
-                  className="relative z-10 mx-7 sm:mx-8 mb-7 sm:mb-8 pt-4"
-                  style={{ borderTop: `1px solid ${job.borderColor}` }}
-                >
-                  <Link
-                    href={job.href}
-                    className="inline-flex items-center gap-2 text-[13px] sm:text-[13.5px] font-semibold transition-all duration-200"
-                    style={{ color: job.accentColor }}
-                  >
-                    <span className="group-hover:underline underline-offset-2">
-                      {job.cta}
-                    </span>
-                    <span className="transition-transform duration-200 group-hover:translate-x-1 text-base leading-none">
-                      →
-                    </span>
-                  </Link>
-                </div>
-              </motion.div>
-            );
-          })}
+          {animated && (
+            <svg
+              ref={svgRef}
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
+              fill="none"
+              stroke="#fff"
+              strokeWidth={1.6}
+              strokeLinejoin="round"
+            >
+              <line
+                ref={axisRef}
+                strokeDasharray="5 5"
+                strokeWidth={1.4}
+                opacity={0.9}
+              />
+              <path ref={roadRef} />
+              <polygon ref={wheelRef} />
+              <circle ref={dotRef} r={3.2} fill="#fff" stroke="none" />
+            </svg>
+          )}
         </div>
       </div>
     </section>

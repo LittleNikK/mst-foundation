@@ -9,11 +9,7 @@ import { cn } from "@/lib/utils";
 import { markHeroLoaded } from "@/lib/loaderState";
 
 const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#governance", label: "Governance" },
   { href: "#funding", label: "Funding" },
-  { href: "#validators", label: "Validators" },
-  { href: "#research", label: "Research" },
   { href: "#transparency", label: "Transparency" },
   { href: "#ecosystem", label: "Ecosystem" },
   { href: "#contact", label: "Contact" },
@@ -87,60 +83,66 @@ export function Navbar() {
       {/* Clean White Floating Capsule Navbar */}
       <div
         className={cn(
-          "flex h-14 sm:h-16 w-full max-w-7xl items-center justify-between rounded-2xl bg-white/95 backdrop-blur-md px-4 sm:px-6 xl:px-8 shadow-[0_10px_30px_rgba(0,0,0,0.08)] border border-black/5 transition-all duration-300",
+          "relative flex h-14 sm:h-16 w-full max-w-7xl items-center justify-between rounded-2xl bg-white/95 backdrop-blur-md px-4 sm:px-6 xl:px-8 shadow-[0_10px_30px_rgba(0,0,0,0.08)] border border-black/5 transition-all duration-300",
           isVisible ? "pointer-events-auto" : "pointer-events-none"
         )}
       >
         {/* Left: Brand */}
-        <Link href="/" className="flex items-center group shrink-0" aria-label="Smart Angelos Foundation">
-          <div className="relative flex h-13 w-13 sm:h-[72px] sm:w-[72px] md:h-[78px] md:w-[78px] items-center justify-center shrink-0">
-            <Image
-              src="/logo-transparent.png"
-              alt="Smart Angelos Foundation"
-              width={92}
-              height={92}
-              className="h-full w-full object-contain scale-125 transition-transform duration-200 group-hover:scale-130"
-              priority
-            />
-          </div>
-        </Link>
+        <div className="flex items-center shrink-0">
+          <Link href="/" className="flex items-center group shrink-0" aria-label="Smart Angelos Foundation">
+            <div className="relative flex h-13 w-13 sm:h-[72px] sm:w-[72px] md:h-[78px] md:w-[78px] items-center justify-center shrink-0">
+              <Image
+                src="/logo-transparent.png"
+                alt="Smart Angelos Foundation"
+                width={92}
+                height={92}
+                className="h-full w-full object-contain scale-125 transition-transform duration-200 group-hover:scale-130"
+                priority
+              />
+            </div>
+          </Link>
+        </div>
 
-        {/* Desktop Nav Items + Action Button */}
-        <div className="hidden lg:flex items-center gap-4 xl:gap-6 2xl:gap-8">
-          {/* Navigation Links with middle dot separators */}
-          <nav className="flex items-center gap-1.5 xl:gap-2.5 2xl:gap-3.5">
-            {navLinks.map((link, idx) => {
-              const fullHref = link.href.startsWith("#")
-                ? pathname === "/"
-                  ? link.href
-                  : `/${link.href}`
-                : link.href;
-              return (
-                <div key={link.label} className="flex items-center gap-1.5 xl:gap-2.5 2xl:gap-3.5">
-                  <Link
-                    href={fullHref}
-                    onClick={(e) => handleLinkClick(e, link.href)}
-                    className="font-[var(--font-inter)] text-[13.5px] xl:text-[14px] 2xl:text-[14.5px] font-medium tracking-tight text-[#2B303B] whitespace-nowrap transition-colors duration-150 hover:text-[#000066]"
-                  >
-                    {link.label}
-                  </Link>
-                  {idx < navLinks.length - 1 && (
-                    <span className="text-slate-300/90 text-[11px] select-none" aria-hidden="true">
-                      ·
-                    </span>
-                  )}
-                </div>
-              );
-            })}
-          </nav>
+        {/* Center: Navigation Links */}
+        <nav className="hidden lg:flex items-center gap-2.5 xl:gap-4 2xl:gap-5 absolute left-1/2 -translate-x-1/2">
+          {navLinks.map((link, idx) => {
+            const fullHref = link.href.startsWith("#")
+              ? pathname === "/"
+                ? link.href
+                : `/${link.href}`
+              : link.href;
+            return (
+              <div key={link.label} className="flex items-center gap-2.5 xl:gap-4 2xl:gap-5">
+                <Link
+                  href={fullHref}
+                  onClick={(e) => handleLinkClick(e, link.href)}
+                  className="group relative py-1 font-[var(--font-inter)] text-[14px] xl:text-[14.5px] 2xl:text-[15px] font-medium tracking-tight text-[#2B303B] whitespace-nowrap transition-colors duration-200 hover:text-[#000066]"
+                >
+                  {link.label}
+                  <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#FFCC00] transition-all duration-300 ease-out group-hover:w-full rounded-full" />
+                </Link>
+                {idx < navLinks.length - 1 && (
+                  <span className="text-slate-300/90 text-[11px] select-none" aria-hidden="true">
+                    ·
+                  </span>
+                )}
+              </div>
+            );
+          })}
+        </nav>
 
-          {/* Apply for a Grant Button */}
+        {/* Right: Apply for a Grant Button */}
+        <div className="hidden lg:flex items-center shrink-0">
           <Link
             href={pathname === "/" ? "#funding" : "/#funding"}
             onClick={(e) => handleLinkClick(e, "#funding")}
-            className="inline-flex items-center justify-center rounded-[6px] border border-[#FFCC00] bg-[#FFCC00]/15 px-3.5 py-1.5 sm:px-4 sm:py-2 font-[var(--font-inter)] text-[13px] sm:text-[13.5px] font-semibold text-[#000066] whitespace-nowrap transition-all duration-200 hover:bg-[#FFCC00] hover:text-[#000066] shadow-xs active:scale-[0.98] shrink-0"
+            className="animated-button-gold relative inline-flex items-center justify-center rounded-[6px] border border-[#FFCC00]/50 bg-white/95 px-3.5 py-1.5 sm:px-4 sm:py-2 font-[var(--font-inter)] text-[13px] sm:text-[13.5px] font-semibold text-[#000066] whitespace-nowrap shadow-sm overflow-hidden transition-all duration-200 active:scale-[0.98] shrink-0"
           >
-            Apply for a Grant
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span className="relative z-10">Apply for a Grant</span>
           </Link>
         </div>
 
@@ -170,9 +172,10 @@ export function Navbar() {
                   key={link.label}
                   href={fullHref}
                   onClick={(e) => handleLinkClick(e, link.href)}
-                  className="font-[var(--font-inter)] text-[15px] font-medium tracking-tight text-[#2B303B] py-1 hover:text-[#000066] transition-colors"
+                  className="group relative inline-flex items-center w-fit font-[var(--font-inter)] text-[15px] font-medium tracking-tight text-[#2B303B] py-1 hover:text-[#000066] transition-colors duration-200"
                 >
                   {link.label}
+                  <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#FFCC00] transition-all duration-300 ease-out group-hover:w-full rounded-full" />
                 </Link>
               );
             })}
@@ -183,9 +186,13 @@ export function Navbar() {
           <Link
             href={pathname === "/" ? "#funding" : "/#funding"}
             onClick={(e) => handleLinkClick(e, "#funding")}
-            className="inline-flex items-center justify-center rounded-[6px] border border-[#FFCC00] bg-[#FFCC00]/15 px-4 py-2 font-[var(--font-inter)] text-[14px] font-semibold text-[#000066] transition-all hover:bg-[#FFCC00] hover:text-[#000066]"
+            className="animated-button-gold relative inline-flex items-center justify-center rounded-[6px] border border-[#FFCC00]/50 bg-white/95 px-4 py-2 font-[var(--font-inter)] text-[14px] font-semibold text-[#000066] shadow-sm overflow-hidden transition-all duration-200 active:scale-[0.98]"
           >
-            Apply for a Grant
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span className="relative z-10">Apply for a Grant</span>
           </Link>
         </div>
       )}

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 
 /* ------------------------------------------------------------------ */
 /*  Link column data                                                   */
@@ -39,12 +40,89 @@ const navigationColumns = [
   },
 ];
 
+function ProximityText({
+  text,
+  radius = 220,
+  minScale = 0.12,
+}: {
+  text: string;
+  radius?: number;
+  minScale?: number;
+}) {
+  const lettersRef = useRef<(HTMLSpanElement | null)[]>([]);
+  const mouse = useRef({ x: -9999, y: -9999 });
+  const scales = useRef<number[]>([]);
+
+  useEffect(() => {
+    const onMove = (event: MouseEvent) => {
+      mouse.current = { x: event.clientX, y: event.clientY };
+    };
+    const onLeave = () => {
+      mouse.current = { x: -9999, y: -9999 };
+    };
+
+    window.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseleave", onLeave);
+
+    let raf = 0;
+    const tick = () => {
+      lettersRef.current.forEach((element, index) => {
+        if (!element) return;
+
+        const bounds = element.getBoundingClientRect();
+        const distance = Math.hypot(
+          mouse.current.x - (bounds.left + bounds.width / 2),
+          mouse.current.y - (bounds.top + bounds.height / 2)
+        );
+        const distanceRatio = Math.min(distance / radius, 1);
+        const target = minScale + (1 - minScale) * distanceRatio * distanceRatio;
+        const previous = scales.current[index] ?? 1;
+        const next = previous + (target - previous) * 0.15;
+
+        scales.current[index] = next;
+        element.style.transform = `scale(${next})`;
+        element.style.opacity = String(0.4 + 0.6 * next);
+      });
+
+      raf = requestAnimationFrame(tick);
+    };
+
+    raf = requestAnimationFrame(tick);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseleave", onLeave);
+    };
+  }, [minScale, radius]);
+
+  return (
+    <h2
+      aria-label={text}
+      className="flex w-full select-none justify-between px-1 sm:px-2 text-center text-[clamp(2rem,10.2vw,11.7vw)] font-bold tracking-[-0.03em] text-white leading-[0.84] drop-shadow-[0_4px_24px_rgba(0,0,0,0.18)] opacity-90"
+    >
+      {text.split("").map((character, index) => (
+        <span
+          key={`${character}-${index}`}
+          ref={(element) => {
+            lettersRef.current[index] = element;
+          }}
+          aria-hidden="true"
+          className="inline-block origin-center will-change-transform"
+        >
+          {character === " " ? "\u00a0" : character}
+        </span>
+      ))}
+    </h2>
+  );
+}
+
 /* ------------------------------------------------------------------ */
 /*  Footer Component                                                   */
 /* ------------------------------------------------------------------ */
 export function Footer() {
   return (
-    <footer className="relative w-full overflow-hidden px-4 sm:px-6 lg:px-8 pb-6 sm:pb-8 pt-2 sm:pt-4 bg-[#F1F3F6]">
+    <footer className="relative w-full overflow-hidden px-3 sm:px-6 lg:px-8 pb-5 sm:pb-8 pt-2 sm:pt-4 bg-[#EFF1F4]">
       {/* Outer Card Container */}
       <div className="relative z-10 w-full max-w-7xl mx-auto rounded-[24px] sm:rounded-[32px] lg:rounded-[36px] overflow-hidden border border-white/60 shadow-[0_16px_48px_rgba(15,23,42,0.07)] bg-[#ECEFF2]">
 
@@ -79,47 +157,26 @@ export function Footer() {
           }}
         />
 
-        {/* Flying bird silhouette from reference image */}
-        <div
-          aria-hidden="true"
-          className="hidden md:block pointer-events-none absolute left-[55%] top-[45%] -translate-x-1/2 select-none z-[3] opacity-65"
-        >
-          <svg width="38" height="26" viewBox="0 0 54 38" fill="none">
-            <path
-              d="M27 18 C23 10 14 3 2 1 C10 8 18 16 23 24 C24 21 26 20 27 20 C28 20 30 21 31 24 C36 16 44 8 52 1 C40 3 31 10 27 18 Z"
-              fill="#242E38"
-            />
-          </svg>
-        </div>
-
         {/* ── Content Area ── */}
-        <div className="relative z-10 pt-8 sm:pt-10 lg:pt-12 px-6 sm:px-10 lg:px-12 pb-0">
+        <div className="relative z-10 min-w-0 pt-7 sm:pt-10 lg:pt-12 px-4 sm:px-10 lg:px-12 pb-0">
 
           {/* Top Row: Brand column on left + 3 Link columns on right */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+          <div className="grid min-w-0 grid-cols-1 lg:grid-cols-12 gap-7 sm:gap-8 lg:gap-10 items-start">
 
             {/* Left Column: Brand, Headline, Paragraph, Button, Copyright */}
-            <div className="lg:col-span-5 flex flex-col justify-between">
+            <div className="min-w-0 lg:col-span-5 flex flex-col justify-between">
               <div>
                 {/* Brand Badge */}
-                <Link href="/" className="inline-flex items-center gap-2.5 select-none group">
-                  <div className="relative flex h-8 w-8 items-center justify-center shrink-0">
+                <Link href="/" className="inline-flex items-center select-none group">
+                  <div className="relative flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center shrink-0">
                     <Image
                       src="/logo-transparent.png"
                       alt="Smart Angelos Foundation Logo"
-                      width={36}
-                      height={36}
-                      className="h-full w-full object-contain"
+                      width={72}
+                      height={72}
+                      className="absolute left-1/2 top-1/2 h-32 w-32 max-w-none -translate-x-1/2 -translate-y-1/2 object-contain sm:h-40 sm:w-40"
                     />
                   </div>
-                  <span
-                    style={{
-                      fontFamily: "var(--font-sans), 'Plus Jakarta Sans', Inter, sans-serif",
-                    }}
-                    className="text-[16px] font-bold text-[#000066] tracking-tight"
-                  >
-                    Smart Angelos
-                  </span>
                 </Link>
 
                 {/* Bold Headline */}
@@ -168,9 +225,9 @@ export function Footer() {
             </div>
 
             {/* Right Side: 3 Navigation Link Columns */}
-            <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-8 lg:pl-4">
+            <div className="min-w-0 lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-7 sm:gap-8 lg:pl-4">
               {navigationColumns.map((col) => (
-                <div key={col.title}>
+                <div key={col.title} className="min-w-0">
                   <p
                     style={{
                       fontFamily: "var(--font-sans), 'Plus Jakarta Sans', Inter, sans-serif",
@@ -187,12 +244,12 @@ export function Footer() {
                             href={link.href}
                             target={link.external ? "_blank" : undefined}
                             rel={link.external ? "noreferrer" : undefined}
-                            className="text-[13px] sm:text-[13.5px] text-[#4A5361] hover:text-[#000066] transition-colors duration-150 leading-[1.65] font-medium inline-block"
+                            className="max-w-full break-words text-[13px] sm:text-[13.5px] text-black hover:text-black transition-colors duration-150 leading-[1.65] font-medium inline-block"
                           >
                             {link.text}
                           </Link>
                         ) : (
-                          <span className="text-[13px] sm:text-[13.5px] text-[#8C95A3] leading-[1.65] font-normal inline-block">
+                          <span className="max-w-full break-words text-[13px] sm:text-[13.5px] text-black leading-[1.65] font-normal inline-block">
                             {link.text}
                           </span>
                         )}
@@ -207,14 +264,9 @@ export function Footer() {
 
           {/* ── Giant Watermark Text across mountains at bottom ── */}
           <div className="relative w-full overflow-hidden text-left pt-8 sm:pt-10 md:pt-12 pb-3 sm:pb-4 md:pb-5 select-none pointer-events-none">
-            <h2
-              style={{
-                fontFamily: "var(--font-jost), 'Jost', var(--font-outfit), sans-serif",
-              }}
-              className="text-[10.2vw] sm:text-[11.1vw] md:text-[11.7vw] font-bold tracking-tight text-white leading-[0.84] whitespace-nowrap drop-shadow-[0_4px_24px_rgba(0,0,0,0.18)] opacity-90 transition-opacity ml-1 sm:ml-1.5 lg:ml-2"
-            >
-              Smart Angelos
-            </h2>
+            <div style={{ fontFamily: "var(--font-jost), 'Jost', var(--font-outfit), sans-serif" }}>
+              <ProximityText text="Smart Angelos" />
+            </div>
           </div>
 
         </div>
